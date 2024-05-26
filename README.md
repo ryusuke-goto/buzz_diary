@@ -117,7 +117,7 @@ AWSを検討しましたが、従量課金制なので個人サービスとし�
 * 画像生成機能
   Open AI API(DALL·E 3 API)
 * ユーザーへの通知機能
-  LINE通知機能(LINE Messaging API)を利用
+  LINE通知機能(LINE Messaging API)
 * Google認証
   OAuth 2.0
 * X認証
