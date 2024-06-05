@@ -161,3 +161,6 @@ AWSを検討しましたが、従量課金制なので個人サービスとし�
 | Google認証 | OAuth 2.0 |
 | X認証 | Twitter API v2 |
 | Xへのシェア機能 | Twitter API v2 |
+
+## ER図
+[![Image from Gyazo](https://i.gyazo.com/13b810a560705ccd4b82868613248482.png)](https://gyazo.com/13b810a560705ccd4b82868613248482)
