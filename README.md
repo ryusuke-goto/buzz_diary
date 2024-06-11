@@ -107,7 +107,7 @@
 | ---- | ---- |
 | フロントエンド | Ruby on Rails Vanilla JS |
 | CSSフレームワーク | Tailwind CSS + daisy UI |
-| バックエンド | Ruby 3.3.1 / Ruby on Rails 7.1.3.2  |
+| バックエンド | Ruby 3.3.0 / Ruby on Rails 7.1.3.2  |
 | データベース | PostgreSQL 16.3 |
 | 環境構築| docker |
 | インフラ | Render/Amazon S3|
