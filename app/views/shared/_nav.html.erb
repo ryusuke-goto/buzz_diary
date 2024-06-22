@@ -1,0 +1,60 @@
+<nav class="fixed bottom-0 w-full bg-green-00 h-20">
+  <div class="" id="navbarSupportedContent">
+    <ul class="flex nav-bar items-center ml-8">
+      <li class="nav-item w-full">
+        <%= link_to "#", class: "nav-link", id: "menu" do %>
+          <div class="icon">
+            <i class="fa-solid fa-tent"></i>
+          </div>
+          <div class="icon_text">
+            ホーム
+          </div>
+        <% end %>
+      </li>
+
+      <li class="nav-item w-full">
+        <%= link_to "#", class: "nav-link" do %>
+          <div class="icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <div class="icon_text">
+            検索
+          </div>
+        <% end %>
+      </li>
+
+      <li class="nav-item w-full">
+        <%= link_to "#", class: "nav-link" do %>
+          <div class="icon">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="icon_text">
+            日記作成
+          </div>
+        <% end %>
+      </li>
+
+      <li class="nav-item w-full"> 
+        <%= link_to "#", class: "nav-link", id: "profile" do %>
+          <div class="icon">
+            <i class="fa-regular fa-calendar-days"></i>
+          </div>
+          <div class="icon_text">
+            思い出
+          </div>
+        <% end %>
+      </li>
+
+      <li class="nav-item w-full"> 
+        <%= link_to "#", class: "nav-link", id: "profile" do %>
+          <div class="icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="icon_text">
+            マイページ
+          </div>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</nav>

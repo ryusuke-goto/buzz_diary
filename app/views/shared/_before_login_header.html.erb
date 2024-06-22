@@ -1,0 +1,35 @@
+<header class="flex items-center justify-between bg-green-00 h-15">
+  <%= link_to "/", class: "logo" do %>
+    <%= image_tag "logo.png", class: "card-img-top", width: "70", height:"70" %>
+  <% end %>
+
+  <button class="">
+    <span class="toggler-icon"></span>
+  </button>
+
+  <div class="collapse" id="navbarSupportedContent">
+    <ul class="ms-auto flex">
+      <li class="mr-5">
+        <%= link_to "#", class: "nav-link", id: "header-board-menu" do %>
+          <div class="icon">
+            <i class="fa-solid fa-question"></i>
+          </div>
+          <div class="icon_text">
+            使い方
+          </div>
+        <% end %>
+      </li>
+
+      <li class="nav-item ml-5 mr-5">
+        <%= link_to "#", class: "nav-link" do %>
+          <div class="icon">
+            <i class="fa-solid fa-mountain-sun"></i>
+          </div>
+          <div class="icon_text">
+            ミッション
+          </div>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</header>
