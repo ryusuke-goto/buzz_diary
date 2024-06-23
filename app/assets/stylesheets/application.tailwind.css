@@ -5,6 +5,14 @@
 @import "top";
 @import "logo";
 
+.font-black {
+    color: black;
+}
+
+.font-white {
+    color: white;
+}
+
 .bg-green-00 {
     background-color: green;
 }
@@ -19,6 +27,6 @@
     font-size:2.4em;
 }
 
-.icon_text {
+.icon-text {
     font-size:0.2em;
 }

@@ -4,7 +4,7 @@
     <title>PraiseDiary</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%= csp_meta_tag %>     
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
@@ -12,11 +12,9 @@
   </head>
 
   <body>
-    <div class="min-h-screen">
+    <div class="min-h-screen bg-white">
       <%= render "shared/before_login_header" %>
-      <body class="">
-        <%= yield %>
-      </body>
+      <%= yield %>
     </div>
     <%= render "shared/nav" %>
     <%= render "shared/footer" %>
