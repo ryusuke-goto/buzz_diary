@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    omniauth_callbacks: "omniauth_callbacks"
+  }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'static_pages#top'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
