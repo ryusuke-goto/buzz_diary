@@ -83,6 +83,6 @@ test:
 production:
   <<: *default
   host: <%= ENV["RENDER_DB_HOSTNAME"] %>
-  database: praise_diary_production
-  username: praise_diary
+  database: praise_diary_db
+  username: praise_diary_db_user
   password: <%= ENV["RENDER_DB_PASSWORD"] %>
