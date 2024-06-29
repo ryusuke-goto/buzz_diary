@@ -1,0 +1,28 @@
+<div id="diary-id-<%= diary.id %>" class="card flex flex-row my-9">
+  <div class="avatar pt-1">
+    <div class="w-20 h-20 rounded-full">
+      <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{diary.user.name}のアバター" %>
+    </div>
+  </div>
+  <div class="card-body pt-2">
+    <div class="flex flex-row justify-between">  
+      <div class="user-name font-black font-bold text-xl">
+        <%= diary.user.name %>
+      </div>
+      <div class="created-at">
+        <%= l diary.created_at, format: :short %>
+      </div>
+    </div>
+    <div class="card-title">
+      <%= link_to diary.title, '#' %>
+    </div>
+    <div class='ms-auto'>
+      <%= link_to '#', id: "button-edit-#{diary.id}" do %>
+        <i class="bi bi-pencil-fill"></i>
+      <% end %>
+      <%= link_to '#', id: "button-delete-#{diary.id}", method: :delete, data: { confirm: '本当にこの日記を削除しますか？' } do %>
+        <i class="bi bi-trash-fill"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
