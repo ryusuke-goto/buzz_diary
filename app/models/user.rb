@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[line] # for line-login
+  
+  has_many :diaries, dependent: :destroy
+  has_one :buff, dependent: :destroy
   # for line-login
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first
@@ -25,5 +28,4 @@ class User < ApplicationRecord
     self.raw_info = raw_info.to_json
     self.save!
   end
-  # ここまで
 end

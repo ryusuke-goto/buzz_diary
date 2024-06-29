@@ -1,0 +1,14 @@
+<div class="container pt-3">
+  <!-- 日記一覧 -->
+  <div class="">
+    <div class="">
+      <div class="mx-10">
+        <% if @diaries.present? %>
+          <%= render partial: 'diary', collection: @diaries %>
+        <% else %>
+          <div class="">日記がありません</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
