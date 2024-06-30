@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDiaries < ActiveRecord::Migration[7.1]
   def change
     create_table :diaries do |t|

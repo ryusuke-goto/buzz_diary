@@ -1,0 +1,17 @@
+<%= form_with model: @diary, class: " w-full max-w-3xl mx-auto" do |f| %>
+  <div class="mb-3">
+    <%= f.label :diary_date %>
+    <%= f.date_field :diary_date, class: "form-control w-full", value: Date.today %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control w-full" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control w-full", rows: "10" %>
+  </div>
+  <div>
+    <%= f.submit nil, class: "btn btn-primary w-full" %>
+  </div>
+<% end %>
