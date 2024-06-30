@@ -2,11 +2,13 @@
   <!-- 日記一覧 -->
   <div class="">
     <div class="">
-      <div class="justify-center mx-10">
+      <div class="flex items-center justify-center mx-10">
         <% if @diaries.present? %>
           <%= render partial: "diary", collection: @diaries %>
         <% else %>
-          <div class="">日記がありません</div>
+          <div class="text-2xl">
+            <%= t("diaries.no_result") %>
+          </div>
         <% end %>
       </div>
     </div>

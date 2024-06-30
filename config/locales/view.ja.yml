@@ -25,7 +25,7 @@ ja:
   users:
     to_login_page: ログインページへ
   diaries:
-    no_result: 掲示板がありません
+    no_result: まだ日記がありません・・・
     board_image: サムネイル
     submit: 登録する
   comments:
