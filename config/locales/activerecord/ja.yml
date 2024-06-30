@@ -12,3 +12,4 @@ ja:
       diary:
         title: タイトル
         body: 本文
+        diary_date: 日付け

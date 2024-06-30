@@ -2,6 +2,9 @@
   <h1><%= t("title.login") %></h1>
 </div>
 <div class="flex items-center justify-center">
+  <%= render partial: "shared/error_messages", locals:{object: @user} %>
+</div>
+<div class="flex items-center justify-center">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
       <%= f.label :email %><br />
