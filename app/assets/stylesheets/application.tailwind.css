@@ -30,3 +30,13 @@
 .icon-text {
     font-size:0.2em;
 }
+
+.btn-line-login {
+    background-color: #06C755;
+    border: solid #06C755;
+}
+
+.btn-line-login:hover {
+    background-color: #06C755;
+    border: solid #06C755;
+}
