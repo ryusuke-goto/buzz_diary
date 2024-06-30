@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -10,14 +12,14 @@
 
 3.times do
   user = User.create!(name: Faker::Name.name,
-    email: Faker::Internet.unique.email,
-    password: "password",
-    password_confirmation: "password")
+                      email: Faker::Internet.unique.email,
+                      password: 'password',
+                      password_confirmation: 'password')
   puts "\"#{user.name}\" has created!"
 end
-  
+
 user_ids = User.ids
-  
+
 3.times do |index|
   user = User.find(user_ids.sample)
   diary = user.diaries.create!(title: "今日は連勤#{index}日目だった", body: "まだまだ#{index}日ぐらい頑張れそう！")

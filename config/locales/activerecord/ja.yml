@@ -9,3 +9,6 @@ ja:
         first_name: 名
         password: パスワード
         password_confirmation: パスワード確認
+      diary:
+        title: タイトル
+        body: 本文

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 
 ruby '3.3.0'
@@ -61,8 +62,8 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'rubocop', require: false
   gem 'faker'
+  gem 'rubocop', require: false
 end
 
 group :test do
@@ -73,7 +74,8 @@ end
 
 gem 'devise'
 gem 'omniauth-line'
-gem 'omniauth-rails_csrf_protection'
 gem 'dotenv-rails'
-gem 'rails-i18n'
+gem 'omniauth-rails_csrf_protection'
 gem 'devise-i18n-views'
+gem 'rails-i18n'
+

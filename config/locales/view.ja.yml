@@ -1,0 +1,71 @@
+ja:
+  defaults:
+    flash_message:
+      created: 日記を投稿しました！
+      not_created: 日記を投稿できませんでした。
+      already_created: その日の日記はすでに作成されています
+  helpers:
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+      show: 詳細
+      edit: 編集
+      delete: 削除
+    label:
+      email: メールアドレス
+      password: パスワード
+      search_word: 検索ワード
+      unspecified: 指定なし
+      YMD: 年/月/日
+  sessions:
+    to_register_page: 登録ページへ
+    password_forget: パスワードをお忘れの方はこちら
+    line-login: LINEログインはこちら
+  users:
+    to_login_page: ログインページへ
+  diaries:
+    no_result: 掲示板がありません
+    board_image: サムネイル
+    submit: 登録する
+  comments:
+    body: コメント
+    commit: 投稿
+  likes:
+    no_result: ブックマーク中の掲示板がありません。
+  profile:
+    full_name: 氏名
+    avatar: アバター
+  mailer:
+    subject: パスワードリセット
+    submit: 送信
+  admin_users:
+    no_result: ユーザーがいません
+  
+  title:
+    home: ホーム
+    search: 検索
+    create_diary: 日記作成
+    memory: 思い出
+    mypage: マイページ
+    login: ログイン
+    logout: ログアウト
+    users_new: ユーザー登録
+    diary: 日記
+    diary_index: 日記一覧
+    diary_show: 日記詳細
+    edit_diary: 日記編集
+    profile: プロフィール
+    edit_profile: プロフィール編集
+    password_reset: パスワードリセット申請
+    choose_password: パスワードリセット
+    dashboard: ダッシュボード
+    user_index: ユーザー一覧
+    user_show: ユーザー詳細
+    user_edit: ユーザー編集
+
+  enums:
+    user:
+      role:
+        admin: 管理者
+        general: 一般
