@@ -21,7 +21,7 @@ ja:
   sessions:
     to_register_page: 登録ページへ
     password_forget: パスワードをお忘れの方はこちら
-    line-login: LINEログインはこちら
+    line-login: LINEでログイン
   users:
     to_login_page: ログインページへ
   diaries:

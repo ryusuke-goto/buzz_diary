@@ -1,17 +1,17 @@
 <%= form_with model: @diary, class: " w-full max-w-3xl mx-auto" do |f| %>
   <div class="mb-3">
     <%= f.label :diary_date %>
-    <%= f.date_field :diary_date, class: "form-control w-full", value: Date.today %>
+    <%= f.date_field :diary_date, class: "input input-bordered input-success", value: Date.today %>
   </div>
   <div class="mb-3">
     <%= f.label :title %>
-    <%= f.text_field :title, class: "form-control w-full" %>
+    <%= f.text_field :title, class: "input input-bordered input-success w-full" %>
   </div>
   <div class="mb-3">
     <%= f.label :body %>
-    <%= f.text_area :body, class: "form-control w-full", rows: "10" %>
+    <%= f.text_area :body, class: "textarea textarea-success w-full", rows: "15" %>
   </div>
-  <div>
-    <%= f.submit nil, class: "btn btn-primary w-full" %>
-  </div>
+  <button class="btn btn-success  w-full">
+    <%= f.submit "保存", class: "" %>
+  </button>
 <% end %>
