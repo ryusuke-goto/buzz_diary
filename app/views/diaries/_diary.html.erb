@@ -14,8 +14,15 @@
       </div>
     </div>
     <%= link_to '#' do %>
-      <div class="card-diary-date">
-        <%=diary.diary_date %><%= t("diaries.diary_date") %>
+      <div class="flex">
+        <div class="card-diary-date">
+          <%=diary.diary_date %><%= t("diaries.diary_date") %>
+        </div>
+        <div class="card-exist-image mx-2 pt-0">
+          <% if diary.diary_image.present? %>
+            <%= t("diaries.image_present") %>
+          <% end %>
+        </div>
       </div>
       <div class="card-title">
         <%= diary.title %>

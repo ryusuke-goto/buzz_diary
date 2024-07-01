@@ -78,4 +78,4 @@ gem 'dotenv-rails'
 gem 'omniauth-rails_csrf_protection'
 gem 'devise-i18n-views'
 gem 'rails-i18n'
-
+gem 'carrierwave', '~> 3.0'
