@@ -20,8 +20,10 @@
         </div>
       <% end %>
       <%= yield %>
+      <div class="pb-20">
+        <%= render "shared/footer" %>
+      </div>
     </div>
     <%= render "shared/nav" %>
-    <%= render "shared/footer" %>
   </body>
 </html>
