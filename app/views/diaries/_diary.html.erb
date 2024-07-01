@@ -13,7 +13,7 @@
         <%= l diary.created_at, format: :short %>
       </div>
     </div>
-    <%= link_to '#' do %>
+    <%= link_to diary_path(diary.id) do %>
       <div class="flex">
         <div class="card-diary-date">
           <%=diary.diary_date %><%= t("diaries.diary_date") %>
