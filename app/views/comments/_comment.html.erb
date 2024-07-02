@@ -1,15 +1,14 @@
-<tr id="comment-<%= comment.id %>">
-  <div class="chat chat-start w-auto">
-    <td style="width: 60px">
-        <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", width: "50", height: "50", class: "rounded-circle" %>
-    <td>
-        <h3 class="small"><%= comment.user.name %></h3>
-        <div class="chat-bubble">
-          <p><%= simple_format(comment.body) %></p>
-        </div>
-    </td>
+<div id="comment-<%= comment.id %>">
+  <div class="chat chat-end">
+    <div class="flex">
+      <div class="chat-bubble mx-3">
+        <p><%= simple_format(comment.body) %></p>
+      </div>
+      <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", width: "50", height: "50", class: "rounded-circle" %>
+      <h3 class="small"><%= comment.user.name %></h3>
+    </div>
     <% if current_user.own?(comment) %>
-        <td class="action">
+        <div class="action">
         <ul class="list-inline justify-content-center" style="float: right;">
             <li class="list-inline-item">
             <%= link_to "#", class: "edit-comment-link" do %>
@@ -22,6 +21,7 @@
             <% end %>
             </li>
         </ul>
-        </td>
+        </div>
     <% end %>
-</tr>
+  </div>
+</div>

@@ -1,9 +1,9 @@
-<div class="row mb-3 w-auto" id="comment-form">
+<div class="fixed bottom-20 w-full bottom-20" id="comment-form">
   <div class="col-lg-8 offset-lg-2">
-    <%= form_with model: comment, url: diary_comments_path(diary) do |f| %>
+    <%= form_with model: comment, class: "flex items-center justify-center", url: diary_comments_path(diary) do |f| %>
       <%= f.label :body %>
-      <%= f.text_area :body, class: "form-control mb-3", row: "4", placeholder: Comment.human_attribute_name(:body) %>
-      <%= f.submit t('defaults.post'), class: "btn btn-primary" %>
+      <%= f.text_area :body, class: " max-w-3xl w-full textarea textarea-success form-control mb-3", row: "4", placeholder: Comment.human_attribute_name(:body) %>
+      <%= f.submit t('comments.commit'), class: "btn btn-success w-32" %>
     <% end %>
   </div>
 </div>
