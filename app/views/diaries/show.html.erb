@@ -1,8 +1,10 @@
 <div class="container pt-5">
-  <div class="row mb-3">
-    <div class="">
-      <h1><%= t('.title') %></h1>
-      <%= render partial: "detail_diary", locals: {diary: @diary} %>
+  <div class="mb-3">
+    <div class="user-name text-center font-black font-bold text-2xl">
+      <%= @diary.user.name %>
+    </div>
+    <div class="flex items-flex-end">
+      <%= render partial: "show_diary", locals: {diary: @diary} %>
     </div>
     <%# コメントフォーム %>
     <div class="row">

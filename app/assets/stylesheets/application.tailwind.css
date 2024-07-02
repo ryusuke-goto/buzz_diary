@@ -40,3 +40,7 @@
     background-color: #06C755;
     border: solid #06C755;
 }
+
+.items-flex-end {
+  align-items: flex-end;
+}
