@@ -8,12 +8,13 @@
     </div>
     <%# コメントフォーム %>
     <div class="row">
-      <div class="col-lg-8 offset-lg-2">
+      <div class="">
         <table class="table">
           <tbody id="table-comment">
-            <%# コメント一覧 %>
+            <%= render partial: "comments/comment", collection: @comments %>
           </tbody>
         </table>
+        <%= render partial: "comments/form", locals: {comment: @comment, diary: @diary} %>
       </div>
     </div>
   </div>
