@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :diaries, dependent: :destroy
   has_one :buff, dependent: :destroy
+  has_many :comments, dependent: :destroy
   # for line-login
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first
@@ -30,5 +31,9 @@ class User < ApplicationRecord
   def set_values_by_raw_info(raw_info)
     self.raw_info = raw_info.to_json
     save!
+  end
+
+  def own?(object)
+    object.user_id == id
   end
 end

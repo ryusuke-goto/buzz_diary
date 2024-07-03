@@ -30,10 +30,10 @@ ja:
     diary_date: の日記
     diary_image: サムネイル
     submit: 登録する
-    image_present: (画像あり)
+    with_image: (画像あり)
   comments:
-    body: コメント
     commit: 投稿
+    placeholder: コメントを投稿しよう
   likes:
     no_result: ブックマーク中の掲示板がありません。
   profile:
