@@ -9,11 +9,11 @@
     <%# コメントフォーム %>
     <div class="row">
       <div class="">
-        <table class="table">
-          <tbody id="table-comment">
+        <div class="table">
+          <div id="table-comment">
             <%= render partial: "comments/comment", collection: @comments %>
-          </tbody>
-        </table>
+          <div>
+        </div>
         <%= render partial: "comments/form", locals: {comment: @comment, diary: @diary} %>
       </div>
     </div>

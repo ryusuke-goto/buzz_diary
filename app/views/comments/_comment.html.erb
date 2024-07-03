@@ -1,27 +1,23 @@
 <div id="comment-<%= comment.id %>">
-  <div class="chat chat-end">
+  <div class="chat chat-end flex flex-row-reverse my-3">
     <div class="flex">
       <div class="chat-bubble mx-3">
         <p><%= simple_format(comment.body) %></p>
       </div>
-      <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", width: "50", height: "50", class: "rounded-circle" %>
-      <h3 class="small"><%= comment.user.name %></h3>
-    </div>
-    <% if current_user.own?(comment) %>
-        <div class="action">
-        <ul class="list-inline justify-content-center" style="float: right;">
-            <li class="list-inline-item">
+      <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", width: "50", height: "50", class: "rounded-full" %>
+      <div>
+        <h3 class="small"><%= comment.user.name %></h3>
+        <% if current_user.own?(comment) %>
+          <div class="action mx-3">
             <%= link_to "#", class: "edit-comment-link" do %>
-                <i class="bi bi-pencil-fill"></i>
+              <i class="fa-regular fa-pen-to-square"></i>
             <% end %>
-            </li>
-            <li class="list-inline-item">
             <%= link_to "#", class: "delete-comment-link" do %>
-                <i class="bi bi-trash-fill"></i>
+              <i class="fa-regular fa-trash-can"></i>
             <% end %>
-            </li>
-        </ul>
-        </div>
-    <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
