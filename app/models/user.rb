@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :diaries, dependent: :destroy
   has_one :buff, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :like_diaries, through: :likes, source: :diary
+
   # for line-login
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first

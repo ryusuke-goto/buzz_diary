@@ -6,8 +6,16 @@
   </div>
   <div class="card-body pt-2">
     <div class="flex flex-row justify-between">  
-      <div class="user-name font-black font-bold text-xl">
+      <div class="user-name font-black font-bold text-xl flex">
         <%= diary.user.name %>
+        <div class="action mx-3">
+          <%= link_to "#", class: "edit-comment-link" do %>
+            <i class="fa-regular fa-pen-to-square"></i>
+          <% end %>
+          <%= link_to "#", class: "delete-comment-link" do %>
+            <i class="fa-regular fa-trash-can"></i>
+          <% end %>
+        </div>
       </div>
       <div class="created-at">
         <%= l diary.created_at, format: :short %>
@@ -28,13 +36,5 @@
         <%= diary.title %>
       </div>
     <% end %>
-    <div class='ms-auto'>
-      <%= link_to '#', id: "button-edit-#{diary.id}" do %>
-        <i class="bi bi-pencil-fill"></i>
-      <% end %>
-      <%= link_to '#', id: "button-delete-#{diary.id}", method: :delete, data: { confirm: '本当にこの日記を削除しますか？' } do %>
-        <i class="bi bi-trash-fill"></i>
-      <% end %>
-    </div>
   </div>
 </div>
