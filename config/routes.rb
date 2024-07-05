@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'static_pages#top'
   resources :diaries, only: %i[index new create show] do
     resources :comments, only: %i[create edit destroy], shallow: true
+    resources :likes, only: %i[create update], shallow: true
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

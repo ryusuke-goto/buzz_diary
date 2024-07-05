@@ -23,12 +23,36 @@
     justify-content: space-between;
 }
 
-.icon {
-    font-size:2.4em;
+.clear-decoration {
+  border: none;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
 }
 
-.icon-text {
-    font-size:0.2em;
+.clear-decoration:hover {
+  border: none;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.clear-decoration:focus {
+  border: none;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.clear-decoration:active span::after {
+  border: none;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.clear-decoration:focus-visible {
+  outline: none;
 }
 
 .btn-line-login {
@@ -44,3 +68,42 @@
 .items-flex-end {
   align-items: flex-end;
 }
+
+.btn_box{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+#btn_animation .btnn {
+  display: block;
+  width: 20px;
+  height: 50px;
+  line-height: 50px;
+  /* font-size: 24px; */
+  border-radius: 39px;
+  text-decoration: none;
+  background-color: none;
+  color: green;
+  text-align: center;
+  animation: btn_animation 1.5s infinite;
+}
+
+@keyframes btn_animation {
+    0% {
+        transform: scale(1.2)
+    }
+    5% {
+        transform: scale(1)
+    }
+    95% {
+        transform: scale(1)
+    }
+    100% {
+        -webkit-transform: scale(1.2)
+    }
+}
+
+
+
