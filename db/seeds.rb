@@ -20,8 +20,8 @@ end
 
 user_ids = User.ids
 
-3.times do |index|
+1.times do |index|
   user = User.find(user_ids.sample)
-  diary = user.diaries.create!(title: "今日は連勤#{index}日目だった", body: "まだまだ#{index}日ぐらい頑張れそう！")
+  diary = user.diaries.create!(title: "今日は連勤#{index}日目だった", body: "まだまだ#{index}日ぐらい頑張れそう！", diary_date: Date.today)
   puts "\"#{diary.title}\" has created!"
 end

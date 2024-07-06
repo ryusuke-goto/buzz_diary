@@ -19,11 +19,8 @@
           </div>
         <% end %>
       </div>
-      <div class="created-at-likes">
-        <div class="created-at">
-          <%= l diary.created_at, format: :short %>
-        </div>
-
+      <div class="created-at">
+        <%= l diary.created_at, format: :short %>
       </div>
     </div>
     <%= link_to diary_path(diary.id) do %>
@@ -41,17 +38,17 @@
         <%= diary.title %>
       </div>
     <% end %>
-    <div id="like-<%=diary.id%>" class="flex items-center pt-3">
+    <div id="like-<%=diary.id%>" class="flex pt-3">
       <% if current_user.own?(diary) %>
+        <div id="btn_animation", class="flex btn_box">
+          <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
+          <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary.id) || 0 %></h1>
+        </div>
+      <% else %>
         <%= button_to diary_likes_path(diary.id), id: "btn_animation", class: "flex btn_box" do %>
           <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
           <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary.id) || 0 %></h1>
         <% end %>
-      <% else %>
-        <div id: "btn_animation", class: "flex btn_box">
-          <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
-          <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary.id) || 0 %></h1>
-        </div>
       <% end %>
     </div>
   </div>
