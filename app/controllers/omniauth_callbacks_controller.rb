@@ -20,7 +20,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       buff_process(@profile)
     end
     flash[:notice] = 'ログインしました'
-    redirect_to root_path
+    redirect_to diaries_path
   end
 
   def fake_email(_uid, _provider)

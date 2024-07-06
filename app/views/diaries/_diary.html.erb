@@ -8,7 +8,7 @@
     <div class="flex flex-row justify-between">  
       <div class="user-name font-black font-bold text-xl flex">
         <%= diary.user.name %>
-        <% if current_user.own?(diary) %>
+        <% if current_user && current_user.own?(diary) %>
           <div class="action mx-3">
             <%= link_to "#", class: "edit-comment-link" do %>
               <i class="fa-regular fa-pen-to-square"></i>
@@ -39,7 +39,7 @@
       </div>
     <% end %>
     <div id="like-<%=diary.id%>" class="flex pt-3">
-      <% if current_user.own?(diary) %>
+      <% if current_user && current_user.own?(diary) %>
         <div id="btn_animation", class="flex btn_box">
           <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
           <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary.id) || 0 %></h1>
@@ -47,7 +47,7 @@
       <% else %>
         <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", class: "flex btn_box", method: { turbo_method: :post } do %>
           <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
-          <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary_id: diary.id) || 0 %></h1>
+          <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary.id) || 0 %></h1>
         <% end %>
       <% end %>
     </div>
