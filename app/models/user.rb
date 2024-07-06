@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :diaries, dependent: :destroy
   has_one :buff, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :like_diaries, through: :likes, source: :diary
+
   # for line-login
   def social_profile(provider)
     social_profiles.select { |sp| sp.provider == provider.to_s }.first
@@ -35,5 +38,11 @@ class User < ApplicationRecord
 
   def own?(object)
     object.user_id == id
+  end
+
+  def like(diary)
+    like = Like.find_or_create_by!(user_id: id, diary_id: diary.id)
+    like.count += diary.user.buff.sum_buff
+    like.save!
   end
 end

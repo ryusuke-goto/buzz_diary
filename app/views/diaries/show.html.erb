@@ -1,22 +1,24 @@
 <% content_for(:title, @diary.title) %>
 <div class="container pt-5">
-  <div class="mb-3">
-    <div class="user-name text-center font-black font-bold text-2xl">
-      <%= @diary.user.name %>
-    </div>
-    <div class="flex items-flex-end">
-      <%= render partial: "show_diary", locals: {diary: @diary} %>
-    </div>
-    <%# コメントフォーム %>
-    <div class="row">
-      <div class="">
-        <div class="table">
-          <div id="table-comment">
-            <%= render partial: "comments/comment", collection: @comments %>
-          <div>
-        </div>
-        <%= render partial: "comments/form", locals: {comment: @comment, diary: @diary} %>
-      </div>
-    </div>
+  <div class="user-name text-center font-black font-bold text-2xl">
+    <%= @diary.user.name %>
   </div>
+  <div class="flex items-flex-end">
+    <%= render partial: "show_diary", locals: {diary: @diary} %>
+  </div>
+  <div id="like-<%=@diary.id%>" class="flex pl-20 pt-0">
+    <% if current_user && current_user.own?(@diary) %>
+      <div id="btn_animation", class="btn_box">
+        <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
+      </div>
+      <h1 class="text-base mx-8 pt-5"><%= Like.likes_count(@diary.id) || 0 %></h1>
+    <% else %>
+      <div id="btn_animation", class="btn_box">
+        <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
+      </div>
+      <h1 class="text-base mx-8 pt-0"><%= Like.likes_count(@diary.id) || 0 %></h1>
+    <% end %>
+  </div>
+  <%= render partial: "comments/comment", collection: @comments %>
+  <%= render partial: "comments/form", locals: {comment: @comment, diary: @diary} %>
 </div>

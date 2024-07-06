@@ -17,12 +17,17 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
       @profile.set_values(@omniauth)
       sign_in(:user, @profile)
+      buff_process(@profile)
     end
     flash[:notice] = 'ログインしました'
-    redirect_to root_path
+    redirect_to diaries_path
   end
 
   def fake_email(_uid, _provider)
     "#{auth.uid}-#{auth.provider}@example.com"
+  end
+
+  def buff_process(user)
+    buff = Buff.find_or_create_by!(user_id: user.id)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_02_140956) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_04_124056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_02_140956) do
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "count", default: 0, null: false
+    t.bigint "user_id"
+    t.bigint "diary_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["diary_id"], name: "index_likes_on_diary_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -64,4 +74,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_02_140956) do
   add_foreign_key "comments", "diaries"
   add_foreign_key "comments", "users"
   add_foreign_key "diaries", "users"
+  add_foreign_key "likes", "diaries"
+  add_foreign_key "likes", "users"
 end
