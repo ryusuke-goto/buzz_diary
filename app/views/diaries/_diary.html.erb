@@ -45,9 +45,9 @@
           <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary.id) || 0 %></h1>
         </div>
       <% else %>
-        <%= button_to diary_likes_path(diary.id), id: "btn_animation", class: "flex btn_box" do %>
+        <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", class: "flex btn_box", method: { turbo_method: :post } do %>
           <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
-          <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary.id) || 0 %></h1>
+          <h1 class="text-base mx-10 pt-5"><%= Like.likes_count(diary_id: diary.id) || 0 %></h1>
         <% end %>
       <% end %>
     </div>
