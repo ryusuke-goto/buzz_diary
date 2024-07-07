@@ -7,17 +7,7 @@
     <%= render partial: "show_diary", locals: {diary: @diary} %>
   </div>
   <div id="like-<%=@diary.id%>" class="flex pl-20 pt-0">
-    <% if current_user && current_user.own?(@diary) %>
-      <div id="btn_animation", class="btn_box">
-        <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
-      </div>
-      <h1 class="text-base mx-8 pt-5"><%= Like.likes_count(@diary.id) || 0 %></h1>
-    <% else %>
-      <div id="btn_animation", class="btn_box">
-        <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
-      </div>
-      <h1 class="text-base mx-8 pt-0"><%= Like.likes_count(@diary.id) || 0 %></h1>
-    <% end %>
+    <%= render partial: "shared/like", locals: {diary: @diary} %>
   </div>
   <%= render partial: "comments/comment", collection: @comments %>
   <%= render partial: "comments/form", locals: {comment: @comment, diary: @diary} %>
