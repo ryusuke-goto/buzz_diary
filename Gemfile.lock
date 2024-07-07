@@ -306,6 +306,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_calendar (3.0.4)
+      rails (>= 6.1)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -376,6 +378,7 @@ DEPENDENCIES
   rails-i18n
   rubocop
   selenium-webdriver
+  simple_calendar
   sprockets-rails
   stimulus-rails
   turbo-rails

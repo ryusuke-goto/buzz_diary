@@ -4,14 +4,7 @@
 
 @import "top";
 @import "logo";
-
-.font-black {
-  color: black;
-}
-
-.font-white {
-    color: white;
-}
+@import "simple_calendar";
 
 .bg-green {
     background-color: #65C294;

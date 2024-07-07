@@ -1,0 +1,9 @@
+<div id="diary-id-<%= diary.id %>">
+  <div class="card-body pt-2">
+    <%= link_to diary_path(diary.id) do %>
+      <div class="card-title">
+        <%= diary.title %>
+      </div>
+    <% end %>
+  </div>
+</div>

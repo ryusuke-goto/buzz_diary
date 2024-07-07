@@ -10,4 +10,8 @@ class Diary < ApplicationRecord
   validates :diary_date, presence: true, uniqueness: true
 
   mount_uploader :diary_image, DiaryImageUploader
+
+  def start_time
+    self.diary_date ##Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :authenticate_user!, only: %i[create]
   skip_before_action :verify_authenticity_token
