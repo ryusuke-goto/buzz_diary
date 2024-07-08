@@ -1,9 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "top";
-@import "logo";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 @import "simple_calendar";
 
 .bg-green {
@@ -96,6 +93,3 @@
         -webkit-transform: scale(1.2)
     }
 }
-
-
-
