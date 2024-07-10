@@ -35,15 +35,13 @@ ja:
     commit: 投稿
     placeholder: コメントを投稿しよう
   likes:
-    no_result: ブックマーク中の掲示板がありません。
   profile:
     full_name: 氏名
     avatar: アバター
-  mailer:
-    subject: パスワードリセット
-    submit: 送信
-  admin_users:
-    no_result: ユーザーがいません
+  simple_calendar:
+    previous: "<<"
+    next: ">>"
+    week: 週間
   
   title:
     home: ホーム

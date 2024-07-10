@@ -1,17 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "top";
-@import "logo";
-
-.font-black {
-  color: black;
-}
-
-.font-white {
-    color: white;
-}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "simple_calendar";
 
 .bg-green {
     background-color: #65C294;
@@ -21,38 +11,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.clear-decoration {
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.clear-decoration:hover {
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.clear-decoration:focus {
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.clear-decoration:active span::after {
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.clear-decoration:focus-visible {
-  outline: none;
 }
 
 .btn-line-login {
@@ -103,6 +61,3 @@
         -webkit-transform: scale(1.2)
     }
 }
-
-
-
