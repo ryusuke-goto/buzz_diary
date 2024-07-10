@@ -1,14 +1,16 @@
-<div id="diary-id-<%= memory_diary.id %>">
-    <div class="card bg-base-100 w-96 shadow-xl">
+<tr class="border-green-50">
+  <td class="border-green-50">
+    <div id="diary-id-<%= memory_diary.id %>">
       <div class="card-body">
-        <%= link_to diary_path(memory_diary.id), class: "flex justify-center items-center" do %>
+        <%= link_to diary_path(memory_diary.id), class: "flex justify-center items-center text-xl" do %>
         <div class="card-date">
           <%= memory_diary.diary_date %>
         </div>
-        <h2 class="card-title">
+        <div class="card-title mx-5">
           <%= memory_diary.title %>
-        </h2>
+        </div>
         <% end %>
       </div>
     </div>
-</div>
+  </td>
+</tr>

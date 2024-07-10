@@ -13,38 +13,6 @@
     justify-content: space-between;
 }
 
-.clear-decoration {
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.clear-decoration:hover {
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.clear-decoration:focus {
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.clear-decoration:active span::after {
-  border: none;
-  outline: none;
-  background: transparent;
-  box-shadow: none;
-}
-
-.clear-decoration:focus-visible {
-  outline: none;
-}
-
 .btn-line-login {
     background-color: #06C755;
     border: solid #06C755;

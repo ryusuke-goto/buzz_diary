@@ -11,5 +11,11 @@
       </div>
     <% end %>
   <% end %>
-  <%= render partial: "memory_diary", collection: @diaries %>
+  <div class="h-96 overflow-x-auto">
+    <table class="border-green-50 table table-pin-rows">
+      <tbody>
+        <%= render partial: "memory_diary", collection: @diaries %>
+      </tbody>
+    </table>
+  </div>
 </div>
