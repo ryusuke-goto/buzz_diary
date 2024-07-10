@@ -1,0 +1,14 @@
+<div id="diary-id-<%= memory_diary.id %>">
+    <div class="card bg-base-100 w-96 shadow-xl">
+      <div class="card-body">
+        <%= link_to diary_path(memory_diary.id), class: "flex justify-center items-center" do %>
+        <div class="card-date">
+          <%= memory_diary.diary_date %>
+        </div>
+        <h2 class="card-title">
+          <%= memory_diary.title %>
+        </h2>
+        <% end %>
+      </div>
+    </div>
+</div>
