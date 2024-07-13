@@ -9,10 +9,7 @@
         <h3 class="small"><%= comment.user.name %></h3>
         <% if current_user.own?(comment) %>
           <div class="action mx-3">
-            <%= link_to "#", class: "edit-comment-link" do %>
-              <i class="fa-regular fa-pen-to-square"></i>
-            <% end %>
-            <%= link_to "#", class: "delete-comment-link" do %>
+            <%= link_to comment_path(comment.id), class: "delete-comment-link", data:{turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
               <i class="fa-regular fa-trash-can"></i>
             <% end %>
           </div>

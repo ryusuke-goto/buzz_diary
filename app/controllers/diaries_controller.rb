@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DiariesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
   def index
     @diaries = Diary.includes(:user)
   end
