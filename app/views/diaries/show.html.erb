@@ -9,6 +9,8 @@
   <div id="like-<%=@diary.id%>" class="flex pl-20 pt-0">
     <%= render partial: "shared/like", locals: {diary: @diary} %>
   </div>
-  <%= render partial: "comments/comment", collection: @comments %>
+  <div id="comments">
+    <%= render partial: "comments/comment", collection: @comments %>
+  </div>
   <%= render partial: "comments/form", locals: {comment: @comment, diary: @diary} %>
 </div>

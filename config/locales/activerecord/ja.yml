@@ -2,6 +2,8 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      diary: 日記
+      comment: コメント
     attributes:
       user:
         email: メールアドレス

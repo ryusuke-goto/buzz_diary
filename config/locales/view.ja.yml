@@ -1,9 +1,14 @@
 ja:
   defaults:
+    delete_confirm: 削除しますか？
     flash_message:
-      created: 日記を投稿しました！
-      not_created: 日記を投稿できませんでした。
+      created: "%{item}を投稿しました！"
+      not_created: "%{item}を投稿できませんでした。"
       already_created: その日の日記はすでに作成されています
+      updated: "%{item}を更新しました"
+      not_updated: "%{item}を更新出来ませんでした・・・"
+      deleted: "%{item}を削除しました"
+      require_login: ログインしてください
   helpers:
     submit:
       create: 登録
