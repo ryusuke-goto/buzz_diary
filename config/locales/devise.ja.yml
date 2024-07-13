@@ -64,4 +64,5 @@ ja:
       too_long: "は%{count}文字以下に設定して下さい。"
       invalid: "は有効でありません。"
       confirmation: "が内容とあっていません。"
+      extension_allowlist_error: '画像の拡張子はjpg jpeg gif pngのみに対応しています。'
 

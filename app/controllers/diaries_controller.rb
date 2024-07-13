@@ -13,17 +13,37 @@ class DiariesController < ApplicationController
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
-      redirect_to diaries_path, success: t('defaults.flash_message.created', item: Diary.model_name.human)
+      redirect_to diaries_path, success: t('defaults.flash_message.created', item: t('activerecord.models.diary'))
     else
-      flash.now[:danger] = t('defaults.flash_message.not_created', item: Diary.model_name.human)
+      flash.now[:danger] = t('defaults.flash_message.not_created', item: t('activerecord.models.diary'))
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @diary = Diary.find_by(id: params[:id])
+    @diary = Diary.find(params[:id])
     @comment = Comment.new
     @comments = @diary.comments.includes(:user).order(created_at: :asc)
+  end
+
+  def edit
+    @diary = current_user.diaries.find(params[:id])
+  end
+
+  def update
+    @diary = current_user.diaries.find(params[:id])
+    if @diary.update(diary_params)
+      redirect_to diaries_path, success: t('defaults.flash_message.updated', item: t('activerecord.models.diary'))
+    else
+      flash.now[:danger] = t('defaults.flash_message.not_updated', item: t('activerecord.models.diary'))
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    diary = current_user.diaries.find(params[:id])
+    diary.destroy!
+    redirect_to diaries_path, success: t('defaults.flash_message.deleted', item: t('activerecord.models.diary'))
   end
 
   private

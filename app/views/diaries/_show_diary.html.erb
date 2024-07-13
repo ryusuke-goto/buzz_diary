@@ -19,10 +19,10 @@
           <%= diary.body %>
         </div>
         <div class='ms-auto'>
-          <%= link_to '#', id: "button-edit-#{diary.id}" do %>
+          <%= link_to edit_diary_path(diary.id), id: "button-edit-#{diary.id}", class: "edit-comment-link" do %>
             <i class="bi bi-pencil-fill"></i>
           <% end %>
-          <%= link_to '#', id: "button-delete-#{diary.id}", method: :delete, data: { confirm: '本当にこの日記を削除しますか？' } do %>
+          <%= link_to diary_path(diary.id), class: "delete-comment-link", id: "button-delete-#{diary.id}", data: { turbo_method: :delete , turbo_confirm: t('defaults.delete_confirm') } do %>
             <i class="bi bi-trash-fill"></i>
           <% end %>
         </div>
