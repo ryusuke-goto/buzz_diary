@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :diaries, only: %i[index new create show edit update destroy] do
     resources :comments, only: %i[create edit update destroy], shallow: true
   end
-  resources :likes, only: %i[create]
+  resources :likes, only: %i[create]do
+    collection do
+      post 'everything'
+    end
+  end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get 'up' => 'rails/health#show', as: :rails_health_check

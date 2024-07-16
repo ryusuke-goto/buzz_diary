@@ -1,15 +1,6 @@
-<% if current_user && current_user.own?(diary) %>
-  <div id="btn_animation", class="btn_box">
-    <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
-  </div>
-  <div id="count-<%=diary.id%>", class="text-base mx-7 pt-0">
-    <h2><%= Like.likes_count(diary.id) || 0 %></h1>
-  </div>
-<% else %>
-  <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", class: "flex btn_box", method: { turbo_method: :post } do %>
-    <i class="btnn fa-solid fa-heart text-5xl pt-2"></i>
-  <% end %>
-  <div id="count-<%=diary.id%>", class="text-base mx-7 pt-0">
-    <h2><%= Like.likes_count(diary.id) || 0 %></h1>
-  </div>
+<%= button_to likes_path(diary_id: diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
+  <i class="btnn fa-solid fa-heart text-5xl"></i>
 <% end %>
+<div id="count-<%=diary.id%>", class="text-base mx-7 pt-3">
+  <h2><%= Like.likes_count(diary.id) || 0 %></h1>
+</div>

@@ -40,6 +40,8 @@ ja:
     commit: 投稿
     placeholder: コメントを投稿しよう
   likes:
+    everything_success: 今日の日記全部にいいねしました！
+    everything_failed: どうやらまだ投稿された今日の日記はないようです。
   profile:
     full_name: 氏名
     avatar: アバター
