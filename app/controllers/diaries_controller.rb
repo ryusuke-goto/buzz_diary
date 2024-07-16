@@ -3,7 +3,7 @@
 class DiariesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   def index
-    @diaries = Diary.includes(:user)
+    @diaries = Diary.includes(:user).order(diary_date: :desc)
   end
 
   def new

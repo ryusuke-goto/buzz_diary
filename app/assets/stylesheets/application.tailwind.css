@@ -35,14 +35,9 @@
 
 #btn_animation .btnn {
   display: block;
-  width: 40px;
-  height: 100px;
-  line-height: 100px;
-  border-radius: 39px;
   text-decoration: none;
   background-color: none;
   color: green;
-  text-align: center;
   animation: btn_animation 1.5s infinite;
 }
 
