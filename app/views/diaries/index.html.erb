@@ -1,16 +1,12 @@
 <% content_for(:title, t("title.diary_index")) %>
 <div class="container">
-  <div class="">
-    <div class="">
-      <div class="mx-5">
-        <% if @diaries.present? %>
-          <%= render partial: "diary", collection: @diaries %>
-        <% else %>
-          <div class="flex items-center justify-center text-2xl">
-            <%= t("diaries.no_result") %>
-          </div>
-        <% end %>
+  <div class="mx-5">
+    <% if @diaries.present? %>
+      <%= render partial: "diary", collection: @diaries %>
+    <% else %>
+      <div class="flex items-center justify-center text-2xl">
+        <%= t("diaries.no_result") %>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
