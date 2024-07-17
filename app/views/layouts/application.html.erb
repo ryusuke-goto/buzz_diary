@@ -10,6 +10,16 @@
 
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <script src="https://kit.fontawesome.com/d7bfabcd52.js" crossorigin="anonymous"></script>
+    <script>
+      function loadMissions(type) {
+        fetch(`/missions/${type}`)
+          .then(response => response.text())
+          .then(html => {
+            document.getElementById('mission-list').innerHTML = html;
+          })
+          .catch(error => console.error('Error loading missions:', error));
+      }
+    </script>
   </head>
 
   <body>
