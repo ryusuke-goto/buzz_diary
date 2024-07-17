@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_04_124056) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_17_123314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_124056) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "daily_missions", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.integer "buff", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "diaries", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
@@ -53,6 +61,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_124056) do
     t.datetime "updated_at", null: false
     t.index ["diary_id"], name: "index_likes_on_diary_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "user_dailies", force: :cascade do |t|
+    t.boolean "status", default: false
+    t.bigint "user_id"
+    t.bigint "daily_mission_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["daily_mission_id"], name: "index_user_dailies_on_daily_mission_id"
+    t.index ["user_id"], name: "index_user_dailies_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,4 +94,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_04_124056) do
   add_foreign_key "diaries", "users"
   add_foreign_key "likes", "diaries"
   add_foreign_key "likes", "users"
+  add_foreign_key "user_dailies", "daily_missions"
+  add_foreign_key "user_dailies", "users"
 end
