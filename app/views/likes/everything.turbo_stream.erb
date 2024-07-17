@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "diaries" do %>
+  <div id="diaries">
+    <%= render partial: "diary", collection: @diaries %>
+  </div>
+<% end %>

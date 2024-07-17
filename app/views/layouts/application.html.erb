@@ -10,11 +10,25 @@
 
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <script src="https://kit.fontawesome.com/d7bfabcd52.js" crossorigin="anonymous"></script>
+    <script>
+      function loadMissions(type) {
+        fetch(`/missions/${type}`)
+          .then(response => response.text())
+          .then(html => {
+            document.getElementById('mission-list').innerHTML = html;
+          })
+          .catch(error => console.error('Error loading missions:', error));
+      }
+    </script>
   </head>
 
   <body>
     <div class="min-h-screen bg-white w-full">
-      <%= render "shared/before_login_header" %>
+      <% if current_user %>
+        <%= render "shared/header" %>
+      <% else %>
+        <%= render "shared/before_login_header" %>
+      <% end %>
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>">
           <%= message %>

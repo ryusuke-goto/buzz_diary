@@ -1,0 +1,2 @@
+class DailyMissionsController < ApplicationController
+end

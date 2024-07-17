@@ -10,9 +10,10 @@ class LikesController < ApplicationController
   end
 
   def everything
-    @diaries = Diary.where(diary_date: Date.today).includes(:user)
-    if @diaries.present?
-      @diaries.each do |diary|
+    @today_diaries = Diary.where(diary_date: Date.today).includes(:user)
+    @diaries = Diary.includes(:user).order(diary_date: :desc)
+    if @today_diaries.present?
+      @today_diaries.each do |diary|
         puts "diaryの値は#{diary}"
         current_user.like(diary)
       end

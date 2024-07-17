@@ -21,15 +21,41 @@
       </li>
 
       <li class="nav-item ml-5 mr-5">
-        <%= link_to "#", class: "nav-link", id: "header-menu" do %>
-          <div class="text-4xl">
-            <i class="fa-solid fa-mountain-sun"></i>
-          </div>
+        <button class="" onclick="my_modal_1.showModal()">
+          <i class="fa-solid fa-mountain-sun text-4xl"></i>
           <div class="text-base">
             ミッション
           </div>
-        <% end %>
+        </button>
+        <!-- モーダル -->
+        <dialog id="my_modal_1" class="modal">
+          <div class="modal-box bg-white text-black">
+            <h3 class="text-lg font-bold">ミッションの選択</h3>
+            <p class="py-4">デイリーミッションまたはチャレンジミッションを選択してください</p>
+            <div class="form-control">
+              <label class="cursor-pointer label">
+                <span class="label-text">デイリーミッション</span> 
+                <input type="radio" name="mission-type" class="radio radio-primary" value="daily" checked onclick="loadMissions('daily')">
+              </label>
+            </div>
+            <div class="form-control">
+              <label class="cursor-pointer label">
+                <span class="label-text">チャレンジミッション</span> 
+                <input type="radio" name="mission-type" class="radio radio-secondary" value="challenge" onclick="loadMissions('challenge')">
+              </label>
+            </div>
+            <div id="mission-list" class="mt-4">
+              <!-- ミッション一覧はここに表示されます -->
+            </div>
+            <div class="modal-action">
+              <form method="dialog">
+                <button class="btn">閉じる</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
       </li>
+
     </ul>
   </div>
 </header>
