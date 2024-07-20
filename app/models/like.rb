@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Like < ApplicationRecord
   belongs_to :user
   belongs_to :diary
@@ -6,6 +8,6 @@ class Like < ApplicationRecord
 
   def self.likes_count(id)
     likes = Like.where(diary_id: id)
-    total_count = likes.map(&:count).sum
+    likes.map(&:count).sum
   end
 end

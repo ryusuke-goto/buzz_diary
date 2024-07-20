@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :diaries, only: %i[index new create show edit update destroy] do
     resources :comments, only: %i[create edit update destroy], shallow: true
   end
-  resources :likes, only: %i[create]do
+  resources :likes, only: %i[create] do
     collection do
       post 'everything'
     end

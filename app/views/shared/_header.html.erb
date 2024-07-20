@@ -1,61 +1,76 @@
-<header class="flex justify-between bg-green h-15 text-white">
-  <%= link_to diaries_path, class: "logo" do %>
-    <%= image_tag "logo.png", class: "img-top", width: "70", height:"70" %>
-  <% end %>
 
-  <button class="">
-    <span class="toggler-icon"></span>
-  </button>
+<%= link_to diaries_path, class: "logo" do %>
+  <%= image_tag "logo.png", class: "img-top mx-5", width: "70", height:"70" %>
+<% end %>
 
-  <div class="collapse" id="navbarSupportedContent">
-    <ul class="ms-auto flex">
-      <li class="mr-5">
-        <%= link_to "/", class: "nav-link", id: "header-menu" do %>
-          <div class="text-4xl">
-            <i class="fa-solid fa-question"></i>
-          </div>
-          <div class="text-base">
-            使い方
-          </div>
-        <% end %>
-      </li>
+<div id="navbarSupportedContent">
+  <ul class="ms-auto flex">
+    <li class="mr-5">
+      <%= link_to "/", class: "nav-link", id: "header-menu" do %>
+        <div class="text-4xl">
+          <i class="fa-solid fa-question"></i>
+        </div>
+        <div class="text-base">
+          使い方
+        </div>
+      <% end %>
+    </li>
 
-      <li class="nav-item ml-5 mr-5">
-        <button class="" onclick="my_modal_1.showModal()">
+    <li class="mr-5">
+      <div class="dropdown dropdown-end">
+        <button class="" tabindex="0">
           <i class="fa-solid fa-mountain-sun text-4xl"></i>
           <div class="text-base">
             ミッション
           </div>
         </button>
-        <!-- モーダル -->
-        <dialog id="my_modal_1" class="modal">
-          <div class="modal-box bg-white text-black">
-            <h3 class="text-lg font-bold">ミッションの選択</h3>
-            <p class="py-4">デイリーミッションまたはチャレンジミッションを選択してください</p>
-            <div class="form-control">
-              <label class="cursor-pointer label">
-                <span class="label-text">デイリーミッション</span> 
-                <input type="radio" name="mission-type" class="radio radio-primary" value="daily" checked onclick="loadMissions('daily')">
-              </label>
-            </div>
-            <div class="form-control">
-              <label class="cursor-pointer label">
-                <span class="label-text">チャレンジミッション</span> 
-                <input type="radio" name="mission-type" class="radio radio-secondary" value="challenge" onclick="loadMissions('challenge')">
-              </label>
-            </div>
-            <div id="mission-list" class="mt-4">
-              <!-- ミッション一覧はここに表示されます -->
-            </div>
-            <div class="modal-action">
-              <form method="dialog">
-                <button class="btn">閉じる</button>
-              </form>
-            </div>
-          </div>
-        </dialog>
-      </li>
+        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+          <li>
+            <button class="" onclick="my_modal_1.showModal(); loadMissions('daily', 'mission-list-daily')">
+              <div class="text-base">
+                デイリー
+              </div>
+            </button>
+          </li>
+          <li>
+            <button class="" onclick="my_modal_2.showModal(); loadMissions('challenge', 'mission-list-challenge')">
+              <div class="text-base">
+                チャレンジ
+              </div>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
 
-    </ul>
+<!-- デイリーミッション用モーダル -->
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box bg-white text-black">
+    <h3 class="text-lg font-bold">デイリーミッション</h3>
+    <div id="mission-list-daily" class="mt-4">
+      <!-- デイリーミッション一覧はここに表示されます -->
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">閉じる</button>
+      </form>
+    </div>
   </div>
-</header>
+</dialog>
+
+<!-- チャレンジミッション用モーダル -->
+<dialog id="my_modal_2" class="modal">
+  <div class="modal-box bg-white text-black">
+    <h3 class="text-lg font-bold">チャレンジミッション</h3>
+    <div id="mission-list-challenge" class="mt-4">
+      <!-- チャレンジミッション一覧はここに表示されます -->
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">閉じる</button>
+      </form>
+    </div>
+  </div>
+</dialog>

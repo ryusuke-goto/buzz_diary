@@ -28,7 +28,7 @@ module Users
     private
 
     def buff_process
-      buff = Buff.find_or_create_by!(user_id: current_user.id)
+      Buff.find_or_create_by!(user_id: current_user.id)
     end
   end
 end
