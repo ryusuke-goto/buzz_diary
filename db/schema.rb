@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_17_160931) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_18_133414) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,13 +26,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_160931) do
 
   create_table "challenge_missions", force: :cascade do |t|
     t.string "title", null: false
-    t.text "body", null: false
     t.integer "buff", default: 1, null: false
     t.integer "like_css"
     t.integer "diary_css"
     t.integer "theme_css"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -47,10 +47,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_160931) do
 
   create_table "daily_missions", force: :cascade do |t|
     t.string "title", null: false
-    t.text "body", null: false
     t.integer "buff", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description", null: false
   end
 
   create_table "diaries", force: :cascade do |t|
