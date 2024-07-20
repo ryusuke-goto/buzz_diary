@@ -28,6 +28,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def buff_process(user)
-    buff = Buff.find_or_create_by!(user_id: user.id)
+    Buff.find_or_create_by!(user_id: user.id)
   end
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.3.0'
@@ -72,12 +73,12 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'devise'
-gem 'omniauth-line'
-gem 'dotenv-rails'
-gem 'omniauth-rails_csrf_protection'
-gem 'devise-i18n-views'
-gem 'rails-i18n'
 gem 'carrierwave', '~> 3.0'
-gem 'simple_calendar'
+gem 'devise'
+gem 'devise-i18n-views'
+gem 'dotenv-rails'
+gem 'omniauth-line'
+gem 'omniauth-rails_csrf_protection'
+gem 'rails-i18n'
 gem 'sassc'
+gem 'simple_calendar'

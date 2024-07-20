@@ -19,12 +19,12 @@
     justify-content: space-between;
 }
 
-.btn-line-login {
+.line-color {
     background-color: #06C755;
     border: solid #06C755;
 }
 
-.btn-line-login:hover {
+.line-color:hover {
     background-color: #06C755;
     border: solid #06C755;
 }
@@ -37,7 +37,7 @@
   display: block;
   text-decoration: none;
   background-color: none;
-  color: green;
+  color: #008000;
   animation: btn_animation 1.5s infinite;
 }
 
