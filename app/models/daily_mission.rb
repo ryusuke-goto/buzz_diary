@@ -22,9 +22,9 @@ class DailyMission < ApplicationRecord
     mission = self.find_by("title LIKE?", "%日記を投稿する%")
     user_daily = user.user_dailies.find_by(daily_mission_id: mission.id)
     today_diary = user.diaries.find_by(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
-    if today_diary.present?
+    if today_diary.present? && !user_daily.status
       logger.debug "user_daily.update executed"
-      @daily_mission_update = user_daily.update(status: true)
+      user_daily.update(status: true)
       user.add_daily_buff(mission.buff)
     end
   end

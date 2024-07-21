@@ -18,9 +18,9 @@
 
     <li class="mr-5">
       <div class="dropdown dropdown-end">
-        <% if @daily_mission_update.present? %>
+        <% if flash[:daily_missions_update].present? %>
           <div class="indicator">
-            <span class="indicator-item badge badge-secondary">99+</span>
+            <span class="indicator-item indicator-bottom indicator-start badge badge-secondary">check!</span>
             <button class="" tabindex="0">
               <i class="fa-solid fa-mountain-sun text-4xl"></i>
               <div class="text-base">
