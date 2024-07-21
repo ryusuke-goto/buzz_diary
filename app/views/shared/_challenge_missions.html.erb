@@ -1,7 +1,24 @@
-<!-- app/views/shared/_challenge_missions.html.erb -->
-<% challenge_missions.each do |mission| %>
-  <div>
-    <h4><%= mission.title %></h4>
-    <p><%= mission.description %></p>
-  </div>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>ミッションID</th>
+      <th>タイトル</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% challenge_missions.each do |mission| %>
+      <tr>
+        <td><%= mission.id %></td>
+        <td><%= mission.title %></td>
+        <td>
+          <% if challenge_status[mission.id]&.status %>
+            達成済
+          <% else %>
+            未達成
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
