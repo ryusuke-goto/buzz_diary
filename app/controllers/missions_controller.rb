@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class MissionsController < ApplicationController
+  before_action :authenticate_user!, only: %i[show]
   def show
     case params[:type]
     when 'daily'

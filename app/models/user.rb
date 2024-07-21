@@ -60,4 +60,19 @@ class User < ApplicationRecord
     like.count += diary.user.buff.sum_buff
     like.save!
   end
+
+  def add_daily_buff(target_buff)
+    logger.debug "add_daily_buff executed"
+    current_buff = self.buff
+    current_buff.daily_buff += target_buff
+    current_buff.save!
+    self.sum_buff
+  end
+
+  def sum_buff
+    logger.debug "add_daily_buff executed"
+    current_buff = self.buff
+    current_buff.sum_buff += current_buff.daily_buff + current_buff.challenge_buff
+    current_buff.save!
+  end
 end

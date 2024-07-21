@@ -13,6 +13,7 @@ class DiariesController < ApplicationController
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
+      DailyMission.check_create_diary_today_mission(current_user)
       redirect_to diaries_path, success: t('defaults.flash_message.created', item: t('activerecord.models.diary'))
     else
       flash.now[:danger] = t('defaults.flash_message.not_created', item: t('activerecord.models.diary'))
