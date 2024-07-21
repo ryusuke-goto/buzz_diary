@@ -12,6 +12,13 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_diaries, through: :likes, source: :diary
+  has_many :user_dailies, dependent: :destroy
+  has_many :user_challenges, dependent: :destroy
+  has_many :my_dailies, through: :user_dailies, source: :daily_mission
+  has_many :my_challenges, through: :user_challenges, source: :challenge_mission
+
+  after_create :create_buff
+  after_commit :ensure_buff_exists, on: :create
 
   # for line-login
   def social_profile(provider)
@@ -36,6 +43,14 @@ class User < ApplicationRecord
     save!
   end
 
+  def create_buff
+    self.create_buff!
+  end
+
+  def ensure_buff_exists
+    self.buff || self.create_buff!
+  end
+
   def own?(object)
     object.user_id == id
   end
@@ -44,5 +59,20 @@ class User < ApplicationRecord
     like = Like.find_or_create_by!(user_id: id, diary_id: diary.id)
     like.count += diary.user.buff.sum_buff
     like.save!
+  end
+
+  def add_daily_buff(target_buff)
+    logger.debug "add_daily_buff executed"
+    current_buff = self.buff
+    current_buff.daily_buff += target_buff
+    current_buff.save!
+    self.sum_buff
+  end
+
+  def sum_buff
+    logger.debug "add_daily_buff executed"
+    current_buff = self.buff
+    current_buff.sum_buff += current_buff.daily_buff + current_buff.challenge_buff
+    current_buff.save!
   end
 end

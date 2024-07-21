@@ -3,7 +3,7 @@
 module Users
   class SessionsController < Devise::SessionsController
     # before_action :configure_sign_in_params, only: [:create]
-    after_action :buff_process, only: :create
+    after_action :buff_missions_process, only: :create
     # GET /resource/sign_in
     # def new
     #   super
@@ -27,8 +27,13 @@ module Users
     # end
     private
 
-    def buff_process
-      Buff.find_or_create_by!(user_id: current_user.id)
+    def buff_missions_process
+      Rails.logger.info "buff_process executed"
+      current_user.ensure_buff_exists
+
+      Rails.logger.info "missions_process executed"
+      DailyMission.check_record_user_dailies(current_user.id)
+      ChallengeMission.check_record_user_challenges(current_user.id)
     end
   end
 end

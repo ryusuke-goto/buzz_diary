@@ -16,8 +16,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
                                                 name: @omniauth['info']['name'], password: Devise.friendly_token[0, 20])
       end
       @profile.set_values(@omniauth)
+      @profile.save!
       sign_in(:user, @profile)
       buff_process(@profile)
+      missions_process(@profile)
     end
     flash[:notice] = 'ログインしました'
     redirect_to diaries_path
@@ -28,6 +30,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def buff_process(user)
-    Buff.find_or_create_by!(user_id: user.id)
+    Rails.logger.info "buff_process executed"
+    user.ensure_buff_exists
+  end
+
+  def missions_process(user)
+    Rails.logger.info "missions_process executed"
+    DailyMission.check_record_user_dailies(user.id)
+    ChallengeMission.check_record_user_challenges(user.id)
   end
 end
