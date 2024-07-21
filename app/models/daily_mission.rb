@@ -24,7 +24,7 @@ class DailyMission < ApplicationRecord
     today_diary = user.diaries.find_by(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
     if today_diary.present?
       logger.debug "user_daily.update executed"
-      @mission_update = user_daily.update(status: true)
+      @daily_mission_update = user_daily.update(status: true)
       user.add_daily_buff(mission.buff)
     end
   end
