@@ -12,6 +12,13 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_diaries, through: :likes, source: :diary
+  has_many :user_dailies, dependent: :destroy
+  has_many :user_challenges, dependent: :destroy
+  has_many :my_dailies, through: :user_dailies, source: :daily_mission
+  has_many :my_challenges, through: :user_challenges, source: :challenge_mission
+
+  after_create :create_buff
+  after_commit :ensure_buff_exists, on: :create
 
   # for line-login
   def social_profile(provider)
@@ -34,6 +41,14 @@ class User < ApplicationRecord
   def set_values_by_raw_info(raw_info)
     self.raw_info = raw_info.to_json
     save!
+  end
+
+  def create_buff
+    self.create_buff!
+  end
+
+  def ensure_buff_exists
+    self.buff || self.create_buff!
   end
 
   def own?(object)
