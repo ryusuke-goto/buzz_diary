@@ -34,6 +34,11 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user.ensure_buff_exists
   end
 
+  def reward_process(user)
+    Rails.logger.info "reward_process executed"
+    user.ensure_reward_exists
+  end
+
   def missions_process(user)
     Rails.logger.info "missions_process executed"
     DailyMission.check_record_user_dailies(user.id)

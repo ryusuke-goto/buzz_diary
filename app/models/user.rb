@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :diaries, dependent: :destroy
   has_one :buff, dependent: :destroy
+  has_one :reward, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :like_diaries, through: :likes, source: :diary
@@ -17,8 +18,8 @@ class User < ApplicationRecord
   has_many :my_dailies, through: :user_dailies, source: :daily_mission
   has_many :my_challenges, through: :user_challenges, source: :challenge_mission
 
-  after_create :create_buff
-  after_commit :ensure_buff_exists, on: :create
+  after_create :create_buff, :create_reward
+  after_commit :ensure_buff_exists, :ensure_reward_exists, :create
 
   # for line-login
   def social_profile(provider)
@@ -49,6 +50,14 @@ class User < ApplicationRecord
 
   def ensure_buff_exists
     self.buff || self.create_buff!
+  end
+
+  def create_reward
+    self.create_reward!
+  end
+
+  def ensure_reward_exists
+    self.reward || self.create_reward!
   end
 
   def own?(object)
