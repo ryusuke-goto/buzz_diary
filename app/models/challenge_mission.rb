@@ -16,4 +16,13 @@ class ChallengeMission < ApplicationRecord
       UserChallenge.create(user_id: user_id, challenge_mission_id: challenge_mission_id)
     end
   end
+
+  def self.check_count_like_record(user)
+    mission = self.find_by("title LIKE?", "%10個の日記にいいね%")
+    user_challenge = user.user_challenges.find_by(challenge_mission_id: mission.id)
+    if !user_challenge.status
+      logger.debug "user_challenge.update executed"
+      user_challenge.update(status: true)
+      user.add_challenge_buff(mission.buff)
+  end
 end

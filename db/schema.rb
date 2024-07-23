@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_18_133414) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_23_142638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,6 +74,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_133414) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "rewards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "like_css", default: 0, null: false
+    t.integer "diary_css", default: 0, null: false
+    t.integer "theme_css", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_rewards_on_user_id"
+  end
+
   create_table "user_challenges", force: :cascade do |t|
     t.boolean "status", default: false
     t.bigint "user_id"
@@ -115,6 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_133414) do
   add_foreign_key "diaries", "users"
   add_foreign_key "likes", "diaries"
   add_foreign_key "likes", "users"
+  add_foreign_key "rewards", "users"
   add_foreign_key "user_challenges", "challenge_missions"
   add_foreign_key "user_challenges", "users"
   add_foreign_key "user_dailies", "daily_missions"

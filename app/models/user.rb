@@ -62,7 +62,10 @@ class User < ApplicationRecord
   end
 
   def liked_diary_count
-    self.like_diary.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
+    counts = self.likes.count
+    if counts > 100
+      ChallengeMission
+    end
   end
 
   def add_daily_buff(target_buff)
