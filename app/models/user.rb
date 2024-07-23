@@ -61,6 +61,10 @@ class User < ApplicationRecord
     like.save!
   end
 
+  def liked_diary_count
+    self.like_diary.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
+  end
+
   def add_daily_buff(target_buff)
     logger.debug "add_daily_buff executed"
     current_buff = self.buff
