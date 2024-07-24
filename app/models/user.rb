@@ -72,23 +72,57 @@ class User < ApplicationRecord
 
   def liked_diary_count
     counts = self.likes.count
-    if counts > 100
-      ChallengeMission
+    if counts > 10
+      result = ChallengeMission.update_mission(user: self, mission_title: "10個の日記にいいね")
+      if result[:success]
+      {success: true, message: result[:message]}
     end
   end
 
-  def add_daily_buff(target_buff)
-    logger.debug "add_daily_buff executed"
+  def add_buff(daily: 0, challenge: 0, mission: nil)
+    logger.debug "add_buff executed"
     current_buff = self.buff
-    current_buff.daily_buff += target_buff
-    current_buff.save!
-    self.sum_buff
+    return { success: false} unless current_buff
+    if daily > 0
+      current_buff.daily_buff += daily
+      logger.debug "daily_buff: #{current_buff.daily_buff}"
+      current_buff.save!
+      self.sum_buff += current_buff.daily_buff
+      current_buff.save!
+      {success: true, message: "buff updated"}
+    elsif challenge > 0
+      current_buff.challenge_buff += challenge
+      logger.debug "challenge_buff: #{current_buff.challenge_buff}"    
+      current_buff.save!
+      self.sum_buff += current_buff.challenge_buff
+      current_buff.save!
+      result = self.update_reward(mission)
+      if result[:success]
+        {success: true, message: "buff & reward updated"}
+      else
+        {success: true, message: "buff updated"}
+      end
+    else
+      logger.debug "cannot add buff"
+      {success: false}
+    end
+    
   end
 
-  def sum_buff
-    logger.debug "add_daily_buff executed"
-    current_buff = self.buff
-    current_buff.sum_buff += current_buff.daily_buff + current_buff.challenge_buff
-    current_buff.save!
+  def update_reward(mission)
+    reward = self.reward
+    if mission.like_css.present?
+      reward.like_css += mission.like_css
+      logger.debug "like_css update"
+    end
+    if mission.diary_css.present?
+      reward.diary_css += mission.diary_css
+      logger.debug "diary_css update"
+    end
+    if mission.theme_css.present?
+      reward.theme_css += mission.theme_css
+      logger.debug "theme_css update"
+    end
+    
   end
 end

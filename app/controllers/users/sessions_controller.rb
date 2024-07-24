@@ -32,7 +32,7 @@ module Users
       current_user.ensure_buff_exists
 
       Rails.logger.info "reward_process executed"
-      user.ensure_reward_exists
+      current_user.ensure_reward_exists
 
       Rails.logger.info "missions_process executed"
       DailyMission.check_record_user_dailies(current_user.id)

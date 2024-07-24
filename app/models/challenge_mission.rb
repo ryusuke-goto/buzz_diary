@@ -17,13 +17,25 @@ class ChallengeMission < ApplicationRecord
     end
   end
 
-  def self.check_count_like_record(user)
-    mission = self.find_by("title LIKE?", "%10個の日記にいいね%")
+  def self.update_mission(user:, mission_title:)
+    mission = self.find_by("title LIKE ?", "%#{mission_title}%")
+    logger.debug "mission #{mission}"
+    return { success: false, message: 'Mission not found' } unless mission
+
     user_challenge = user.user_challenges.find_by(challenge_mission_id: mission.id)
-    if !user_challenge.status
-      logger.debug "user_challenge.update executed"
+    logger.debug "user_daily #{user_challenge.inspect}"
+    if user_challenge.present? && !user_challenge.status
+      logger.debug "user_daily.update executed"
       user_challenge.update(status: true)
-      user.add_challenge_buff(mission.buff)
+      result = user.add_buff(challenge: mission.buff, mission: mission)
+      if result[:success]
+        { success: true, message: mission.title }
+      else
+        { success: false, message: 'update failed' }
+      end
+    else
+      logger.debug "mission not found or user_challenge_status is already true"
+      { success: false, message: 'Mission not found or already completed' }
     end
   end
 end
