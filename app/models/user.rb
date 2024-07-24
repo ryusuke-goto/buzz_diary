@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :my_challenges, through: :user_challenges, source: :challenge_mission
 
   after_create :create_buff, :create_reward
-  after_commit :ensure_buff_exists, :ensure_reward_exists, :create
+  after_commit :ensure_buff_exists, :ensure_reward_exists,on: :create
 
   # for line-login
   def social_profile(provider)

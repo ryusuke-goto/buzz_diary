@@ -24,5 +24,6 @@ class ChallengeMission < ApplicationRecord
       logger.debug "user_challenge.update executed"
       user_challenge.update(status: true)
       user.add_challenge_buff(mission.buff)
+    end
   end
 end

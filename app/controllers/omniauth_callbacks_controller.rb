@@ -19,6 +19,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @profile.save!
       sign_in(:user, @profile)
       buff_process(@profile)
+      reward_process(@profile)
       missions_process(@profile)
     end
     flash[:notice] = 'ログインしました'
