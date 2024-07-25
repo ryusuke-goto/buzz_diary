@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   get 'memories', to: 'memories#index'
   get 'missions/:type', to: 'missions#show', as: 'missions'
+  resource :profile
   # Defines the root path route ("/")
   # root "posts#index"
 end
