@@ -17,15 +17,21 @@ class DailyMission < ApplicationRecord
     end
   end
 
-  def self.check_create_diary_today_mission(user)
-    logger.debug "check_create_diary_mission executed"
-    mission = self.find_by("title LIKE?", "%日記を投稿する%")
+  def self.update_mission(user:, mission_title:)
+    mission = self.find_by("title LIKE ?", "%#{mission_title}%")
+    logger.debug "mission #{mission}"
+    return { success: false, message: 'Mission not found' } unless mission
+
     user_daily = user.user_dailies.find_by(daily_mission_id: mission.id)
-    today_diary = user.diaries.find_by(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
-    if today_diary.present? && !user_daily.status
+    logger.debug "user_daily #{user_daily.inspect}"
+    if user_daily.present? && !user_daily.status
       logger.debug "user_daily.update executed"
       user_daily.update(status: true)
-      user.add_daily_buff(mission.buff)
+      user.add_daily_buff(daily: mission.buff)
+      { success: true, message: mission.title }
+    else
+      logger.debug "mission not found or user_challenge_status is already true"
+      { success: false, message: 'Mission not found or already completed' }
     end
   end
 end

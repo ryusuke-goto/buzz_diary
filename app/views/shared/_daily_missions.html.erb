@@ -1,9 +1,15 @@
 <table>
   <thead>
     <tr>
-      <th>ミッションID</th>
-      <th>タイトル</th>
-      <th>ステータス</th>
+      <th>
+        <%= t('missions.id') %>
+      </th>
+      <th>
+        <%= t('missions.content') %>
+      </th>
+      <th>
+        <%= t('missions.status') %>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -13,9 +19,9 @@
         <td><%= mission.title %></td>
         <td>
           <% if daily_status[mission.id]&.status %>
-            達成済
+            <%= t('missions.true') %>
           <% else %>
-            未達成
+            <%= t('missions.false') %>
           <% end %>
         </td>
       </tr>

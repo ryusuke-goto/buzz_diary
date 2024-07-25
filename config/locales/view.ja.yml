@@ -9,7 +9,8 @@ ja:
       not_updated: "%{item}を更新出来ませんでした・・・"
       deleted: "%{item}を削除しました"
       require_login: ログインしてください
-      daily_missions_updated: "%{item}個のデイリーミッションを達成しました！"
+      daily_missions_updated: "デイリーミッション「%{item}」を達成しました！"
+      challenge_missions_updated: "チャレンジミッション「%{item}」を達成しました！"
   helpers:
     submit:
       create: 登録
@@ -51,6 +52,12 @@ ja:
     previous: "<<"
     next: ">>"
     week: 週間
+  missions:
+    id: ミッションID
+    content: 内容
+    status: ステータス
+    true: 達成
+    false: 未達成
   
   title:
     home: ホーム
