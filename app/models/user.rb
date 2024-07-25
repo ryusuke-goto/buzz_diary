@@ -74,54 +74,59 @@ class User < ApplicationRecord
     counts = self.likes.count
     if counts > 10
       result = ChallengeMission.update_mission(user: self, mission_title: "10個の日記にいいね")
-      if result[:success]
-      {success: true, message: result[:message]}
+      if result
+        { success: true, message: "10個の日記にいいね" }
+      else
+        logger.debug "message::::like_count not update"
+        { success: false }
+      end
+    else
+      logger.debug "message::::like_count not update"
+      { success: false }
     end
   end
 
   def add_buff(daily: 0, challenge: 0, mission: nil)
-    logger.debug "add_buff executed"
+    logger.debug "message::::add_buff executed"
     current_buff = self.buff
-    return { success: false} unless current_buff
     if daily > 0
       current_buff.daily_buff += daily
-      logger.debug "daily_buff: #{current_buff.daily_buff}"
+      logger.debug "message::::daily_buff: #{current_buff.daily_buff}"
       current_buff.save!
-      self.sum_buff += current_buff.daily_buff
+      current_buff.sum_buff += current_buff.daily_buff
       current_buff.save!
-      {success: true, message: "buff updated"}
+      return true
     elsif challenge > 0
       current_buff.challenge_buff += challenge
-      logger.debug "challenge_buff: #{current_buff.challenge_buff}"    
+      logger.debug "message::::challenge_buff: #{current_buff.challenge_buff}"    
       current_buff.save!
-      self.sum_buff += current_buff.challenge_buff
+      current_buff.sum_buff += current_buff.challenge_buff
       current_buff.save!
       result = self.update_reward(mission)
-      if result[:success]
-        {success: true, message: "buff & reward updated"}
-      else
-        {success: true, message: "buff updated"}
-      end
+      logger.debug "message::::update_reward result #{result}"
+      return true
     else
-      logger.debug "cannot add buff"
-      {success: false}
+      logger.debug "error::::cannot add buff"
+      return false
     end
     
   end
 
   def update_reward(mission)
+    logger.debug "message::::update_reward executed"
+    logger.debug "message::::mission is #{mission.inspect}"
     reward = self.reward
     if mission.like_css.present?
       reward.like_css += mission.like_css
-      logger.debug "like_css update"
+      logger.debug "message::::like_css update"
     end
     if mission.diary_css.present?
       reward.diary_css += mission.diary_css
-      logger.debug "diary_css update"
+      logger.debug "message::::diary_css update"
     end
     if mission.theme_css.present?
       reward.theme_css += mission.theme_css
-      logger.debug "theme_css update"
+      logger.debug "message::::theme_css update"
     end
     
   end

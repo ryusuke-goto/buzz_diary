@@ -19,23 +19,26 @@ class ChallengeMission < ApplicationRecord
 
   def self.update_mission(user:, mission_title:)
     mission = self.find_by("title LIKE ?", "%#{mission_title}%")
-    logger.debug "mission #{mission}"
-    return { success: false, message: 'Mission not found' } unless mission
+    logger.debug "message::::mission #{mission}"
+    return false unless mission
 
     user_challenge = user.user_challenges.find_by(challenge_mission_id: mission.id)
-    logger.debug "user_daily #{user_challenge.inspect}"
+    logger.debug "message::::user_daily #{user_challenge.inspect}"
     if user_challenge.present? && !user_challenge.status
-      logger.debug "user_daily.update executed"
+      logger.debug "message::::user_daily.update executed"
       user_challenge.update(status: true)
       result = user.add_buff(challenge: mission.buff, mission: mission)
-      if result[:success]
-        { success: true, message: mission.title }
+      logger.debug "message::::add_buff result #{result}"
+      if result
+        logger.debug "message::::add_buff success"
+        return true
       else
-        { success: false, message: 'update failed' }
+        logger.debug "error::::add_buff failed"
+        return false
       end
     else
-      logger.debug "mission not found or user_challenge_status is already true"
-      { success: false, message: 'Mission not found or already completed' }
+      logger.debug "message::::mission not found or user_challenge_status is already true"
+      return false
     end
   end
 end

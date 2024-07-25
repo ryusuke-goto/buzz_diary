@@ -9,6 +9,7 @@ class LikesController < ApplicationController
     current_user.like(@diary)
     result = current_user.liked_diary_count
     if result[:success]
+      logger.debug "like_count update"
       flash[:challenge_missions_update] = t('defaults.flash_message.challenge_missions_updated', item: result[:message])
     end
   end
@@ -22,7 +23,7 @@ class LikesController < ApplicationController
         current_user.like(diary)
       end
       result = current_user.liked_diary_count
-      if result[:success]
+      if result
         flash[:challenge_missions_update] = t('defaults.flash_message.challenge_missions_updated', item: result[:message])
       end
       redirect_to diaries_path, success: t('likes.everything_success')
