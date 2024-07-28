@@ -27,7 +27,7 @@ class DailyMission < ApplicationRecord
     if user_daily.present? && !user_daily.status
       logger.debug "user_daily.update executed"
       user_daily.update(status: true)
-      user.add_daily_buff(daily: mission.buff)
+      user.add_buff(daily: mission.buff)
       { success: true, message: mission.title }
     else
       logger.debug "mission not found or user_challenge_status is already true"

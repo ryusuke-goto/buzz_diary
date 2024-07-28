@@ -5,8 +5,13 @@ namespace :daily_mission_processing do
     users = User.all
     users.each do |user|
       dailies = user.user_dailies.all
-      dailies.each do |daily|
-        daily.status
+      puts "user_id: #{user.id} checking..."
+      dailies.each do |daily|    
+        if daily.status
+          daily.update(status: false)
+          puts "daily_id:#{daily.daily_mission_id}"
+          puts "status: true => false"
+        end
       end
     end
   end
