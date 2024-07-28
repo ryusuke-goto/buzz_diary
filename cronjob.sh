@@ -2,4 +2,4 @@
 
 set -o errexit
 
-bundle exec rake reset_daily_mission:reset_status
+bundle exec rake daily_mission_processing:reset_status
