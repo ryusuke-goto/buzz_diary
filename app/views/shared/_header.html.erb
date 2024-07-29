@@ -54,6 +54,16 @@
         </ul>
       </div>
     </li>
+    <li class="mr-5">
+      <%= link_to destroy_user_session_path, class: "line-logout-link", data: { turbo_method: :delete } do %>
+        <div class="text-4xl">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+        <div class="text-base">
+          ログアウト
+        </div>
+      <% end %>
+    </li>
   </ul>
 </div>
 

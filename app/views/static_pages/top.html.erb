@@ -13,22 +13,4 @@
     <p>毎日の投稿を忘れないように、このアプリのLINEアカウントを友だち追加して、リマインド通知をもらおう！</p>
     <p>ユーザー同士でいいねを送り合いながら、毎日楽しく記録を残していきましょう！</p>
   </div>
-  <div class="" id="userLoginSinup">
-    <ul class="ms-auto flex">
-      <li class="mr-5">
-        <%= link_to new_user_session_path, class: "line-login-link" do %>
-        <div class="">
-            ログインはこちら
-        </div>
-        <% end %>
-      </li>
-      <li class="mr-5">
-        <%= link_to destroy_user_session_path, class: "line-logout-link", data: { turbo_method: :delete } do %>
-          <div class="">
-            暫定でログアウトはこちら
-          </div>
-        <% end %>
-      </li>
-    </ul>
-  </div>
 </main>
