@@ -32,7 +32,7 @@
         <% end %>
       </header>
       <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>">
+        <div class="flex justify-center alert alert-<%= message_type %>">
           <%= message %>
         </div>
       <% end %>
@@ -41,7 +41,7 @@
         <%= render partial: "shared/footer" %>
       </div>
     </div>
-    <% if current_user && request.path == diaries_path %>
+    <% if current_user && params[:controller] == 'diaries' && params[:action] == 'index' %>
       <div class="fixed bottom-24 right-9">
         <%= render partial: "diaries/like_everything" %>
       </div>

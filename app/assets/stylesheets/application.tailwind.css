@@ -16,6 +16,11 @@
     border: solid #06C755;
 }
 
+.alert-danger {
+  color: black;
+  background-color: orange;
+}
+
 #btn_animation .btnn {
   display: block;
   text-decoration: none;
