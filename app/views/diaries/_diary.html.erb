@@ -1,7 +1,7 @@
 <div id="diary-id-<%= diary.id %>" class="card flex flex-row my-9">
   <div class="avatar pt-1">
     <div class="w-20 h-20 rounded-full">
-      <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{diary.user.name}のアバター" %>
+      <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{diary.user.name}のアバター", onerror: "this.onerror=null; this.src='/assets/avatar.png'" %>
     </div>
   </div>
   <div class="card-body pt-2">
