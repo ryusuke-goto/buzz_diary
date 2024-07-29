@@ -25,6 +25,21 @@ module Users
     # def configure_sign_in_params
     #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
     # end
+
+    def test_sign_in; end
+
+    # テストユーザー用のサインイン処理
+    def test_sign_in_user
+      user = User.find_by(email: params[:email])
+      if user&.valid_password?(params[:password])
+        sign_in(user)
+        redirect_to root_path, notice: 'テストユーザーとしてログインしました。'
+      else
+        flash.now[:alert] = '無効なメールアドレスまたはパスワードです。'
+        render :test_sign_in
+      end
+    end
+
     private
 
     def buff_reward_missions_process

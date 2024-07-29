@@ -1,24 +1,29 @@
-<header class="flex justify-between bg-green h-15 text-white">
-  <%= link_to diaries_path, class: "logo" do %>
-    <%= image_tag "logo.png", class: "img-top", width: "70", height:"70" %>
-  <% end %>
 
-  <button class="">
-    <span class="toggler-icon"></span>
-  </button>
+<%= link_to diaries_path, class: "logo" do %>
+  <%= image_tag "logo.png", class: "img-top mx-5", width: "70", height:"70" %>
+<% end %>
 
-  <div class="collapse" id="navbarSupportedContent">
-    <ul class="ms-auto flex">
-      <li class="mr-5">
-        <%= link_to "/", class: "nav-link", id: "header-menu" do %>
-          <div class="text-4xl">
-            <i class="fa-solid fa-question"></i>
-          </div>
-          <div class="text-base">
-            使い方
-          </div>
-        <% end %>
-      </li>
-    </ul>
-  </div>
-</header>
+<div id="navbarSupportedContent">
+  <ul class="ms-auto flex">
+    <li class="mr-5">
+      <%= link_to "/", class: "nav-link", id: "header-menu" do %>
+        <div class="text-4xl">
+          <i class="fa-solid fa-question"></i>
+        </div>
+        <div class="text-base">
+          使い方
+        </div>
+      <% end %>
+    </li>
+    <li class="mr-5">
+      <%= link_to new_user_session_path, class: "line-login-link pt-5" do %>
+        <div class="text-4xl">
+        <i class="fa-solid fa-right-to-bracket"></i>
+        </div>
+        <div class="text-base">
+            ログイン
+        </div>
+    <% end %>
+  </li>
+  </ul>
+</div>

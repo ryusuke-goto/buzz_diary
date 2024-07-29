@@ -21,6 +21,11 @@ Rails.application.routes.draw do
   get 'memories', to: 'memories#index'
   get 'missions/:type', to: 'missions#show', as: 'missions'
   resource :profile
+  # テストユーザー用のログインルートを追加
+  devise_scope :user do
+    get 'test_sign_in', to: 'users/sessions#test_sign_in', as: :test_sign_in
+    post 'test_sign_in', to: 'users/sessions#test_sign_in_user'
+  end
   # Defines the root path route ("/")
   # root "posts#index"
 end
