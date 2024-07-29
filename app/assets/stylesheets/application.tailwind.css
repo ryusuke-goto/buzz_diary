@@ -3,22 +3,41 @@
 @import "tailwindcss/utilities";
 
 .bg-green {
-    background-color: #65C294;
+  background-color: #65C294;
 }
 
 .line-color {
-    background-color: #06C755;
-    border: solid #06C755;
+  background-color: #06C755;
+  border: solid #06C755;
 }
 
 .line-color:hover {
-    background-color: #06C755;
-    border: solid #06C755;
+  background-color: #06C755;
+  border: solid #06C755;
 }
 
 .alert-danger {
   color: black;
   background-color: orange;
+  border: solid orange;
+}
+
+.alert-success {
+  color: black;
+  background-color: greenyellow;
+  border: solid greenyellow;
+}
+
+.alert-daily_missions_update {
+  color: black;
+  background-color: greenyellow;
+  border: solid greenyellow;
+}
+
+.alert-notice {
+  color: white;
+  background-color: #06C755;
+  border: solid #06C755;
 }
 
 #btn_animation .btnn {
@@ -30,18 +49,18 @@
 }
 
 @keyframes btn_animation {
-    0% {
-        transform: scale(1.2)
-    }
-    5% {
-        transform: scale(1)
-    }
-    95% {
-        transform: scale(1)
-    }
-    100% {
-        -webkit-transform: scale(1.2)
-    }
+  0% {
+      transform: scale(1.2)
+  }
+  5% {
+      transform: scale(1)
+  }
+  95% {
+      transform: scale(1)
+  }
+  100% {
+      -webkit-transform: scale(1.2)
+  }
 }
 
 .simple-calendar {
