@@ -31,7 +31,7 @@
   <% if diary.diary_image.present? %>
     <div class="chat-bubble my-2">
       <div class="card-exist-image mx-2 pt-0">
-        <%= image_tag diary.diary_image.url, class: "img-top", width: "400", height:"400"  %>
+        <%= image_tag diary.diary_image.to_s, class: "img-top", width: "400", height:"400"  %>
       </div>
     </div>
   <% end %>
