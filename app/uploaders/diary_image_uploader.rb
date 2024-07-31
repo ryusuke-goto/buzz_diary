@@ -15,8 +15,8 @@ class DiaryImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  include CarrierWave::MiniMagick
-  process resize_to_limit: [500, 500]
+  # include CarrierWave::MiniMagick
+  # process resize_to_limit: [500, 500]
 
   def extension_allowlist
     %w(jpg jpeg gif png)
