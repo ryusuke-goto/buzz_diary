@@ -83,3 +83,4 @@ gem 'rails-i18n'
 gem 'sassc'
 gem 'simple_calendar'
 gem "aws-sdk-s3", require: false
+gem 'fog-aws'
