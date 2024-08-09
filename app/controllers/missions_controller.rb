@@ -11,7 +11,8 @@ class MissionsController < ApplicationController
     when 'challenge'
       @missions = current_user.my_challenges
       @mission_status = current_user.user_challenges.index_by(&:challenge_mission_id)
-      render partial: 'shared/challenge_missions', locals: { challenge_missions: @missions, challenge_status: @mission_status }
+      render partial: 'shared/challenge_missions',
+             locals: { challenge_missions: @missions, challenge_status: @mission_status }
     else
       render plain: 'Invalid mission type', status: :bad_request
     end
