@@ -1,0 +1,13 @@
+<%= turbo_stream.replace "remind" do %>
+  <div id="remind" class="form-control">
+    <% if current_user.remind %>
+      <%= button_to update_remind_profile_path, class: "btn btn-success" do %>
+        LINE通知はONです
+      <% end %>
+    <% else %>
+      <%= button_to update_remind_profile_path, class: "btn btn-neutral" do %>
+        LINE通知はOFFです
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
