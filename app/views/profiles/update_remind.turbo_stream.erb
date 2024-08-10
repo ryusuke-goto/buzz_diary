@@ -1,11 +1,11 @@
 <%= turbo_stream.replace "remind" do %>
   <div id="remind" class="form-control">
     <% if current_user.remind %>
-      <%= button_to update_remind_profile_path, class: "btn btn-success" do %>
+      <%= button_to update_remind_profile_path, class: "btn btn-success", method: :patch do %>
         LINE通知はONです
       <% end %>
     <% else %>
-      <%= button_to update_remind_profile_path, class: "btn btn-neutral" do %>
+      <%= button_to update_remind_profile_path, class: "btn btn-neutral", method: :patch do %>
         LINE通知はOFFです
       <% end %>
     <% end %>
