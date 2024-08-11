@@ -36,10 +36,12 @@ class User < ApplicationRecord
     credentials['secret']
     credentials.to_json
     info['name']
+    info['image']
     # self.set_values_by_raw_info(omniauth['extra']['raw_info'])
   end
 
   def set_values_by_raw_info(raw_info)
+    puts "pppppppppppppppp#{raw_info.to_json}"
     self.raw_info = raw_info.to_json
     save!
   end
