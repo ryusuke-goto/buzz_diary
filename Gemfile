@@ -73,14 +73,15 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+gem 'aws-sdk-s3', require: false
 gem 'carrierwave', '~> 3.0'
 gem 'devise'
 gem 'devise-i18n-views'
 gem 'dotenv-rails'
+gem 'fog-aws'
 gem 'omniauth-line'
 gem 'omniauth-rails_csrf_protection'
 gem 'rails-i18n'
 gem 'sassc'
 gem 'simple_calendar'
-gem "aws-sdk-s3", require: false
-gem 'fog-aws'
+gem 'line-bot-api'

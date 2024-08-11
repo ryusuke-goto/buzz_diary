@@ -13,9 +13,10 @@ class DiariesController < ApplicationController
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
-      result = DailyMission.update_mission(user: current_user, mission_title: "日記を投稿する")
+      result = DailyMission.update_mission(user: current_user, mission_title: '日記を投稿する')
       if result[:success]
-        flash[:daily_missions_update] = t('defaults.flash_message.daily_missions_updated', item: result[:message])        
+        flash[:daily_missions_update] =
+          t('defaults.flash_message.daily_missions_updated', item: result[:message])
       end
       redirect_to diaries_path, success: t('defaults.flash_message.created', item: t('activerecord.models.diary'))
     else

@@ -43,13 +43,13 @@ module Users
     private
 
     def buff_reward_missions_process
-      Rails.logger.info "buff_process executed"
+      Rails.logger.info 'buff_process executed'
       current_user.ensure_buff_exists
 
-      Rails.logger.info "reward_process executed"
+      Rails.logger.info 'reward_process executed'
       current_user.ensure_reward_exists
 
-      Rails.logger.info "missions_process executed"
+      Rails.logger.info 'missions_process executed'
       DailyMission.check_record_user_dailies(current_user.id)
       ChallengeMission.check_record_user_challenges(current_user.id)
     end

@@ -40,6 +40,12 @@
   border: solid #06C755;
 }
 
+.alert-alert {
+  color: white;
+  background-color: #06C755;
+  border: solid #06C755;
+}
+
 #btn_animation .btnn {
   display: block;
   text-decoration: none;

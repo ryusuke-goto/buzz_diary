@@ -18,7 +18,7 @@
   puts "\"#{user.name}\" has created!"
 end
 
-user_ids = User.ids
+User.ids
 
 # 4.times do |index|
 #   user = User.find(user_ids.sample)

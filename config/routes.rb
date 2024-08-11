@@ -20,12 +20,18 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   get 'memories', to: 'memories#index'
   get 'missions/:type', to: 'missions#show', as: 'missions'
-  resource :profile
+  resource :profile do
+    member do
+      patch :update_remind
+    end
+  end
   # テストユーザー用のログインルートを追加
   devise_scope :user do
     get 'test_sign_in', to: 'users/sessions#test_sign_in', as: :test_sign_in
     post 'test_sign_in', to: 'users/sessions#test_sign_in_user'
   end
+  # Linebot
+  post 'callback' => 'line_bot#callback'
   # Defines the root path route ("/")
   # root "posts#index"
 end

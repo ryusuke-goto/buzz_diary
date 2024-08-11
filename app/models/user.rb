@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :my_challenges, through: :user_challenges, source: :challenge_mission
 
   after_create :create_buff, :create_reward
-  after_commit :ensure_buff_exists, :ensure_reward_exists,on: :create
+  after_commit :ensure_buff_exists, :ensure_reward_exists, on: :create
 
   # for line-login
   def social_profile(provider)
@@ -45,19 +45,19 @@ class User < ApplicationRecord
   end
 
   def create_buff
-    self.create_buff!
+    create_buff!
   end
 
   def ensure_buff_exists
-    self.buff || self.create_buff!
+    buff || create_buff!
   end
 
   def create_reward
-    self.create_reward!
+    create_reward!
   end
 
   def ensure_reward_exists
-    self.reward || self.create_reward!
+    reward || create_reward!
   end
 
   def own?(object)
@@ -71,63 +71,61 @@ class User < ApplicationRecord
   end
 
   def liked_diary_count
-    counts = self.likes.count
+    counts = likes.count
     if counts > 10
-      result = ChallengeMission.update_mission(user: self, mission_title: "10個の日記にいいね")
+      result = ChallengeMission.update_mission(user: self, mission_title: '10個の日記にいいね')
       if result
-        { success: true, message: "10個の日記にいいね" }
+        { success: true, message: '10個の日記にいいね' }
       else
-        logger.debug "message::::like_count not update"
+        logger.debug 'message::::like_count not update'
         { success: false }
       end
     else
-      logger.debug "message::::like_count not update"
+      logger.debug 'message::::like_count not update'
       { success: false }
     end
   end
 
   def add_buff(daily: 0, challenge: 0, mission: nil)
-    logger.debug "message::::add_buff executed"
-    current_buff = self.buff
-    if daily > 0
+    logger.debug 'message::::add_buff executed'
+    current_buff = buff
+    if daily.positive?
       current_buff.daily_buff += daily
       logger.debug "message::::daily_buff: #{current_buff.daily_buff}"
       current_buff.save!
       current_buff.sum_buff += current_buff.daily_buff
       current_buff.save!
-      return true
-    elsif challenge > 0
+      true
+    elsif challenge.positive?
       current_buff.challenge_buff += challenge
-      logger.debug "message::::challenge_buff: #{current_buff.challenge_buff}"    
+      logger.debug "message::::challenge_buff: #{current_buff.challenge_buff}"
       current_buff.save!
       current_buff.sum_buff += current_buff.challenge_buff
       current_buff.save!
-      result = self.update_reward(mission)
+      result = update_reward(mission)
       logger.debug "message::::update_reward result #{result}"
-      return true
+      true
     else
-      logger.debug "error::::cannot add buff"
-      return false
+      logger.debug 'error::::cannot add buff'
+      false
     end
-    
   end
 
   def update_reward(mission)
-    logger.debug "message::::update_reward executed"
+    logger.debug 'message::::update_reward executed'
     logger.debug "message::::mission is #{mission.inspect}"
     reward = self.reward
     if mission.like_css.present?
       reward.like_css += mission.like_css
-      logger.debug "message::::like_css update"
+      logger.debug 'message::::like_css update'
     end
     if mission.diary_css.present?
       reward.diary_css += mission.diary_css
-      logger.debug "message::::diary_css update"
+      logger.debug 'message::::diary_css update'
     end
-    if mission.theme_css.present?
-      reward.theme_css += mission.theme_css
-      logger.debug "message::::theme_css update"
-    end
-    
+    return unless mission.theme_css.present?
+
+    reward.theme_css += mission.theme_css
+    logger.debug 'message::::theme_css update'
   end
 end

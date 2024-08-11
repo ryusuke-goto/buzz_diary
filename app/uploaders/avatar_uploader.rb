@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
 class AvatarUploader < CarrierWave::Uploader::Base
- # Include RMagick or MiniMagick support:
+  # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  if Rails.env.development?
-    storage :fog
-  elsif Rails.env.test?
-    storage :fog
-  else
-    storage :fog
+       Rails.env.test?
   end
+    storage :fog
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -19,11 +15,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   process resize_to_limit: [500, 500]
 
   def extension_allowlist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # ここでファイル形式を指定する
   def filename
-    original_filename if original_filename
+    original_filename
   end
 end
