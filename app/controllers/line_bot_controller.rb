@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class LineBotController < ApplicationController
   def callback
-    puts "======="
-    puts body = request.body.read
-    puts "======="
+    puts '======='
+    puts request.body.read
+    puts '======='
   end
 
   # private
- 
+
   # def client
   #   @client ||= Line::Bot::Client.new { |config|
   #     config.channel_secret = ENV["LINE_CHANNEL_SECRET"]

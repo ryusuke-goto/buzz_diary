@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 namespace :line_bot do
-  desc "LINEを使ってログインし、LINE通知をONにしたユーザー全てにメッセージを送る" #desc → description（説明）
+  desc 'LINEを使ってログインし、LINE通知をONにしたユーザー全てにメッセージを送る' # desc → description（説明）
   task remind: :environment do
     users = User.where(remind: true)
     puts users
