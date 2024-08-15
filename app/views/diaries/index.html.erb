@@ -1,10 +1,15 @@
 <% content_for(:title, t("title.diary_index")) %>
 <div class="container">
   <div class="mx-5">
-    <% if @diaries.present? %>
-    <div id="diaries">
-      <%= render partial: "diary", collection: @diaries %>
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <%= render 'search_form', q: @q, url: diaries_path %>
+      </div>
     </div>
+    <% if @diaries.present? %>
+      <div id="diaries">
+        <%= render partial: "diary", collection: @diaries %>
+      </div>
     <% else %>
       <div class="flex items-center justify-center text-2xl">
         <%= t("diaries.no_result") %>
