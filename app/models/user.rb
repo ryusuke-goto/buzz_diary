@@ -130,4 +130,8 @@ class User < ApplicationRecord
     reward.theme_css += mission.theme_css
     logger.debug 'message::::theme_css update'
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name"]
+  end
 end

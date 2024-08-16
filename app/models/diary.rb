@@ -16,10 +16,10 @@ class Diary < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["body", "created_at", "diary_date", "diary_image", "id", "id_value", "title", "updated_at", "user_id"]
+    ["body", "created_at", "diary_date", "title"]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["comments", "likes", "user"]
+    ["user"]
   end
 end
