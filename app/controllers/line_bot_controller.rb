@@ -3,7 +3,7 @@
 class LineBotController < ApplicationController
   def callback
     puts '======='
-    puts request.body.read
+    # puts request.body.read
     puts '======='
   end
 

@@ -32,12 +32,13 @@ ja:
   users:
     to_login_page: ログインページへ
   diaries:
-    no_result: まだ日記がありません・・・
+    no_result: 日記がありません・・・
     created_at: 投稿日時
     diary_date: の日記
     diary_image: サムネイル
     submit: 登録する
     with_image: (画像あり)
+    search_words: 検索ワードを入れてください
   comments:
     commit: 投稿
     placeholder: コメントを投稿しよう

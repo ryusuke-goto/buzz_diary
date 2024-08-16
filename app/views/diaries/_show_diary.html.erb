@@ -2,7 +2,11 @@
   <div class="chat chat-start w-auto">
     <div class="avatar pt-1">
       <div class="w-10 h-10 rounded-full">
-        <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{diary.user.name}のアバター" %>
+        <% if diary.user.image.present? %>
+          <%= image_tag diary.user.image %>
+        <% else %>
+          <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{diary.user.name}のアバター", onerror: "this.onerror=null; this.src='/assets/avatar.png'" %>
+        <% end %>
       </div>
     </div>
     <div class="chat-bubble">

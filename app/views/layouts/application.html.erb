@@ -25,7 +25,7 @@
 
   <body>
     <div class="flex flex-col min-h-screen bg-white">
-      <header class="flex justify-between bg-green h-15 text-white">  
+      <header class="flex justify-between bg-wakatake h-15 text-white">  
         <% if user_signed_in? %>
           <%= render partial: "shared/header" %>
         <% else %>
@@ -47,7 +47,7 @@
         <%= render partial: "diaries/like_everything" %>
       </div>
     <% end %>
-      <nav class="fixed h-20 bottom-0 w-full bg-green text-white">
+      <nav class="fixed h-20 bottom-0 w-full bg-wakatake text-white">
         <%= render "shared/nav" %>
       </nav>
   </body>

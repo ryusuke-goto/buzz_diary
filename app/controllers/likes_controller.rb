@@ -25,7 +25,7 @@ class LikesController < ApplicationController
       result = current_user.liked_diary_count
       if result
         flash[:challenge_missions_update] =
-          t('defaults.flash_message.challenge_missions_updated', item: result[:message])
+          # t('defaults.flash_message.challenge_missions_updated', item: result[:message])
       end
       redirect_to diaries_path, success: t('likes.everything_success')
     else

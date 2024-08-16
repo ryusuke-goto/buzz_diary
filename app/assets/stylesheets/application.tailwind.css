@@ -2,8 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.bg-green {
+.bg-wakatake {
   background-color: #65C294;
+}
+
+.border-wakatake {
+  border: solid #65C294;
 }
 
 .line-color {

@@ -1,0 +1,6 @@
+<%= search_form_for q, url: url, class: "w-full" do |f| %>
+  <div class="flex items-center justify-center gap-2 w-full max-w-full">
+    <%= f.search_field :title_or_body_or_user_name_cont, class: 'form-control input input-bordered w-full bg-white', placeholder: t('diaries.search_words') %>
+    <%= f.submit t('title.search'), class: 'btn btn-outline btn-success' %>
+  </div>
+<% end %>
