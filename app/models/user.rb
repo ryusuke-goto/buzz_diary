@@ -131,7 +131,7 @@ class User < ApplicationRecord
     logger.debug 'message::::theme_css update'
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["name"]
+  def self.ransackable_attributes(_auth_object = nil)
+    ['name']
   end
 end
