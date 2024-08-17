@@ -4,8 +4,7 @@ class DiariesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   def index
     @q = Diary.ransack(params[:q])
-    # @diaries = Diary.includes(:user).order(diary_date: :desc)
-    @diaries = @q.result.includes(:user).order(diary_date: :desc)
+    @diaries = @q.result.includes(:user).with_likes_count.order(diary_date: :desc)
   end
 
   def new
@@ -28,7 +27,7 @@ class DiariesController < ApplicationController
   end
 
   def show
-    @diary = Diary.find(params[:id])
+    @diary = Diary.with_likes_count.find(params[:id])
     @comment = Comment.new
     @comments = @diary.comments.includes(:user).order(created_at: :asc)
   end
