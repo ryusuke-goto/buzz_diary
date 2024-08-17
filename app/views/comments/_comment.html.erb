@@ -4,7 +4,15 @@
       <div class="chat-bubble mx-3">
         <p><%= simple_format(comment.body) %></p>
       </div>
-      <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", width: "50", height: "50", class: "rounded-full" %>
+      <div class="avatar pt-1">
+        <div class="w-10 h-10 rounded-full">
+          <% if comment.user.image.present? %>
+            <%= image_tag comment.user.image %>
+          <% else %>
+            <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{comment.user.name}のアバター", onerror: "this.onerror=null; this.src='/assets/avatar.png'" %>
+          <% end %>
+        </div>
+      </div>
       <div>
         <h3 class="small"><%= comment.user.name %></h3>
         <% if current_user.own?(comment) %>
