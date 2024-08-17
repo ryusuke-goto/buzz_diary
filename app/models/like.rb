@@ -6,8 +6,9 @@ class Like < ApplicationRecord
 
   validates :user_id, uniqueness: { scope: :diary_id }
 
-  def self.likes_count(id)
-    likes = Like.where(diary_id: id)
-    likes.map(&:count).sum
+  def self.likes_count(diary_ids)
+    Like.where(diary_id: diary_ids)
+        .group(:diary_id)
+        .sum(:count)
   end
 end
