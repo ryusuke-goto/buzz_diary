@@ -15,11 +15,11 @@ class Diary < ApplicationRecord
     diary_date # #Where 'start' is a attribute of type 'Date' accessible through MyModel's relationship
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["body", "created_at", "diary_date", "title"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[body created_at diary_date title]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["user"]
+  def self.ransackable_associations(_auth_object = nil)
+    ['user']
   end
 end

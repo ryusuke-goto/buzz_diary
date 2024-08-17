@@ -22,11 +22,11 @@ class LikesController < ApplicationController
         puts "diaryの値は#{diary}"
         current_user.like(diary)
       end
-      result = current_user.liked_diary_count
-      if result
-        flash[:challenge_missions_update] =
-          # t('defaults.flash_message.challenge_missions_updated', item: result[:message])
-      end
+      current_user.liked_diary_count
+      # if result
+      #   flash[:challenge_missions_update] =
+      #     # t('defaults.flash_message.challenge_missions_updated', item: result[:message])
+      # end
       redirect_to diaries_path, success: t('likes.everything_success')
     else
       redirect_to diaries_path, success: t('likes.everything_failed')
