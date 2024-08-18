@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root 'static_pages#top'
-  resources :diaries, only: %i[index new create show edit update destroy] do
+  resources :diaries do
     resources :comments, only: %i[create edit update destroy], shallow: true
+    get :search, on: :collection
   end
   resources :likes, only: %i[create] do
     collection do

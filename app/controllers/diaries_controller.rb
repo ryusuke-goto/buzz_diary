@@ -52,6 +52,13 @@ class DiariesController < ApplicationController
     redirect_to diaries_path, success: t('defaults.flash_message.deleted', item: t('activerecord.models.diary'))
   end
 
+  def search
+    @diaries = Diary.where("title LIKE ?", "%#{params[:q]}%")
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def diary_params
