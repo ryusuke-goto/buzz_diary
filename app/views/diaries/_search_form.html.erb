@@ -1,6 +1,10 @@
 <%= search_form_for q, url: url, class: "w-full" do |f| %>
   <div class="flex items-center justify-center gap-2 w-full max-w-full">
-    <%= f.search_field :title_or_body_or_user_name_cont, class: 'form-control input input-bordered w-full bg-white', placeholder: t('diaries.search_words') %>
+    <div class="w-full" data-controller="autocomplete" data-autocomplete-url-value="/diaries/search" role="combobox">
+      <%= f.search_field :title_or_body_or_user_name_cont, data: { autocomplete_target: 'input' }, class: 'form-control input input-bordered w-full bg-white', placeholder: t('diaries.search_words') %>
+      <%= f.hidden_field :title, data: { autocomplete_target: 'hidden' } %>
+      <ul class="list-group bg-white absolute w-full md:text-sm max-w-max" data-autocomplete-target="results"></ul>
+    </div>
     <%= f.submit t('title.search'), class: 'btn btn-outline btn-success' %>
   </div>
 <% end %>
