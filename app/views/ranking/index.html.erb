@@ -1,5 +1,8 @@
 <% if @max_liked_diaries.present? %>
   <div id="diaries">
+    <div class="text-2xl">
+      いいねを最ももらった日記は！
+    </div>
     <%= render partial: "diaries/diary", collection: @max_liked_diaries %>
   </div>
 <% else %>
