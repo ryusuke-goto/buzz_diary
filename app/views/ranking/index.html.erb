@@ -1,0 +1,9 @@
+<% if @max_liked_diaries.present? %>
+  <div id="diaries">
+    <%= render partial: "diaries/diary", collection: @max_liked_diaries %>
+  </div>
+<% else %>
+  <div class="flex items-center justify-center text-2xl">
+    <%= t("diaries.no_result") %>
+  </div>
+<% end %>
