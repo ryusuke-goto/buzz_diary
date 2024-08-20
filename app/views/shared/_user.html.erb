@@ -1,0 +1,12 @@
+<div class="flex flex-col items-center">
+  <div class="w-40 h-40 rounded-full">
+    <% if user.image.present? %>
+      <%= image_tag user.image %>
+    <% else %>
+      <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{user.name}のアバター", onerror: "this.onerror=null; this.src='/assets/avatar.png'" %>
+    <% end %>
+  </div>
+  <div class="user-name text-black font-bold text-xl">
+    <%= user.name %>
+  </div>
+</div>

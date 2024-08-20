@@ -1,7 +1,7 @@
 <% if @max_liked_diaries.present? %>
   <div id="diaries">
-    <div class="text-2xl items-center justify-center">
-      いいねを一番もらった日記は...
+    <div class="text-2xl flex items-center justify-center">
+      いいねを一番もらっている日記は...
     </div>
     <%= render partial: "diaries/diary", collection: @max_liked_diaries %>
   </div>
@@ -12,10 +12,12 @@
 <% end %>
 <% if @max_liked_diaries.present? %>
   <div id="diaries">
-    <div class="text-2xl items-center justify-center">
-      いいねを一番もらった日記は...
+    <div class="text-2xl flex items-center justify-center">
+      いいねを一番送っている素敵な人は...
     </div>
-    <%= render partial: "diaries/diary", collection: @max_likes_record_users %>
+    <div class="flex items-center justify-center">
+      <%= render partial: "shared/user", collection: @max_likes_record_users %>
+    </div>
   </div>
 <% else %>
   <div class="flex items-center justify-center text-2xl">
