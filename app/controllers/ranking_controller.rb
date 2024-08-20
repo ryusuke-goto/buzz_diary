@@ -5,6 +5,6 @@ class RankingController < ApplicationController
     @max_liked_diaries = diaries.select { |diary| diary.likes_count == max_likes_count }
     user_likes_record_count = Like.includes(:user).group(:user_id).count
     max_likes_record = user_likes_record_count.max
-    max_likes_record_users = User.where(id: max_likes_record.user_id).select(:name, :image)
+    @max_likes_record_users = User.where(id: max_likes_record).select(:name, :image)
   end
 end
