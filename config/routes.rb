@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get 'up' => 'rails/health#show', as: :rails_health_check
+  get 'up', to: 'rails/health#show', as: :rails_health_check
   get 'memories', to: 'memories#index'
   get 'missions/:type', to: 'missions#show', as: 'missions'
   resource :profile do
@@ -32,7 +32,8 @@ Rails.application.routes.draw do
     post 'test_sign_in', to: 'users/sessions#test_sign_in_user'
   end
   # Linebot
-  get 'callback' => 'line_bot#callback'
+  get 'callback', to: 'line_bot#callback'
   # Defines the root path route ("/")
   # root "posts#index"
+  get 'ranking', to: 'ranking#index'
 end
