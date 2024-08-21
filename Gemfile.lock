@@ -261,6 +261,7 @@ GEM
     parser (3.3.3.0)
       ast (~> 2.4.1)
       racc
+    particles-js-rails (2.0.0)
     pg (1.5.6)
     psych (5.1.2)
       stringio
@@ -420,6 +421,7 @@ DEPENDENCIES
   line-bot-api
   omniauth-line
   omniauth-rails_csrf_protection
+  particles-js-rails (= 2.0.0)
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.4)

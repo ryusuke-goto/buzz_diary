@@ -1,26 +1,29 @@
-<% if @max_liked_diaries.present? %>
-  <div id="diaries">
-    <div class="text-2xl flex items-center justify-center">
-      いいねを一番もらっている日記は...
+<div class="z-40">
+  <% if @max_liked_diaries.present? %>
+    <div id="diaries">
+      <div class="text-2xl flex items-center justify-center">
+        いいねを一番もらっている日記は...
+      </div>
+      <%= render partial: "diaries/diary", collection: @max_liked_diaries %>
     </div>
-    <%= render partial: "diaries/diary", collection: @max_liked_diaries %>
-  </div>
-<% else %>
-  <div class="flex items-center justify-center text-2xl">
-    <%= t("diaries.no_result") %>
-  </div>
-<% end %>
-<% if @max_liked_diaries.present? %>
-  <div id="diaries">
-    <div class="text-2xl flex items-center justify-center">
-      いいねを一番送っている素敵な人は...
+  <% else %>
+    <div class="flex items-center justify-center text-2xl">
+      <%= t("diaries.no_result") %>
     </div>
-    <div class="flex items-center justify-center">
-      <%= render partial: "shared/user", collection: @max_likes_record_users %>
+  <% end %>
+  <% if @max_liked_diaries.present? %>
+    <div id="diaries">
+      <div class="text-2xl flex items-center justify-center">
+        いいねを一番送っている素敵な人は...
+      </div>
+      <div class="flex items-center justify-center">
+        <%= render partial: "shared/user", collection: @max_likes_record_users %>
+      </div>
     </div>
-  </div>
-<% else %>
-  <div class="flex items-center justify-center text-2xl">
-    <%= t("diaries.no_result") %>
-  </div>
-<% end %>
+  <% else %>
+    <div class="flex items-center justify-center text-2xl">
+      <%= t("diaries.no_result") %>
+    </div>
+  <% end %>
+</div>
+<div id="particles-js"></div>
