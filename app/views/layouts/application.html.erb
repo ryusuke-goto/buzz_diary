@@ -20,12 +20,20 @@
           .catch(error => console.error('Error loading missions:', error));
       }
     </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      document.addEventListener('turbo:load', function() {
+        particlesJS.load('particles-js', 'particles.json', function() {
+          console.log('callback - particles.js config loaded');
+        });
+      });
+    </script>
     <%= favicon_link_tag('favicon.ico') %>
   </head>
 
   <body>
     <div class="flex flex-col min-h-screen bg-white">
-      <header class="flex justify-between bg-wakatake h-15 text-white">  
+      <header class="flex justify-between bg-wakatake h-15 text-white z-40">  
         <% if user_signed_in? %>
           <%= render partial: "shared/header" %>
         <% else %>
