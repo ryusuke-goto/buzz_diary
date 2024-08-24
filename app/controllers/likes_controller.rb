@@ -12,7 +12,7 @@ class LikesController < ApplicationController
     return unless result[:success]
 
     logger.debug 'like_count update'
-    flash[:challenge_missions_update] = t('defaults.flash_message.challenge_missions_updated', item: result[:message])
+    flash[:challenge-missions-update] = t('defaults.flash_message.challenge_missions_updated', item: result[:message])
   end
 
   def everything
