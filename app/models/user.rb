@@ -73,19 +73,27 @@ class User < ApplicationRecord
   end
 
   def liked_diary_count
+    milestones = {
+      10 => '10個の日記にいいね',
+      50 => '50個の日記にいいね',
+      100 => '100個の日記にいいね',
+      150 => '150個の日記にいいね'
+    }
+  
     counts = likes.count
-    if counts > 10
-      result = ChallengeMission.update_mission(user: self, mission_title: '10個の日記にいいね')
-      if result
-        { success: true, message: '10個の日記にいいね' }
-      else
-        logger.debug 'message::::like_count_mission not update'
-        { success: false }
+  
+    milestones.each do |threshold, mission_title|
+      if counts > threshold
+        result = ChallengeMission.update_mission(user: self, mission_title: mission_title)
+        if result
+          return { success: true, message: mission_title }
+        else
+          logger.debug "message::::like_count_mission not update for milestone #{threshold}"
+        end
       end
-    else
-      logger.debug 'message::::like_count_mission not update'
-      { success: false }
     end
+  
+    { success: false }
   end
 
   def add_buff(daily: 0, challenge: 0, mission: nil)
