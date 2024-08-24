@@ -43,9 +43,7 @@
       </div>
     <% end %>
     <div id="like-<%=diary.id%>" class="flex pt-3">
-      <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
-        <i class="btnn fa-solid fa-heart text-5xl"></i>
-      <% end %>
+      <%= diary.user.reward.like_css.inspect %>
       <div id="count-<%= diary.id %>" class="text-base mx-7 pt-3">
         <h2><%= diary.likes_count || 0 %></h2>
       </div>

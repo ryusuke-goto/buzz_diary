@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def set_values_by_raw_info(raw_info)
-    puts "pppppppppppppppp#{raw_info.to_json}"
+    puts "[event]#{raw_info.to_json}"
     self.raw_info = raw_info.to_json
     save!
   end
@@ -79,11 +79,11 @@ class User < ApplicationRecord
       if result
         { success: true, message: '10個の日記にいいね' }
       else
-        logger.debug 'message::::like_count not update'
+        logger.debug 'message::::like_count_mission not update'
         { success: false }
       end
     else
-      logger.debug 'message::::like_count not update'
+      logger.debug 'message::::like_count_mission not update'
       { success: false }
     end
   end

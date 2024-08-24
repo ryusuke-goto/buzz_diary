@@ -28,6 +28,7 @@ class ChallengeMission < ApplicationRecord
     if user_challenge.present? && !user_challenge.status
       logger.debug 'message::::user_daily.update executed'
       user_challenge.update(status: true)
+      user.update_reward(mission)
       result = user.add_buff(challenge: mission.buff, mission:)
       logger.debug "message::::add_buff result #{result}"
       if result

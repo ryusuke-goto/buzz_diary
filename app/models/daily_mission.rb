@@ -7,6 +7,7 @@ class DailyMission < ApplicationRecord
   validates :description, presence: true, length: { maximum: 65_535 }
 
   def self.check_record_user_dailies(user_id)
+    # Create a user daily record corresponding to the newly added daily mission. Call this upon login.
     daily_mission_ids = pluck(:id)
     existing_daily_mission_ids = UserDaily.where(user_id:,
                                                  daily_mission_id: daily_mission_ids).pluck(:daily_mission_id)
