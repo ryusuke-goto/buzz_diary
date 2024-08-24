@@ -5,7 +5,7 @@
         <% if diary.user.image.present? %>
           <%= image_tag diary.user.image %>
         <% else %>
-          <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{diary.user.name}のアバター", onerror: "this.onerror=null; this.src='/assets/avatar.png'" %>
+          <%= image_tag '/assets/avatar.png', alt: "#{diary.user.name}のアバター" %>
         <% end %>
       </div>
     </div>

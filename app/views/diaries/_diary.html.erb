@@ -4,7 +4,7 @@
       <% if diary.user.image.present? %>
         <%= image_tag diary.user.image %>
       <% else %>
-        <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{diary.user.name}のアバター", onerror: "this.onerror=null; this.src='/assets/avatar.png'" %>
+        <%= image_tag '/assets/avatar.png', alt: "#{diary.user.name}のアバター" %>
       <% end %>
     </div>
   </div>
@@ -43,7 +43,20 @@
       </div>
     <% end %>
     <div id="like-<%=diary.id%>" class="flex pt-3">
-      <%= diary.user.reward.like_css.inspect %>
+      <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
+        <% case diary.user.like_css %>
+        <% when 0 %>
+          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-green-500"></i>
+        <% when 1 %>
+          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-amber-300"></i>
+        <% when 2 %>
+          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-blue-500"></i>
+        <% when 3 %>
+          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-rose-500"></i>
+        <% when 4 %>
+          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-fuchsia-600"></i>
+        <% end %>
+      <% end %>
       <div id="count-<%= diary.id %>" class="text-base mx-7 pt-3">
         <h2><%= diary.likes_count || 0 %></h2>
       </div>

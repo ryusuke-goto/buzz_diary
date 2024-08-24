@@ -52,7 +52,7 @@
     </div>
     <% if current_user && params[:controller] == 'diaries' && params[:action] == 'index' %>
       <div class="fixed bottom-24 right-9">
-        <%= render partial: "diaries/like_everything" %>
+        <%= render partial: "diaries/like_everything", locals: {user: current_user} %>
       </div>
     <% end %>
       <nav class="fixed h-20 bottom-0 w-full bg-wakatake text-white">

@@ -90,22 +90,23 @@ class User < ApplicationRecord
 
   def add_buff(daily: 0, challenge: 0, mission: nil)
     logger.debug 'message::::add_buff executed'
-    current_buff = buff
+    logger.debug "self: #{self}"
+    logger.debug "self.buff: #{buff}"
     if daily.positive?
-      current_buff.daily_buff += daily
-      logger.debug "message::::daily_buff: #{current_buff.daily_buff}"
-      current_buff.save!
-      current_buff.sum_buff += current_buff.daily_buff
-      current_buff.save!
+      self.buff.daily_buff += daily
+      logger.debug "message::::daily_buff: #{buff.daily_buff}"
+      self.buff.save!
+      self.buff.sum_buff += buff.daily_buff
+      self.save!
       true
     elsif challenge.positive?
-      current_buff.challenge_buff += challenge
-      logger.debug "message::::challenge_buff: #{current_buff.challenge_buff}"
-      current_buff.save!
-      current_buff.sum_buff += current_buff.challenge_buff
-      current_buff.save!
-      result = update_reward(mission)
-      logger.debug "message::::update_reward result #{result}"
+      buff.challenge_buff += challenge
+      logger.debug "message::::challenge_buff: #{buff.challenge_buff}"
+      self.buff.save!
+      self.buff.sum_buff += buff.challenge_buff
+      self.save!
+      result = self.update_reward(mission)
+      logger.debug "message::::update_reward result #{self.like_css}"
       true
     else
       logger.debug 'error::::cannot add buff'
@@ -116,19 +117,19 @@ class User < ApplicationRecord
   def update_reward(mission)
     logger.debug 'message::::update_reward executed'
     logger.debug "message::::mission is #{mission.inspect}"
-    reward = self.reward
+    logger.debug "self: #{self}"
+    logger.debug "self.like_css: #{like_css}"
     if mission.like_css.present?
-      reward.like_css += mission.like_css
+      self.like_css += mission.like_css
+      self.save!
       logger.debug 'message::::like_css update'
-    end
-    if mission.diary_css.present?
-      reward.diary_css += mission.diary_css
+    elsif mission.diary_css.present?
+      diary_css += mission.diary_css
       logger.debug 'message::::diary_css update'
+    elsif mission.theme_css.present?
+      theme_css += mission.theme_css
+      logger.debug 'message::::theme_css update'
     end
-    return unless mission.theme_css.present?
-
-    reward.theme_css += mission.theme_css
-    logger.debug 'message::::theme_css update'
   end
 
   def self.ransackable_attributes(_auth_object = nil)

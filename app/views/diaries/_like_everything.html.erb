@@ -1,5 +1,16 @@
 <div id="like-everything" class="tooltip tooltip-open tooltip-success" data-tip="<%= t("likes.like_everything") %>">
   <%= button_to everything_likes_path, id: "btn_animation", method: { turbo_method: :post } do %>
-    <i class="btnn fa-solid fa-heart text-7xl pt-2"></i>
+    <% case user.like_css %>
+      <% when 0 %>
+        <i class="btnn fa-solid fa-heart text-7xl pt-2 text-green-500"></i>
+      <% when 1 %>
+        <i class="btnn fa-solid fa-heart text-7xl pt-2 text-amber-300"></i>
+      <% when 2 %>
+        <i class="btnn fa-solid fa-heart text-7xl pt-2 text-blue-500"></i>
+      <% when 3 %>
+        <i class="btnn fa-solid fa-heart text-7xl pt-2 text-rose-500"></i>
+      <% when 4 %>
+        <i class="btnn fa-solid fa-heart text-7xl pt-2 text-fuchsia-600"></i>
+      <% end %>
   <% end %>
 </div>
