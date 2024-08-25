@@ -32,7 +32,7 @@
   border: solid greenyellow;
 }
 
-.alert-daily-missions-update {
+.alert-daily_missions_update {
   color: black;
   background-color: greenyellow;
   border: solid greenyellow;
@@ -50,10 +50,10 @@
   border: solid #ff6347;
 }
 
-.challenge-missions-update {
+.alert-challenge_missions_update {
   color: black;
-  background-color: greenyellow;
-  border: solid greenyellow;
+  background-color: mediumturquoise;
+  border: solid mediumturquoise;
 }
 
 #btn_animation .btnn {

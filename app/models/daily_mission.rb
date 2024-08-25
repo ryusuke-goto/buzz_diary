@@ -22,7 +22,7 @@ class DailyMission < ApplicationRecord
   def self.update_mission(user:, mission_title:)
     mission = find_by('title LIKE ?', "%#{mission_title}%")
     logger.debug "mission #{mission}"
-    return { success: false, message: 'Mission not found' } unless mission
+    return { process: false, message: 'Mission not found' } unless mission
 
     user_daily = user.user_dailies.find_by(daily_mission_id: mission.id)
     logger.debug "user_daily #{user_daily.inspect}"
@@ -30,10 +30,10 @@ class DailyMission < ApplicationRecord
       logger.debug 'user_daily.update executed'
       user_daily.update(status: true)
       user.add_buff(daily: mission.buff)
-      { success: true, message: mission.title }
+      { process: true, message: mission.title }
     else
       logger.debug 'mission not found or user_challenge_status is already true'
-      { success: false, message: 'Mission not found or already completed' }
+      { process: false, message: 'Mission not found or already completed' }
     end
   end
 end

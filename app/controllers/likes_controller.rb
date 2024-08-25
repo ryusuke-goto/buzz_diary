@@ -9,10 +9,10 @@ class LikesController < ApplicationController
     current_user.like(diary)
     @diary = Diary.with_likes_count.find_by(id: params[:diary_id])
     result = current_user.liked_diary_count
-    return unless result[:success]
+    return unless result[:process]
 
     logger.debug 'like_count update'
-    flash[:challenge-missions-update] = t('defaults.flash_message.challenge_missions_updated', item: result[:message])
+    flash[:challenge_missions_update] = t('defaults.flash_message.challenge_missions_updated', item: result[:message])
   end
 
   def everything

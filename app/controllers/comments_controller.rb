@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     comment = current_user.comments.build(comment_params)
     if comment.save
       result = DailyMission.update_mission(user: current_user, mission_title: 'コメントを投稿する')
-      if result[:success]
+      if result[:process]
         flash[:daily-missions-update] =
           t('defaults.flash_message.daily_missions_updated', item: result[:message])
       end

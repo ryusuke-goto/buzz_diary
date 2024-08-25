@@ -10,18 +10,18 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-5.times do
-  user = User.create!(name: Faker::Name.name,
-                      email: Faker::Internet.unique.email,
-                      password: 'password',
-                      password_confirmation: 'password')
-  puts "\"#{user.name}\" has created!"
-end
+# 5.times do
+#   user = User.create!(name: Faker::Name.name,
+#                       email: Faker::Internet.unique.email,
+#                       password: 'password',
+#                       password_confirmation: 'password')
+#   puts "\"#{user.name}\" has created!"
+# end
 
 User.ids
 
-# 4.times do |index|
-#   user = User.find(user_ids.sample)
-#   diary = user.diaries.create!(title: "今日は連勤#{index}日目だった", body: "まだまだ#{index}日ぐらい頑張れそう！", diary_date: Date.today)
-#   puts "\"#{diary.title}\" has created!"
-# end
+10.times do |index|
+  user = User.find(11)
+  diary = user.diaries.create!(title: "今日は連勤#{index}日目だった", body: "まだまだ#{index}日ぐらい頑張れそう！", diary_date: Date.today)
+  puts "\"#{diary.title}\" has created!"
+end
