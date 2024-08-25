@@ -1,7 +1,7 @@
 class RankingController < ApplicationController
   def index
     max_liked_diaries
-    likes_record_users
+    max_liked_users
   end
 
   private
@@ -12,11 +12,15 @@ class RankingController < ApplicationController
     @max_liked_diaries = diaries.select { |diary| diary.likes_count == max_likes_count }
   end
 
-  def likes_record_users
-    user_likes_record_count = Like.includes(:user).group(:user_id).count
-    max_likes_record = user_likes_record_count.max
-    logger.debug "message::::max_likes_record #{max_likes_record}"
-    @max_likes_record_users = User.where(id: max_likes_record).select(:name, :image)
+  def max_liked_users
+    # ユーザーごとの「いいねした日記」数を集計
+    user_likes_record_count = Like.group(:user_id).count
+    # 最大「いいねした日記」数を取得
+    max_likes_count = user_likes_record_count.values.max   
+    # 最大「いいねした日記」数を持つユーザーIDを取得
+    max_likes_user_ids = user_likes_record_count.select { |_, v| v == max_likes_count }.keys    
+    logger.debug "message::::max_likes_user_ids #{max_likes_user_ids}"
+    # 最大「いいねした日記」数を持つユーザーの情報を取得
+    @max_likes_record_users = User.where(id: max_likes_user_ids).select(:name, :image)
   end
-
 end
