@@ -24,11 +24,11 @@ class ChallengeMission < ApplicationRecord
     return false unless mission
 
     user_challenge = user.user_challenges.find_by(challenge_mission_id: mission.id)
-    logger.debug "message::::user_daily #{user_challenge.inspect}"
+    logger.debug "message::::user_challenge #{user_challenge.inspect}"
     if user_challenge.present? && !user_challenge.status
-      logger.debug 'message::::user_daily.update executed'
+      logger.debug 'message::::user_challenge.update executed'
       user_challenge.update(status: true)
-      result = user.add_buff(challenge: mission.buff, mission:)
+      result = user.add_buff(challenge: mission.buff, mission: mission)
       logger.debug "message::::add_buff result #{result}"
       if result
         logger.debug 'message::::add_buff success'

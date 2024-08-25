@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def set_values_by_raw_info(raw_info)
-    puts "pppppppppppppppp#{raw_info.to_json}"
+    puts "[event]#{raw_info.to_json}"
     self.raw_info = raw_info.to_json
     save!
   end
@@ -73,65 +73,79 @@ class User < ApplicationRecord
   end
 
   def liked_diary_count
+    milestones = {
+      10 => '10個の日記にいいね',
+      50 => '50個の日記にいいね',
+      100 => '100個の日記にいいね',
+      150 => '150個の日記にいいね'
+    }
+  
     counts = likes.count
-    if counts > 10
-      result = ChallengeMission.update_mission(user: self, mission_title: '10個の日記にいいね')
-      if result
-        { success: true, message: '10個の日記にいいね' }
-      else
-        logger.debug 'message::::like_count not update'
-        { success: false }
+    logger.debug "message::::like_count: #{counts}"
+    milestones.each do |threshold, mission_title|
+      if counts > threshold
+        result = ChallengeMission.update_mission(user: self, mission_title: mission_title)
+        if result
+          logger.debug "message::::like_count_mission updated for milestone #{threshold}"
+          return { process: true, message: mission_title }
+        else
+          logger.debug "message::::like_count_mission not update for milestone #{threshold}"
+        end
       end
-    else
-      logger.debug 'message::::like_count not update'
-      { success: false }
     end
+  
+    { process: false }
   end
 
   def add_buff(daily: 0, challenge: 0, mission: nil)
     logger.debug 'message::::add_buff executed'
-    current_buff = buff
+    logger.debug "self: #{self}"
+    logger.debug "self.buff: #{buff}"
+  
+    updated = false
+  
     if daily.positive?
-      current_buff.daily_buff += daily
-      logger.debug "message::::daily_buff: #{current_buff.daily_buff}"
-      current_buff.save!
-      current_buff.sum_buff += current_buff.daily_buff
-      current_buff.save!
-      true
-    elsif challenge.positive?
-      current_buff.challenge_buff += challenge
-      logger.debug "message::::challenge_buff: #{current_buff.challenge_buff}"
-      current_buff.save!
-      current_buff.sum_buff += current_buff.challenge_buff
-      current_buff.save!
-      result = update_reward(mission)
-      logger.debug "message::::update_reward result #{result}"
-      true
-    else
-      logger.debug 'error::::cannot add buff'
-      false
+      update_buff(:daily_buff, daily)
+      updated = true
     end
+  
+    if challenge.positive?
+      update_buff(:challenge_buff, challenge)
+      updated = true
+      update_css(mission)
+    end
+  
+    unless updated
+      logger.debug 'error::::cannot add buff'
+      return false
+    end
+  
+    true
   end
 
-  def update_reward(mission)
+  def update_css(mission)
     logger.debug 'message::::update_reward executed'
     logger.debug "message::::mission is #{mission.inspect}"
-    reward = self.reward
-    if mission.like_css.present?
-      reward.like_css += mission.like_css
-      logger.debug 'message::::like_css update'
-    end
-    if mission.diary_css.present?
-      reward.diary_css += mission.diary_css
-      logger.debug 'message::::diary_css update'
-    end
-    return unless mission.theme_css.present?
 
-    reward.theme_css += mission.theme_css
-    logger.debug 'message::::theme_css update'
+    if mission.like_css.present?
+      increment!(:like_css, mission.like_css)
+      logger.debug 'message::::like_css update'
+    elsif mission.diary_css.present?
+      increment!(:diary_css, mission.diary_css)
+      logger.debug 'message::::diary_css update'
+    elsif mission.theme_css.present?
+      increment!(:theme_css, mission.theme_css)
+      logger.debug 'message::::theme_css update'
+    end
   end
 
   def self.ransackable_attributes(_auth_object = nil)
     ['name']
+  end
+
+  def update_buff(type, amount)
+    buff.increment!(type, amount)
+    buff.increment!(:sum_buff, amount)
+    logger.debug "message::::#{type} updated to #{buff[type]}"
   end
 end

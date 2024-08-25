@@ -50,11 +50,16 @@
   border: solid #ff6347;
 }
 
+.alert-challenge_missions_update {
+  color: black;
+  background-color: mediumturquoise;
+  border: solid mediumturquoise;
+}
+
 #btn_animation .btnn {
   display: block;
   text-decoration: none;
   background-color: none;
-  color: #008000;
   animation: btn_animation 1.5s infinite;
 }
 

@@ -15,6 +15,7 @@ class RankingController < ApplicationController
   def likes_record_users
     user_likes_record_count = Like.includes(:user).group(:user_id).count
     max_likes_record = user_likes_record_count.max
+    logger.debug "message::::max_likes_record #{max_likes_record}"
     @max_likes_record_users = User.where(id: max_likes_record).select(:name, :image)
   end
 
