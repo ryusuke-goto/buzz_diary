@@ -13,7 +13,6 @@ class DiariesController < ApplicationController
 
   def create
     @diary = current_user.diaries.build(diary_params)
-    logger.debug "message::::current_user.reward result #{result}"
     if @diary.save
       result = DailyMission.update_mission(user: current_user, mission_title: '日記を投稿する')
       if result[:process]
