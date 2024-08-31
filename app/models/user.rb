@@ -66,6 +66,28 @@ class User < ApplicationRecord
     object.user_id == id
   end
 
+  def number_of_consecutive_days
+    past_count = 0
+    my_diaries = diaries.order(created_at: :desc)
+    my_diaries.each do |diary|
+      if diary.created_at.between?((Time.zone.today - past_count).beginning_of_day, (Time.zone.today - past_count).end_of_day)
+        past_count += 1
+      else
+        break
+      end
+    end
+    milestones = {
+      30 => '30日間連続で投稿する',
+      21 => '21日間連続で投稿する',
+      14 => '14日間連続で投稿する',
+      7 => '7日間連続で投稿する',
+      3 => '3日間連続で投稿する'
+    }
+
+    logger.debug "message::::past_count: #{past_count}"
+    self.mission_milestones_check(milestones, past_count)
+  end
+
   def like(diary)
     like = Like.find_or_create_by!(user_id: id, diary_id: diary.id)
     like.count += diary.user.buff.sum_buff
@@ -82,18 +104,21 @@ class User < ApplicationRecord
   
     counts = likes.count
     logger.debug "message::::like_count: #{counts}"
+    self.mission_milestones_check(milestones, counts)
+  end
+
+  def mission_milestones_check(milestones, count)
     milestones.each do |threshold, mission_title|
-      if counts > threshold
+      if count > threshold
         result = ChallengeMission.update_mission(user: self, mission_title: mission_title)
         if result
-          logger.debug "message::::like_count_mission updated for milestone #{threshold}"
+          logger.debug "message::::mission updated for milestone #{threshold}"
           return { process: true, message: mission_title }
         else
-          logger.debug "message::::like_count_mission not update for milestone #{threshold}"
+          logger.debug "message::::mission not update for milestone #{threshold}"
         end
       end
     end
-  
     { process: false }
   end
 
