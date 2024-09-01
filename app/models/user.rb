@@ -96,10 +96,11 @@ class User < ApplicationRecord
 
   def number_of_liked_diaries
     milestones = {
-      10 => '10個の日記にいいね',
-      50 => '50個の日記にいいね',
+      200 => '200個の日記にいいね',
+      150 => '150個の日記にいいね',
       100 => '100個の日記にいいね',
-      150 => '150個の日記にいいね'
+      50 => '50個の日記にいいね',
+      10 => '10個の日記にいいね'
     }
   
     counts = likes.count
@@ -109,10 +110,11 @@ class User < ApplicationRecord
 
   def number_of_comments
     milestones = {
-      5 => '5個のコメントを投稿',
-      10 => '10個のコメントを投稿',
+      25 => '25個のコメントを投稿',
+      20 => '20個のコメントを投稿',
       15 => '15個のコメントを投稿',
-      20 => '20個のコメントを投稿'
+      10 => '10個のコメントを投稿',
+      5 => '5個のコメントを投稿'
     }
   
     counts = comments.count
