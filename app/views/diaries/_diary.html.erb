@@ -9,13 +9,15 @@
     </div>
     <% case diary.user.diary_css %>
       <% when 0 %>
-        <div class="w-20 h-20 rounded-full bg-wakatake"></div>
+        <div class="w-20 h-20 rounded-full bg-green-500"></div>
       <% when 1 %>
-        <div class="w-20 h-20 rounded-full bg-lime-400"></div>
+        <div class="w-20 h-20 rounded-full bg-yellow-400"></div>
       <% when 2 %>
-        <div class="w-20 h-20 rounded-full bg-yellow-300"></div>
+        <div class="w-20 h-20 rounded-full bg-blue-500"></div>
       <% when 3 %>
-        <div class="w-20 h-20 rounded-full bg-emerald-500"></div>
+        <div class="w-20 h-20 rounded-full bg-rose-600"></div>
+      <% when 4 %>
+        <div class="w-20 h-20 rounded-full bg-fuchsia-700"></div>
     <% end %>
   </div>
   <div class="card-body pt-2">
@@ -58,13 +60,13 @@
         <% when 0 %>
           <i class="btnn fa-solid fa-heart text-7xl pt-2 text-green-500"></i>
         <% when 1 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-amber-300"></i>
+          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-yellow-400"></i>
         <% when 2 %>
           <i class="btnn fa-solid fa-heart text-7xl pt-2 text-blue-500"></i>
         <% when 3 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-rose-500"></i>
+          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-rose-600"></i>
         <% when 4 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-fuchsia-600"></i>
+          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-fuchsia-700"></i>
         <% end %>
       <% end %>
       <div id="count-<%= diary.id %>" class="text-base mx-7 pt-3">
