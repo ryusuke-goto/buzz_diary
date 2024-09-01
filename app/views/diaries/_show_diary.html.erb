@@ -1,15 +1,27 @@
 <article class="card my-9">
   <div class="chat chat-start w-auto">
-    <div class="avatar pt-1">
-      <div class="w-10 h-10 rounded-full">
+    <div class="avatar pt-1 relative">
+      <div class="w-10 h-10 rounded-full absolute top-2 left-1">
         <% if diary.user.image.present? %>
           <%= image_tag diary.user.image %>
         <% else %>
           <%= image_tag '/assets/avatar.png', alt: "#{diary.user.name}のアバター" %>
         <% end %>
       </div>
+      <% case diary.user.diary_css %>
+        <% when 0 %>
+          <div class="w-12 h-12 rounded-full bg-green-500"></div>
+        <% when 1 %>
+          <div class="w-12 h-12 rounded-full bg-yellow-400"></div>
+        <% when 2 %>
+          <div class="w-12 h-12 rounded-full bg-sky-500"></div>
+        <% when 3 %>
+          <div class="w-12 h-12 rounded-full bg-rose-600"></div>
+        <% when 4 %>
+          <div class="w-12 h-12 rounded-full bg-fuchsia-700"></div>
+      <% end %>
     </div>
-    <div class="chat-bubble">
+    <div class="chat-bubble bg-white text-black">
       <div class="card-body pt-2">
         <div class="flex">
           <div class="card-diary-date">

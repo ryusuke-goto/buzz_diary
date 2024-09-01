@@ -14,11 +14,8 @@ class DiariesController < ApplicationController
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
-      result = DailyMission.update_mission(user: current_user, mission_title: '日記を投稿する')
-      if result[:process]
-        flash[:daily_missions_update] =
-          t('defaults.flash_message.daily_missions_updated', item: result[:message])
-      end
+      daily_create_mission_check
+      number_of_consecutive_days_check
       redirect_to diaries_path, success: t('defaults.flash_message.created', item: t('activerecord.models.diary'))
     else
       flash.now[:danger] = t('defaults.flash_message.not_created', item: t('activerecord.models.diary'))
@@ -63,5 +60,21 @@ class DiariesController < ApplicationController
 
   def diary_params
     params.require(:diary).permit(:title, :body, :diary_date, :diary_image, :diary_image_cache)
+  end
+
+  def daily_create_mission_check
+    result = DailyMission.update_mission(user: current_user, mission_title: '日記を投稿する')
+    if result[:process]
+      flash[:daily_missions_update] =
+        t('defaults.flash_message.daily_missions_updated', item: result[:message])
+    end
+  end
+
+  def number_of_consecutive_days_check
+    result = current_user.number_of_consecutive_days
+    if result[:process]
+      flash[:challenge_missions_update] =
+        t('defaults.flash_message.challenge_missions_updated', item: result[:message])
+    end
   end
 end

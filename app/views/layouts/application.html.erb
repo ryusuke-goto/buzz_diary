@@ -32,7 +32,22 @@
   </head>
 
   <body>
-    <div class="flex flex-col min-h-screen bg-white">
+    <% if params[:controller] == 'diaries' && params[:action] == 'show' %>
+      <% case @diary.user.theme_css %>
+        <% when 0 %>
+          <div class="flex flex-col min-h-screen bg-green-100">
+        <% when 1 %>
+          <div class="flex flex-col min-h-screen bg-yellow-100">
+        <% when 2 %>
+          <div class="flex flex-col min-h-screen bg-sky-100">
+        <% when 3 %>
+          <div class="flex flex-col min-h-screen bg-rose-100">
+        <% when 4 %>
+          <div class="flex flex-col min-h-screen bg-fuchsia-100">
+      <% end %>
+    <% else %>
+      <div class="flex flex-col min-h-screen bg-white">
+    <% end %>
       <header class="flex justify-between bg-wakatake h-15 text-white z-50">  
         <% if user_signed_in? %>
           <%= render partial: "shared/header" %>

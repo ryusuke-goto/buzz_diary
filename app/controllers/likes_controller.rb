@@ -8,7 +8,7 @@ class LikesController < ApplicationController
     diary = Diary.with_likes_count.find_by(id: params[:diary_id])
     current_user.like(diary)
     @diary = Diary.with_likes_count.find_by(id: params[:diary_id])
-    result = current_user.liked_diary_count
+    result = current_user.number_of_liked_diaries
     return unless result[:process]
 
     logger.debug 'like_count update'
@@ -23,7 +23,7 @@ class LikesController < ApplicationController
         puts "diaryの値は#{diary}"
         current_user.like(diary)
       end
-      current_user.liked_diary_count
+      current_user.number_of_liked_diaries
       diary_ids = @diaries.pluck(:id)
       # if result
       #   flash[:challenge_missions_update] =
