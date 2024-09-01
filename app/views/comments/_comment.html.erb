@@ -7,7 +7,7 @@
       <div class="avatar pt-1 relative">
         <div class="w-10 h-10 rounded-full absolute top-2 left-1">
           <% if comment.user.image.present? %>
-            <%= image_tag diary.user.image %>
+            <%= image_tag comment.user.image %>
           <% else %>
             <%= image_tag '/assets/avatar.png', alt: "#{comment.user.name}のアバター" %>
           <% end %>
