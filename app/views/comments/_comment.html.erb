@@ -4,14 +4,24 @@
       <div class="chat-bubble mx-3">
         <p><%= simple_format(comment.body) %></p>
       </div>
-      <div class="avatar pt-1">
-        <div class="w-10 h-10 rounded-full">
+      <div class="avatar pt-1 relative">
+        <div class="w-10 h-10 rounded-full absolute top-2 left-1">
           <% if comment.user.image.present? %>
-            <%= image_tag comment.user.image %>
+            <%= image_tag diary.user.image %>
           <% else %>
-            <%= image_tag "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg", alt: "#{comment.user.name}のアバター", onerror: "this.onerror=null; this.src='/assets/avatar.png'" %>
+            <%= image_tag '/assets/avatar.png', alt: "#{comment.user.name}のアバター" %>
           <% end %>
         </div>
+        <% case comment.user.diary_css %>
+          <% when 0 %>
+            <div class="w-12 h-12 rounded-full bg-wakatake"></div>
+          <% when 1 %>
+            <div class="w-12 h-12 rounded-full bg-lime-400"></div>
+          <% when 2 %>
+            <div class="w-12 h-12 rounded-full bg-yellow-300"></div>
+          <% when 3 %>
+            <div class="w-12 h-12 rounded-full bg-emerald-500"></div>
+        <% end %>
       </div>
       <div>
         <h3 class="small"><%= comment.user.name %></h3>
