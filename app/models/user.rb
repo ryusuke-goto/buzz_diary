@@ -94,7 +94,7 @@ class User < ApplicationRecord
     like.save!
   end
 
-  def liked_diary_count
+  def number_of_liked_diaries
     milestones = {
       10 => '10個の日記にいいね',
       50 => '50個の日記にいいね',
@@ -103,7 +103,20 @@ class User < ApplicationRecord
     }
   
     counts = likes.count
-    logger.debug "message::::like_count: #{counts}"
+    logger.debug "message::::likes_count: #{counts}"
+    self.mission_milestones_check(milestones, counts)
+  end
+
+  def number_of_comments
+    milestones = {
+      5 => '5個のコメントを投稿',
+      10 => '10個のコメントを投稿',
+      15 => '15個のコメントを投稿',
+      20 => '20個のコメントを投稿'
+    }
+  
+    counts = comments.count
+    logger.debug "message::::comments_count: #{counts}"
     self.mission_milestones_check(milestones, counts)
   end
 
