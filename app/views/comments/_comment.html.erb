@@ -1,7 +1,7 @@
 <div id="comment-<%= comment.id %>">
   <div class="chat chat-end flex flex-row-reverse my-3">
     <div class="flex">
-      <div class="chat-bubble mx-3">
+      <div class="chat-bubble mx-3 bg-white text-black">
         <p><%= simple_format(comment.body) %></p>
       </div>
       <div class="avatar pt-1 relative">
@@ -18,7 +18,7 @@
           <% when 1 %>
             <div class="w-12 h-12 rounded-full bg-yellow-400"></div>
           <% when 2 %>
-            <div class="w-12 h-12 rounded-full bg-blue-500"></div>
+            <div class="w-12 h-12 rounded-full bg-sky-500"></div>
           <% when 3 %>
             <div class="w-12 h-12 rounded-full bg-rose-600"></div>
           <% when 4 %>

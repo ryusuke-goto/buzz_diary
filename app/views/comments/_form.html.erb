@@ -1,7 +1,7 @@
 <div class="fixed bottom-20 w-full" id="comment-form">
   <div class="col-lg-8 offset-lg-2">
     <%= form_with model: comment, class: "flex items-center justify-center", url: diary_comments_path(diary) do |f| %>
-      <%= f.text_area :body, class: " max-w-3xl w-full textarea textarea-success form-control h-16 mb-1", placeholder: t("comments.placeholder") %>
+      <%= f.text_area :body, class: " max-w-3xl w-full textarea textarea-success form-control h-16 mb-1 bg-white", placeholder: t("comments.placeholder") %>
       <%= f.submit t('comments.commit'), class: "btn btn-success w-24 h-16 mb-1" %>
     <% end %>
   </div>
