@@ -58,20 +58,28 @@
     <% end %>
     <div id="like-<%=diary.id%>" class="flex pt-3">
       <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
-        <% case diary.user.like_css %>
-        <% when 0 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-green-500"></i>
-        <% when 1 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-yellow-400"></i>
-        <% when 2 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-sky-500"></i>
-        <% when 3 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-rose-600"></i>
-        <% when 4 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-fuchsia-700"></i>
-        <% when 5 %>
-          <i class="btnn fa-solid fa-heart text-7xl pt-2 text-teal-300"></i>
+        <% if diary.likes_count >= 0 && diary.likes_count < 500 %>
+          <div class="btn0">
+        <% elsif diary.likes_count >= 500 && diary.likes_count < 1000 %>
+          <div class="btn1">
+        <% else %>
+          <div class="btn2">
         <% end %>
+          <% case diary.user.like_css %>
+          <% when 0 %>
+            <i class="fa-solid fa-heart text-7xl pt-2 text-green-500"></i>
+          <% when 1 %>
+            <i class="fa-solid fa-heart text-7xl pt-2 text-yellow-400"></i>
+          <% when 2 %>
+            <i class="fa-solid fa-heart text-7xl pt-2 text-sky-500"></i>
+          <% when 3 %>
+            <i class="fa-solid fa-heart text-7xl pt-2 text-rose-600"></i>
+          <% when 4 %>
+            <i class="fa-solid fa-heart text-7xl pt-2 text-fuchsia-700"></i>
+          <% when 5 %>
+            <i class="fa-solid fa-heart text-7xl pt-2 text-teal-300"></i>
+          <% end %>
+        </div>
       <% end %>
       <div id="count-<%= diary.id %>" class="text-base mx-7 pt-3">
         <h2><%= diary.likes_count || 0 %></h2>

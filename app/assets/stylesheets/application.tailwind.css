@@ -56,11 +56,25 @@
   border: solid mediumturquoise;
 }
 
-#btn_animation .btnn {
+#btn_animation .btn0 {
+  display: block;
+  text-decoration: none;
+  background-color: none;
+  animation: btn_animation 2.5s infinite;
+}
+
+#btn_animation .btn1 {
   display: block;
   text-decoration: none;
   background-color: none;
   animation: btn_animation 1.5s infinite;
+}
+
+#btn_animation .btn2 {
+  display: block;
+  text-decoration: none;
+  background-color: none;
+  animation: btn_animation 0.5s infinite;
 }
 
 @keyframes btn_animation {
