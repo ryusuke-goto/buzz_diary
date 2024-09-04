@@ -62,8 +62,10 @@
           <div class="btn0">
         <% elsif diary.likes_count >= 500 && diary.likes_count < 1000 %>
           <div class="btn1">
-        <% else %>
+        <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
           <div class="btn2">
+        <% else %>
+          <div class="btn3">
         <% end %>
           <% case diary.user.like_css %>
           <% when 0 %>
