@@ -70,7 +70,8 @@ class User < ApplicationRecord
     past_count = 0
     my_diaries = diaries.order(created_at: :desc)
     my_diaries.each do |diary|
-      if diary.created_at.between?((Time.zone.today - past_count).beginning_of_day, (Time.zone.today - past_count).end_of_day)
+      logger.debug "message::::diary: #{diary.inspect}"
+      if diary.created_at.between?((Time.zone.today - past_count.days).beginning_of_day, (Time.zone.today - past_count.days).end_of_day)
         past_count += 1
       else
         break
