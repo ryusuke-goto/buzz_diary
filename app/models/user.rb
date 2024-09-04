@@ -70,8 +70,8 @@ class User < ApplicationRecord
     past_count = 0
     my_diaries = diaries.order(created_at: :desc)
     my_diaries.each do |diary|
-      logger.debug "message::::diary: #{diary.inspect}"
-      if diary.created_at.between?((Time.zone.today - past_count.days).beginning_of_day, (Time.zone.today - past_count.days).end_of_day)
+      logger.info "message::::diary: #{diary.inspect}"
+      if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day, (Time.zone.today - past_count.day).end_of_day)
         past_count += 1
       else
         break
@@ -85,7 +85,7 @@ class User < ApplicationRecord
       3 => '3日間連続'
     }
 
-    logger.debug "message::::past_count: #{past_count}"
+    logger.info "message::::past_count: #{past_count}"
     self.mission_milestones_check(milestones, past_count)
   end
 
@@ -125,13 +125,13 @@ class User < ApplicationRecord
 
   def mission_milestones_check(milestones, count)
     milestones.each do |threshold, mission_title|
-      if count > threshold
+      if count >= threshold
         result = ChallengeMission.update_mission(user: self, mission_title: mission_title)
         if result
-          logger.debug "message::::mission updated for milestone #{threshold}"
+          logger.info "message::::mission updated for milestone #{threshold}"
           return { process: true, message: mission_title }
         else
-          logger.debug "message::::mission not update for milestone #{threshold}"
+          logger.info "message::::mission not update for milestone #{threshold}"
         end
       end
     end
