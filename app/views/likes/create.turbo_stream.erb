@@ -1,5 +1,5 @@
 <%= turbo_stream.replace "like-#{@diary.id}" do %>
-  <div id="like-<%=@diary.id%>" class="flex pt-0">
+  <div id="like-<%=@diary.id%>" class="flex">
     <%= button_to likes_path(diary_id: @diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
         <% if @diary.likes_count >= 0 && @diary.likes_count < 500 %>
           <div class="btn0">

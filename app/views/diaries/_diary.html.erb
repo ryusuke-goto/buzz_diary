@@ -56,7 +56,7 @@
         <%= diary.title %>
       </div>
     <% end %>
-    <div id="like-<%=diary.id%>" class="flex pt-3">
+    <div id="like-<%=diary.id%>" class="flex">
       <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
         <% if diary.likes_count >= 0 && diary.likes_count < 500 %>
           <div class="btn0">
