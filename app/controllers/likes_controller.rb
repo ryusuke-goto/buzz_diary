@@ -16,7 +16,7 @@ class LikesController < ApplicationController
   end
 
   def everything
-    @today_diaries = Diary.where(diary_date: Date.today).includes(:user)
+    @today_diaries = Diary.where(diary_date: Time.zone.today).includes(:user)
     @diaries = Diary.includes(:user).with_likes_count.order(diary_date: :desc)
     if @today_diaries.present?
       @today_diaries.each do |diary|

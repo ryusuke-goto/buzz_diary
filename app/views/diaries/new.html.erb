@@ -1,11 +1,9 @@
 <% content_for(:title, t("title.new_diary")) %>
+<%= render partial: "shared/error_messages", locals:{object: @diary} %>
 <div class="container">
   <div class="row">
     <div class="flex items-center justify-center">
       <h1><%= t("title.new_diary") %></h1>
-    </div>
-    <div class="flex justify-center">
-      <%= render partial: "shared/error_messages", locals:{object: @diary} %>
     </div>
     <div class="flex items-center justify-center mx-5">
       <%= render partial: "form", locals:{button: "保存"} %>
