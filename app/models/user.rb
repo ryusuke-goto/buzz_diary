@@ -73,7 +73,10 @@ class User < ApplicationRecord
       logger.info "message::::diary: #{diary.inspect}"
       if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day, (Time.zone.today - past_count.day).end_of_day)
         past_count += 1
+      elsif diary.created_at.between?((Time.zone.today - (past_count - 1).day).beginning_of_day, (Time.zone.today - (past_count - 1).day).end_of_day)
+        logger.info "message::::Same created_at date as the previous diary"
       else
+        logger.info "message::::each loop break"
         break
       end
     end

@@ -1,7 +1,7 @@
 <%= form_with model: @diary, class: "w-full max-w-3xl mx-auto" do |f| %>
   <div class="mb-3">
     <%= f.label :diary_date %>
-    <%= f.date_field :diary_date, class: "input input-bordered input-success", value: Date.today %>
+    <%= f.date_field :diary_date, class: "input input-bordered input-success", value: Time.zone.today %>
   </div>
   <div class="mb-3">
     <%= f.label :title %>

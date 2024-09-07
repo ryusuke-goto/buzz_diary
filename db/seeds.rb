@@ -22,6 +22,6 @@ User.ids
 
 10.times do |index|
   user = User.find(11)
-  diary = user.diaries.create!(title: "今日は連勤#{index}日目だった", body: "まだまだ#{index}日ぐらい頑張れそう！", diary_date: Date.today)
+  diary = user.diaries.create!(title: "今日は連勤#{index}日目だった", body: "まだまだ#{index}日ぐらい頑張れそう！", diary_date: Time.zone.today)
   puts "\"#{diary.title}\" has created!"
 end

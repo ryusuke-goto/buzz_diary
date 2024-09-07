@@ -1,5 +1,5 @@
 <% if object.errors.any? %>
-  <div id="error_explanation" class="flex justify-center alert alert-danger">
+  <div id="error_explanation" class="flex w-full justify-center alert alert-danger">
     <ul class="mb-0">
       <% object.errors.each do |error| %>
         <li><%= error.full_message %></li>
