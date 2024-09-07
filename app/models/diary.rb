@@ -12,7 +12,7 @@ class Diary < ApplicationRecord
   mount_uploader :diary_image, DiaryImageUploader
 
   # likes_countを一緒に取得するスコープ
-  scope :with_likes_count, -> {
+  scope :with_likes_count, lambda {
     left_joins(:likes)
       .select('diaries.*, COALESCE(SUM(likes.count), 0) AS likes_count')
       .group('diaries.id')

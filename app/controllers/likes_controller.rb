@@ -24,7 +24,7 @@ class LikesController < ApplicationController
         current_user.like(diary)
       end
       current_user.number_of_liked_diaries
-      diary_ids = @diaries.pluck(:id)
+      @diaries.pluck(:id)
       # if result
       #   flash[:challenge_missions_update] =
       #     # t('defaults.flash_message.challenge_missions_updated', item: result[:message])
