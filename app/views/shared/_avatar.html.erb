@@ -1,0 +1,23 @@
+<div class="avatar pt-1 relative">
+  <div class="w-16 h-16 rounded-full absolute top-3 left-2">
+    <% if user.image.present? %>
+      <%= image_tag user.image %>
+    <% else %>
+      <%= image_tag '/assets/avatar.png', alt: "#{user.name}のアバター" %>
+    <% end %>
+  </div>
+  <% case user.diary_css %>
+    <% when 0 %>
+      <div class="w-20 h-20 rounded-full bg-green-500"></div>
+    <% when 1 %>
+      <div class="w-20 h-20 rounded-full bg-yellow-400"></div>
+    <% when 2 %>
+      <div class="w-20 h-20 rounded-full bg-sky-500"></div>
+    <% when 3 %>
+      <div class="w-20 h-20 rounded-full bg-rose-600"></div>
+    <% when 4 %>
+      <div class="w-20 h-20 rounded-full bg-fuchsia-700"></div>
+    <% when 5 %>
+      <div class="w-20 h-20 rounded-full bg-teal-300"></div>
+  <% end %>
+</div>
