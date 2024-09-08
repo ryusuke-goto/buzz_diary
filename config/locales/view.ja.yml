@@ -31,6 +31,7 @@ ja:
     line-login: LINEでログイン
   users:
     to_login_page: ログインページへ
+    line-friend: 友だち追加
   diaries:
     no_result: 日記がありません・・・
     created_at: 投稿日時

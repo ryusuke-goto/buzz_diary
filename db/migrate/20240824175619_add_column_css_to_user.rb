@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddColumnCssToUser < ActiveRecord::Migration[7.1]
   def change
     add_column :users, :like_css, :integer, default: 0

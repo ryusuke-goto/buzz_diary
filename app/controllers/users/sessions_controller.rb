@@ -4,6 +4,7 @@ module Users
   class SessionsController < Devise::SessionsController
     # before_action :configure_sign_in_params, only: [:create]
     after_action :buff_reward_missions_process, only: :create
+    after_action :auth_token, only: :create
     # GET /resource/sign_in
     # def new
     #   super

@@ -1,19 +1,17 @@
 <% content_for(:title, t("title.memory")) %>
-<div class="container">
-  <%= month_calendar(events: @diaries) do |date, diaries| %>
-    <%= date.day %>
-    <% diaries.each do |diary| %>
-      <div class="flex">
-        <i class="fa-solid fa-heart-circle-check text-2xl pt-2" style="color: #65c294;"></i>
-        <div id="count-<%=diary.id%>", class="text-base pt-3">
-          <h2><%= diary.likes_count || 0 %></h1>
-        </div>
+<%= month_calendar(events: @diaries) do |date, diaries| %>
+  <%= date.day %>
+  <% diaries.each do |diary| %>
+    <div class="flex">
+      <i class="fa-solid fa-heart-circle-check text-2xl pt-2" style="color: #65c294;"></i>
+      <div id="count-<%=diary.id%>", class="text-base pt-3">
+        <h2><%= diary.likes_count || 0 %></h1>
       </div>
-    <% end %>
+    </div>
   <% end %>
-  <table class="flex items-center justify-center">
-    <tbody>
-      <%= render partial: "memory_diary", collection: @diaries %>
-    </tbody>
-  </table>
-</div>
+<% end %>
+<table class="flex items-center justify-center">
+  <tbody>
+    <%= render partial: "memory_diary", collection: @diaries %>
+  </tbody>
+</table>

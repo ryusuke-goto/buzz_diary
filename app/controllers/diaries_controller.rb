@@ -50,10 +50,8 @@ class DiariesController < ApplicationController
   end
 
   def search
-    @diaries = Diary.where("title LIKE ?", "%#{params[:q]}%")
-    respond_to do |format|
-      format.js
-    end
+    @diaries = Diary.where('title LIKE ?', "%#{params[:q]}%")
+    respond_to(&:js)
   end
 
   private
@@ -64,17 +62,17 @@ class DiariesController < ApplicationController
 
   def daily_create_mission_check
     result = DailyMission.update_mission(user: current_user, mission_title: '日記を投稿する')
-    if result[:process]
-      flash[:daily_missions_update] =
-        t('defaults.flash_message.daily_missions_updated', item: result[:message])
-    end
+    return unless result[:process]
+
+    flash[:daily_missions_update] =
+      t('defaults.flash_message.daily_missions_updated', item: result[:message])
   end
 
   def number_of_consecutive_days_check
     result = current_user.number_of_consecutive_days
-    if result[:process]
-      flash[:challenge_missions_update] =
-        t('defaults.flash_message.challenge_missions_updated', item: result[:message])
-    end
+    return unless result[:process]
+
+    flash[:challenge_missions_update] =
+      t('defaults.flash_message.challenge_missions_updated', item: result[:message])
   end
 end

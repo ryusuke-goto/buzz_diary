@@ -71,12 +71,14 @@ class User < ApplicationRecord
     my_diaries = diaries.order(created_at: :desc)
     my_diaries.each do |diary|
       logger.info "message::::diary: #{diary.inspect}"
-      if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day, (Time.zone.today - past_count.day).end_of_day)
+      if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day,
+                                   (Time.zone.today - past_count.day).end_of_day)
         past_count += 1
-      elsif diary.created_at.between?((Time.zone.today - (past_count - 1).day).beginning_of_day, (Time.zone.today - (past_count - 1).day).end_of_day)
-        logger.info "message::::Same created_at date as the previous diary"
+      elsif diary.created_at.between?((Time.zone.today - (past_count - 1).day).beginning_of_day,
+                                      (Time.zone.today - (past_count - 1).day).end_of_day)
+        logger.info 'message::::Same created_at date as the previous diary'
       else
-        logger.info "message::::each loop break"
+        logger.info 'message::::each loop break'
         break
       end
     end
@@ -89,7 +91,7 @@ class User < ApplicationRecord
     }
 
     logger.info "message::::past_count: #{past_count}"
-    self.mission_milestones_check(milestones, past_count)
+    mission_milestones_check(milestones, past_count)
   end
 
   def like(diary)
@@ -106,10 +108,10 @@ class User < ApplicationRecord
       50 => '50個の日記にいいね',
       10 => '10個の日記にいいね'
     }
-  
+
     counts = likes.count
     logger.debug "message::::likes_count: #{counts}"
-    self.mission_milestones_check(milestones, counts)
+    mission_milestones_check(milestones, counts)
   end
 
   def number_of_comments
@@ -120,22 +122,22 @@ class User < ApplicationRecord
       10 => '10個のコメントを投稿',
       5 => '5個のコメントを投稿'
     }
-  
+
     counts = comments.count
     logger.debug "message::::comments_count: #{counts}"
-    self.mission_milestones_check(milestones, counts)
+    mission_milestones_check(milestones, counts)
   end
 
   def mission_milestones_check(milestones, count)
     milestones.each do |threshold, mission_title|
-      if count >= threshold
-        result = ChallengeMission.update_mission(user: self, mission_title: mission_title)
-        if result
-          logger.info "message::::mission updated for milestone #{threshold}"
-          return { process: true, message: mission_title }
-        else
-          logger.info "message::::mission not update for milestone #{threshold}"
-        end
+      next unless count >= threshold
+
+      result = ChallengeMission.update_mission(user: self, mission_title:)
+      if result
+        logger.info "message::::mission updated for milestone #{threshold}"
+        return { process: true, message: mission_title }
+      else
+        logger.info "message::::mission not update for milestone #{threshold}"
       end
     end
     { process: false }
@@ -145,25 +147,25 @@ class User < ApplicationRecord
     logger.debug 'message::::add_buff executed'
     logger.debug "self: #{self}"
     logger.debug "self.buff: #{buff}"
-  
+
     updated = false
-  
+
     if daily.positive?
       update_buff(:daily_buff, daily)
       updated = true
     end
-  
+
     if challenge.positive?
       update_buff(:challenge_buff, challenge)
       updated = true
       update_css(mission)
     end
-  
+
     unless updated
       logger.debug 'error::::cannot add buff'
       return false
     end
-  
+
     true
   end
 
@@ -191,5 +193,23 @@ class User < ApplicationRecord
     buff.increment!(type, amount)
     buff.increment!(:sum_buff, amount)
     logger.debug "message::::#{type} updated to #{buff[type]}"
+  end
+
+  def get_friendship_status
+    return unless access_token # access_tokenがなければリクエストを送らない
+
+    uri = URI.parse("https://api.line.me/friendship/v1/status")
+
+    request = Net::HTTP::Get.new(uri)
+    request["Authorization"] = "Bearer #{access_token}"
+
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    JSON.parse(response.body)
+  rescue StandardError => e
+    Rails.logger.error "Failed to get friendship status: #{e.message}"
+    nil
   end
 end
