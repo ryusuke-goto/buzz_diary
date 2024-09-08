@@ -11,10 +11,22 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @auth_token = @omniauth['credentials']['token']
     if @omniauth.present?
       @profile = User.find_or_initialize_by(provider: @omniauth['provider'], uid: @omniauth['uid'])
-      if @profile.email.blank?
+      if @profile.new_record?
         email = @omniauth['info']['email'] || "#{@omniauth['uid']}-#{@omniauth['provider']}@example.com"
-        @profile = current_user || User.create!(provider: @omniauth['provider'], uid: @omniauth['uid'], email:,
-                                                name: @omniauth['info']['name'], image: @omniauth['info']['image'], password: Devise.friendly_token[0, 20])
+        @profile.assign_attributes(
+          email: email,
+          name: @omniauth['info']['name'],
+          image: @omniauth['info']['image'],
+          password: Devise.friendly_token[0, 20],
+          access_token: @omniauth['credentials']['token'],
+          refresh_token: @omniauth['credentials']['refresh_token']
+        )
+      else
+        # 既存ユーザーのトークンを更新
+        @profile.update(
+          access_token: @omniauth['credentials']['token'],
+          refresh_token: @omniauth['credentials']['refresh_token']
+        )
       end
       @profile.set_values(@omniauth)
       @profile.save!

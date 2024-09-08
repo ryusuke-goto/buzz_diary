@@ -1,3 +1,9 @@
+<style>
+  .scale-button {
+    transform: scale(2); /* 2倍に拡大 */
+    transform-origin: center; /* 拡大縮小の中心をボタンの中央に設定 */
+  }
+</style>
 <div class="flex items-center justify-center">
   <div>
     <%= render partial: "shared/avatar", locals:{user: current_user} %>
@@ -17,22 +23,26 @@
     <div id="mypage_remind">
       LINE通知の設定
     </div>
-    <div id="remind" class="form-control">
-      <% if current_user.remind %>
-        <%= button_to update_remind_profile_path, class: "btn btn-success", method: :patch do %>
-          LINE通知はONです
+    <% if @friendship %>
+      <div id="remind" class="form-control">
+        <% if current_user.remind %>
+          <%= button_to update_remind_profile_path, class: "btn btn-success", method: :patch do %>
+            LINE通知はONです
+          <% end %>
+        <% else %>
+          <%= button_to update_remind_profile_path, class: "btn btn-neutral", method: :patch do %>
+            LINE通知はOFFです
+          <% end %>
         <% end %>
-      <% else %>
-        <%= button_to update_remind_profile_path, class: "btn btn-neutral", method: :patch do %>
-          LINE通知はOFFです
-        <% end %>
-      <% end %>
-    </div>
-    <div id="mypage_qr">
-      バズダイアリー公式アカウントを友達追加
-    </div>
-    <div id="qr">
-      <%= image_tag "qrcode.png", class: "img-top mx-5", width: "70", height:"70" %>
-    </div>
+      </div>
+    <% else %>
+      <div id="mypage_qr">
+        まずはバズダイアリー公式アカウントを友だち追加！
+      </div>
+      <div id="qr" class="">
+        <div class="line-it-button" data-lang="ja" data-type="friend" data-env="REAL" data-count="true"  data-lineId="@2006035762" style="display: none;"></div>
+        <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+      </div>
+    <% end %>
   </div>
 </div>

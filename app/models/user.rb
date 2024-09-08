@@ -194,4 +194,22 @@ class User < ApplicationRecord
     buff.increment!(:sum_buff, amount)
     logger.debug "message::::#{type} updated to #{buff[type]}"
   end
+
+  def get_friendship_status
+    return unless access_token # access_tokenがなければリクエストを送らない
+
+    uri = URI.parse("https://api.line.me/friendship/v1/status")
+
+    request = Net::HTTP::Get.new(uri)
+    request["Authorization"] = "Bearer #{access_token}"
+
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(request)
+    end
+
+    JSON.parse(response.body)
+  rescue StandardError => e
+    Rails.logger.error "Failed to get friendship status: #{e.message}"
+    nil
+  end
 end
