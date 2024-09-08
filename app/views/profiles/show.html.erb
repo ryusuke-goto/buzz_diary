@@ -7,7 +7,16 @@
     <div id="user_name">
       <%= current_user.name %>
     </div>
-    <div id=""
+    <div id="mypage_number_of_consecutive_days">
+      日記の連続投稿日数(作成日時を参照)
+    </div>
+    <div id="number_of_consecutive_days">
+      <%= @past_count %>
+      日
+    </div>
+    <div id="mypage_remind">
+      LINE通知の設定
+    </div>
     <div id="remind" class="form-control">
       <% if current_user.remind %>
         <%= button_to update_remind_profile_path, class: "btn btn-success", method: :patch do %>
@@ -19,5 +28,6 @@
         <% end %>
       <% end %>
     </div>
+    
   </div>
 </div>
