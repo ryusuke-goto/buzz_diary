@@ -70,15 +70,17 @@
 <!-- デイリーミッション用モーダル -->
 <dialog id="my_modal_1" class="modal">
   <div class="modal-box bg-white text-black">
-    <h3 class="text-lg font-bold">デイリーミッション</h3>
-    <div class="text-lg">毎日クリアするたびにいいね獲得数UP!</div>
-    <div id="mission-list-daily" class="mt-4">
-      <!-- デイリーミッション一覧はここに表示されます -->
+    <div class="flex justify-center justify-between">
+      <h3 class="text-lg font-bold">デイリーミッション</h3>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">閉じる</button>
+        </form>
+      </div>
     </div>
-    <div class="modal-action">
-      <form method="dialog">
-        <button class="btn">閉じる</button>
-      </form>
+    <div class="text-lg">毎日クリアするたびにいいね獲得数UP!</div>
+    <div id="mission-list-daily">
+      <!-- デイリーミッション一覧はここに表示されます -->
     </div>
   </div>
 </dialog>
@@ -86,14 +88,18 @@
 <!-- チャレンジミッション用モーダル -->
 <dialog id="my_modal_2" class="modal">
   <div class="modal-box bg-white text-black">
-    <h3 class="text-lg font-bold">チャレンジミッション</h3>
-    <div id="mission-list-challenge" class="mt-4">
-      <!-- チャレンジミッション一覧はここに表示されます -->
+    <div class="flex justify-center justify-between">
+      <h3 class="text-lg font-bold">チャレンジミッション</h3>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">閉じる</button>
+        </form>
+      </div>
     </div>
-    <div class="modal-action">
-      <form method="dialog">
-        <button class="btn">閉じる</button>
-      </form>
+    <div class="text-lg">クリアするたびにいいね獲得数UP!</div>
+    <div class="text-lg">アプリのどこかに変化も？</div>
+    <div id="mission-list-challenge">
+      <!-- チャレンジミッション一覧はここに表示されます -->
     </div>
   </div>
 </dialog>
