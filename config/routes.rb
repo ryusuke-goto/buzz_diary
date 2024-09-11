@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'images/ogp.png', to: 'images#ogp', as: 'images_ogp'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     omniauth_callbacks: 'omniauth_callbacks'
