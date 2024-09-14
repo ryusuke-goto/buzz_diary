@@ -58,6 +58,7 @@
           <%= render partial: "shared/before_login_header" %>
         <% end %>
       </header>
+
       <% flash.each do |message_type, message| %>
         <div class="flex justify-center alert alert-<%= message_type %>">
           <%= message %>
