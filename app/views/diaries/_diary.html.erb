@@ -33,9 +33,6 @@
     </div>
     <%= link_to diary_path(diary.id) do %>
       <div class="flex">
-        <div class="card-diary-date">
-          <%=diary.diary_date %><%= t("diaries.diary_date") %>
-        </div>
         <div class="card-exist-image mx-2 pt-0">
           <% if diary.diary_image.present? %>
             <%= t("diaries.with_image") %>
