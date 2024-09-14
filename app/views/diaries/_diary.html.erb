@@ -26,16 +26,6 @@
     <div class="flex flex-row justify-between">  
       <div class="user-name text-black font-bold text-xl flex">
         <%= diary.user.name %>
-        <% if current_user && current_user.own?(diary) %>
-          <div class="action mx-3">
-            <%= link_to edit_diary_path(diary.id), class: "edit-comment-link" do %>
-              <i class="fa-regular fa-pen-to-square"></i>
-            <% end %>
-            <%= link_to diary_path(diary.id), class: "delete-comment-link", data: { turbo_method: :delete , turbo_confirm: t('defaults.delete_confirm') } do %>
-              <i class="fa-regular fa-trash-can"></i>
-            <% end %>
-          </div>
-        <% end %>
       </div>
       <div class="created-at">
         <%= l diary.created_at, format: :short %>
