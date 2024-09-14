@@ -207,7 +207,7 @@ class User < ApplicationRecord
       http.request(request)
     end
 
-    JSON.parse(response.body)
+    JSON.parse(response.body)["friendFlag"]
   rescue StandardError => e
     Rails.logger.error "Failed to get friendship status: #{e.message}"
     nil
