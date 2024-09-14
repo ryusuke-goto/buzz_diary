@@ -28,10 +28,7 @@
                 <%= t('missions.true') %>
               </div>
               <div class="text-gray-600">
-                <% # OGP用のURLとタイトルを準備 %>
                 <% mission_url = "https://praise-diary.onrender.com/diaries" %>
-                <% image_url = "#{request.base_url}/images/ogp.png?text=#{CGI.escape(mission.title)}" %>
-      
                 <% twitter_share_url = "https://twitter.com/share?url=#{mission_url}" %>
                 <%= link_to twitter_share_url, target: '_blank', data: { toggle: "tooltip", placement: "bottom" }, title: "Xでシェア" do %>
                   <i class="fa-brands fa-square-x-twitter fa-2xl"></i>
