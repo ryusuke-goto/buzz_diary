@@ -1,5 +1,6 @@
 <div id="navbarSupportedContent">
   <ul class="flex justify-between mt-3">
+  <div class="grid"><!-- 左端の透明なスペース --></div>
     <li class="nav-item">
       <%= link_to diaries_path, class: "nav-link", id: "home" do %>
         <div class="text-4xl">
@@ -45,14 +46,15 @@
     </li>
 
     <li class="nav-item"> 
-      <%= link_to profile_path, class: "nav-link", id: "profile" do %>
-        <div class="text-4xl">
+      <div class="text-4xl">
+        <%= link_to profile_path, class: "nav-link", id: "profile" do %>
           <i class="fa-solid fa-user"></i>
-        </div>
-        <div class="text-sm">
-          マイページ
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+      <div class="text-xs">
+        マイページ
+      </div>
     </li>
+  <div class="grid"><!-- 左端の透明なスペース --></div>
   </ul>
 </div>

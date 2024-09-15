@@ -61,12 +61,12 @@
         </div>
       </header>
 
-      <% flash.each do |message_type, message| %>
-        <div class="flex justify-center alert alert-<%= message_type %>">
-          <%= message %>
-        </div>
-      <% end %>
       <div class="pt-20" >
+        <% flash.each do |message_type, message| %>
+          <div class="flex justify-center alert alert-<%= message_type %>">
+            <%= message %>
+          </div>
+        <% end %>
         <%= yield %>
       </div>
       <div class="pb-44">

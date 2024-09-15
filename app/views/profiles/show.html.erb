@@ -1,9 +1,3 @@
-<style>
-  .scale-button {
-    transform: scale(2); /* 2倍に拡大 */
-    transform-origin: center; /* 拡大縮小の中心をボタンの中央に設定 */
-  }
-</style>
 <div class="flex items-center justify-center">
   <div>
     <%= render partial: "shared/avatar", locals:{user: current_user} %>
@@ -50,13 +44,7 @@
         <% end %>
       </div>
     <% else %>
-      <div id="mypage_qr">
-        まずはバズダイアリー公式アカウントを友だち追加！
-      </div>
-      <div id="qr" class="">
-        <div class="line-it-button" data-lang="ja" data-type="friend" data-env="REAL" data-count="true"  data-lineId="@2006035762" style="display: none;"></div>
-        <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-      </div>
+      <%= render partial: "line-it" %>
     <% end %>
   </div>
 </div>
