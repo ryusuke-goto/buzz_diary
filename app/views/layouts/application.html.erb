@@ -51,12 +51,14 @@
     <% else %>
       <div class="flex flex-col min-h-screen bg-white">
     <% end %>
-      <header class="flex justify-between bg-wakatake h-15 text-white z-50">  
-        <% if user_signed_in? %>
-          <%= render partial: "shared/header" %>
-        <% else %>
-          <%= render partial: "shared/before_login_header" %>
-        <% end %>
+      <header class="fixed w-full bg-wakatake h-15 text-white z-50"> 
+        <div class="flex justify-between">
+          <% if user_signed_in? %>
+            <%= render partial: "shared/header" %>
+          <% else %>
+            <%= render partial: "shared/before_login_header" %>
+          <% end %>
+        </div>
       </header>
 
       <% flash.each do |message_type, message| %>
