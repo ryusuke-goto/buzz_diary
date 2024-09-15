@@ -70,7 +70,17 @@
               <% end %>
             </div>
             <div id="count-<%= diary.id %>">
-              <div class="absolute text-black top-8 left-<%= 6 - diary.likes_count.to_s.length %>">
+              <% if diary.likes_count >= 0 && diary.likes_count < 10 %>
+                <div class="absolute text-black top-8 left-5">
+              <% elsif diary.likes_count >= 10 && diary.likes_count < 100 %>
+                <div class="absolute text-black top-8 left-4">
+              <% elsif diary.likes_count >= 100 && diary.likes_count < 1000 %>
+                <div class="absolute text-black top-8 left-2">
+              <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
+                <div class="absolute text-black top-8 left-1">
+              <% else %>
+                <div class="absolute text-black top-8 left-0">
+              <% end %>
                 <h2><%= diary.likes_count || 0 %></h2>
               </div>
             </div>
