@@ -1,6 +1,6 @@
 <div id="diary-id-<%= diary.id %>" class="card flex flex-row">
   <div class="avatar pt-1 relative">
-    <div class="w-16 h-16 rounded-full absolute top-3 left-2">
+    <div class="w-12 h-12 rounded-full absolute top-3 left-2">
       <% if diary.user.image.present? %>
         <%= image_tag diary.user.image %>
       <% else %>
@@ -9,9 +9,9 @@
     </div>
     <% case diary.user.diary_css %>
       <% when 0 %>
-        <div class="w-20 h-20 rounded-full bg-green-500"></div>
+        <div class="w-16 h-16 rounded-full bg-green-500"></div>
       <% when 1 %>
-        <div class="w-20 h-20 rounded-full bg-yellow-400"></div>
+        <div class="w-16 h-16 rounded-full bg-yellow-400"></div>
       <% when 2 %>
         <div class="w-20 h-20 rounded-full bg-sky-500"></div>
       <% when 3 %>
@@ -40,7 +40,9 @@
         <% end %>
       </div>
       <div class="relative">
-        <%= l diary.created_at, format: :short %>
+        <div class="text-xs">
+          <%= l diary.created_at, format: :short %>
+        </div>
         <div id="like-<%=diary.id%>" class="flex right-0.5">
           <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
             <% if diary.likes_count >= 0 && diary.likes_count < 500 %>
@@ -54,31 +56,21 @@
             <% end %>
               <% case diary.user.like_css %>
               <% when 0 %>
-                <i class="fa-solid fa-heart text-7xl pt-2 text-green-500"></i>
+                <i class="fa-solid fa-heart text-5xl pt-2 text-green-500"></i>
               <% when 1 %>
-                <i class="fa-solid fa-heart text-7xl pt-2 text-yellow-400"></i>
+                <i class="fa-solid fa-heart text-5xl pt-2 text-yellow-400"></i>
               <% when 2 %>
-                <i class="fa-solid fa-heart text-7xl pt-2 text-sky-500"></i>
+                <i class="fa-solid fa-heart text-5xl pt-2 text-sky-500"></i>
               <% when 3 %>
-                <i class="fa-solid fa-heart text-7xl pt-2 text-rose-600"></i>
+                <i class="fa-solid fa-heart text-5xl pt-2 text-rose-600"></i>
               <% when 4 %>
-                <i class="fa-solid fa-heart text-7xl pt-2 text-fuchsia-700"></i>
+                <i class="fa-solid fa-heart text-5xl pt-2 text-fuchsia-700"></i>
               <% when 5 %>
-                <i class="fa-solid fa-heart text-7xl pt-2 text-teal-300"></i>
+                <i class="fa-solid fa-heart text-5xl pt-2 text-teal-300"></i>
               <% end %>
             </div>
             <div id="count-<%= diary.id %>">
-              <% if diary.likes_count >= 0 && diary.likes_count < 10 %>
-                <div class="absolute text-black top-12 left-8">
-              <% elsif diary.likes_count >= 10 && diary.likes_count < 100 %>
-                <div class="absolute text-black top-12 left-7">
-              <% elsif diary.likes_count >= 100 && diary.likes_count < 1000 %>
-                <div class="absolute text-black top-12 left-6">
-              <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
-                <div class="absolute text-black top-12 left-4">
-              <% else %>
-                <div class="absolute text-black top-12 left-3.5">
-              <% end %>
+              <div class="absolute text-black top-8 left-<%= 6 - diary.likes_count.to_s.length %>">
                 <h2><%= diary.likes_count || 0 %></h2>
               </div>
             </div>
