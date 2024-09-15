@@ -22,8 +22,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
           refresh_token: @omniauth['credentials']['refresh_token']
         )
       else
-        # 既存ユーザーのトークンを更新
+        # 既存ユーザーのトークン、アバター、名前を更新
         @profile.update(
+          name: @omniauth['info']['name'],
+          image: @omniauth['info']['image'],
           access_token: @omniauth['credentials']['token'],
           refresh_token: @omniauth['credentials']['refresh_token']
         )
