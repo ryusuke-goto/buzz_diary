@@ -1,4 +1,4 @@
-<div id="like-everything" class="tooltip tooltip-open tooltip-success" data-tip="<%= t("likes.like_everything") %>">
+<div id="like-everything" class="tooltip tooltip-open  tooltip-right tooltip-success" data-tip="<%= t("likes.like_everything") %>">
   <%= button_to everything_likes_path, id: "btn_animation", method: { turbo_method: :post } do %>
     <div class="btn0">
       <% case user.like_css %>

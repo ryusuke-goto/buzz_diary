@@ -46,7 +46,7 @@ ja:
   likes:
     everything_success: 今日の日記全部にいいねしました！
     everything_failed: どうやらまだ投稿された今日の日記はないようです。・・・本日最初の投稿者になりませんか？
-    like_everything: 今日の日記全部いいね！！
+    like_everything: 今日の全部いいね！
   profile:
     full_name: 氏名
     avatar: アバター
