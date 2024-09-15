@@ -70,7 +70,7 @@
       </div>
     </div>
     <% if current_user && params[:controller] == 'diaries' && params[:action] == 'index' %>
-      <div class="fixed bottom-24 right-9">
+      <div class="fixed bottom-24 left-4">
         <%= render partial: "diaries/like_everything", locals: {user: current_user} %>
       </div>
     <% end %>
