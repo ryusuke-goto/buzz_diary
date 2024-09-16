@@ -5,25 +5,11 @@
 <div id="navbarSupportedContent">
   <ul class="flex justify-between mt-1 mx-3 w-60">
     <li class="">
-      <%= link_to "/", class: "nav-link", id: "header-menu" do %>
-        <div class="text-4xl">
-          <i class="fa-solid fa-question"></i>
-        </div>
-        <div class="text-sm">
-          使い方
-        </div>
-      <% end %>
+      <%= navbar_link("/", "fa-solid fa-question", "使い方", "header-menu") %>
     </li>
 
     <li class="">
-      <%= link_to new_user_session_path, class: "line-login-link" do %>
-        <div class="text-4xl">
-        <i class="fa-solid fa-right-to-bracket"></i>
-        </div>
-        <div class="text-sm">
-            ログイン
-        </div>
-      <% end %>
+      <%= navbar_link(new_user_session_path, "fa-solid fa-right-to-bracket", "ログイン", "login") %>
     </li>
   </ul>
 </div>

@@ -6,14 +6,7 @@
 <div id="navbarSupportedContent">
   <ul class="flex justify-between mt-1 w-60">
     <li class="">
-      <%= link_to "/", class: "nav-link", id: "header-menu" do %>
-        <div class="text-4xl">
-          <i class="fa-solid fa-question"></i>
-        </div>
-        <div class="text-sm">
-          使い方
-        </div>
-      <% end %>
+      <%= navbar_link("/", "fa-solid fa-question", "使い方", "header-menu") %>
     </li>
 
     <li class="">
@@ -56,16 +49,15 @@
     </li>
     <li class="">
       <%= link_to destroy_user_session_path, class: "line-logout-link", data: { turbo_method: :delete } do %>
-        <div class="text-4xl">
+        <div class="text-4xl flex items-center justify-center">
           <i class="fa-solid fa-right-from-bracket"></i>
         </div>
-        <div class="text-sm">
+        <div class="text-sm flex items-center justify-center">
           ログアウト
         </div>
       <% end %>
     </li>
   </ul>
-  <div class="grid"><!-- 左端の透明なスペース --></div>
 </div>
 
 <dialog id="my_modal_3" class="modal">

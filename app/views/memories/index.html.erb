@@ -1,4 +1,7 @@
 <% content_for(:title, t("title.memory")) %>
+<div class="text-2xl font-bold flex items-center justify-center">
+  <h1><%= t("title.memory") %></h1>
+</div>
 <%= month_calendar(events: @diaries) do |date, diaries| %>
   <%= date.day %>
   <% diaries.each do |diary| %>

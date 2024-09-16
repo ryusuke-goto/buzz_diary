@@ -43,4 +43,13 @@ module ApplicationHelper
       # }
     }
   end
+
+  def navbar_link(path, icon_class, text, id)
+    link_to path, class: "nav-link", id: id do
+      content_tag(:div, class: "text-4xl flex items-center justify-center") do
+        content_tag(:i, "", class: icon_class)
+      end +
+      content_tag(:div, text, class: "text-xs flex items-center justify-center")
+    end
+  end
 end
