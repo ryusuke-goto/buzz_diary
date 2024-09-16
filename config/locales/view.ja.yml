@@ -58,9 +58,9 @@ ja:
     id: ミッションID
     content: 内容
     description: 変化
-    status: ステータス
+    status: 達成状況
     true: 達成
-    false: 未達成
+    false: 未達
   
   title:
     home: ホーム

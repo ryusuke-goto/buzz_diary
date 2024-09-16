@@ -3,7 +3,6 @@
     <thead>
       <tr>
         <th>
-          <%= t('missions.id') %>
         </th>
         <th>
           <%= t('missions.content') %>
@@ -19,7 +18,7 @@
     <tbody>
       <% challenge_missions.each do |mission| %>
         <tr>
-          <td><%= mission.id %></td>
+          <th><%= mission.id %></th>
           <td><%= mission.title %></td>
           <td><%= mission.description %></td>
           <td>
