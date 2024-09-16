@@ -29,7 +29,7 @@
       </div>
       <div>
         <h3 class="small"><%= comment.user.name %></h3>
-        <% if current_user.own?(comment) %>
+        <% if user_signed_in? && current_user.own?(comment) %>
           <div class="action mx-3">
             <%= link_to comment_path(comment.id), class: "delete-comment-link", data:{turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
               <i class="fa-regular fa-trash-can"></i>

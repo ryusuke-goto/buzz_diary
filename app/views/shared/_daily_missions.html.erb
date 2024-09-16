@@ -3,7 +3,6 @@
     <thead>
       <tr>
         <th>
-          <%= t('missions.id') %>
         </th>
         <th>
           <%= t('missions.content') %>
@@ -16,12 +15,12 @@
     <tbody>
       <% daily_missions.each do |mission| %>
         <tr>
-          <td><%= mission.id %></td>
+          <th><%= mission.id %></th>
           <td><%= mission.title %></td>
           <td>
             <% if daily_status[mission.id]&.status %>
               <div class="font-bold text-green-500">
-                <%= t('missions.true') %>!
+                <%= t('missions.true') %>
               </div>
             <% else %>
               <div class="font-bold">
