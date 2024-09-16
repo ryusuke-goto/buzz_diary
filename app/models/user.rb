@@ -199,15 +199,19 @@ class User < ApplicationRecord
     return unless access_token # access_tokenがなければリクエストを送らない
 
     uri = URI.parse("https://api.line.me/friendship/v1/status")
-
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = uri.scheme === "https"
     request = Net::HTTP::Get.new(uri)
-    request["Authorization"] = "Bearer #{access_token}"
+    headers = { "Authorization" => "Bearer #{access_token}" }
+    response = http.get(uri.path, headers)
+    logger.info "message::::access_token: #{access_token}"
+    response.code # status code
+    response.body # response body
+    logger.info "message::::response.code: #{response.code}"
+    logger.info "message::::response.body: #{response.body}"
 
-    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-      http.request(request)
-    end
-
-    JSON.parse(response.body)["friendFlag"]
+    friendFlag = JSON.parse(response.body)
+    friendFlag["friendFlag"]
   rescue StandardError => e
     Rails.logger.error "Failed to get friendship status: #{e.message}"
     nil

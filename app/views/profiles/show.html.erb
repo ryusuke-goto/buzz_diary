@@ -1,62 +1,29 @@
-<style>
-  .scale-button {
-    transform: scale(2); /* 2倍に拡大 */
-    transform-origin: center; /* 拡大縮小の中心をボタンの中央に設定 */
-  }
-</style>
-<div class="flex items-center justify-center">
-  <div>
-    <%= render partial: "shared/avatar", locals:{user: current_user} %>
-    <div id="mypage_name">
-      名前
-    </div>
-    <div id="user_name">
-      <%= current_user.name %>
-    </div>
-    <div id="mypage_number_of_consecutive_days">
-      日記の連続投稿日数(作成日時を参照)
-    </div>
-    <div id="number_of_consecutive_days">
-      <%= @past_count %>
-      日
-    </div>
-    <div id="mypage_comments_count">
-      コメント投稿数
-    </div>
-    <div id="comments_count">
-      <%= @comments_count %>
-      個
-    </div>
-    <div id="mypage_likes_count">
-      いいねした日記の数
-    </div>
-    <div id="likes_count">
-      <%= @likes_count %>
-      個
-    </div>
-    <div id="mypage_remind">
-      LINE通知の設定
-    </div>
-    <% if @friendship %>
-      <div id="remind" class="form-control">
-        <% if current_user.remind %>
-          <%= button_to update_remind_profile_path, class: "btn btn-success", method: :patch do %>
-            LINE通知はONです
-          <% end %>
-        <% else %>
-          <%= button_to update_remind_profile_path, class: "btn btn-neutral", method: :patch do %>
-            LINE通知はOFFです
-          <% end %>
-        <% end %>
-      </div>
-    <% else %>
-      <div id="mypage_qr">
-        まずはバズダイアリー公式アカウントを友だち追加！
-      </div>
-      <div id="qr" class="">
-        <div class="line-it-button" data-lang="ja" data-type="friend" data-env="REAL" data-count="true"  data-lineId="@2006035762" style="display: none;"></div>
-        <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-      </div>
-    <% end %>
+<div class="flex flex-col items-center justify-center">
+  <div class="text-2xl font-bold py-3">
+    マイページ
   </div>
+
+  <%= render partial: "shared/avatar", locals: { user: current_user } %>
+
+  <%= render partial: "shared/info_row", locals: { label: "名前", value: current_user.name } %>
+  <%= render partial: "shared/info_row", locals: { label: "日記の連続投稿日数(作成日時を参照)", value: "#{@past_count} 日" } %>
+  <%= render partial: "shared/info_row", locals: { label: "コメント投稿数", value: "#{@comments_count} 個" } %>
+  <%= render partial: "shared/info_row", locals: { label: "いいねした日記の数", value: "#{@likes_count} 個" } %>
+
+  <div class="text-xl py-3">LINE通知の設定</div>
+
+  <% if @friendship %>
+    <div id="remind" class="form-control">
+      <%= button_to update_remind_profile_path, class: current_user.remind ? "btn btn-success" : "btn btn-neutral", method: :patch do %>
+        LINE通知は<%= current_user.remind ? "ON" : "OFF" %>です
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center">
+      まずはバズダイアリー公式アカウントを友だち追加！
+    </div>
+    <div class="flex items-center justify-center">
+      <%= render partial: "line_friend" %>
+    </div>
+  <% end %>
 </div>

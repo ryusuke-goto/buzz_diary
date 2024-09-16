@@ -51,30 +51,34 @@
     <% else %>
       <div class="flex flex-col min-h-screen bg-white">
     <% end %>
-      <header class="flex justify-between bg-wakatake h-15 text-white z-50">  
-        <% if user_signed_in? %>
-          <%= render partial: "shared/header" %>
-        <% else %>
-          <%= render partial: "shared/before_login_header" %>
-        <% end %>
+      <header class="fixed w-full bg-wakatake h-15 text-white z-50"> 
+        <div class="flex justify-between">
+          <% if user_signed_in? %>
+            <%= render partial: "shared/header" %>
+          <% else %>
+            <%= render partial: "shared/before_login_header" %>
+          <% end %>
+        </div>
       </header>
 
-      <% flash.each do |message_type, message| %>
-        <div class="flex justify-center alert alert-<%= message_type %>">
-          <%= message %>
-        </div>
-      <% end %>
-      <%= yield %>
+      <div class="pt-20" >
+        <% flash.each do |message_type, message| %>
+          <div class="flex justify-center alert alert-<%= message_type %>">
+            <%= message %>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
       <div class="pb-44">
         <%= render partial: "shared/footer" %>
       </div>
     </div>
     <% if current_user && params[:controller] == 'diaries' && params[:action] == 'index' %>
-      <div class="fixed bottom-24 left-4">
+      <div class="fixed bottom-24 left-20">
         <%= render partial: "diaries/like_everything", locals: {user: current_user} %>
       </div>
     <% end %>
-      <nav class="fixed h-20 bottom-0 w-full bg-wakatake text-white">
+      <nav class="fixed h-20 bottom-0 w-full px-3 bg-wakatake text-white">
         <%= render "shared/nav" %>
       </nav>
   </body>

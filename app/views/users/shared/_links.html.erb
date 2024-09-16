@@ -1,8 +1,10 @@
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to omniauth_authorize_path(resource_name, provider), class: "flex btn btn-lg line-color text-white", data: { turbo: false } do %>
-      <%= image_tag "line_btn_base.png", width: "60", height:"60" %>
-      <%= t("sessions.line-login") %>
+<div class="w-full flex items-center justify-center">
+  <% if devise_mapping.omniauthable? %>
+    <% resource_class.omniauth_providers.each do |provider| %>
+      <%= button_to omniauth_authorize_path(resource_name, provider), class: "flex btn btn-lg line-color text-white", data: { turbo: false } do %>
+        <%= image_tag "line_btn_base.png", width: "60", height:"60" %>
+        <%= t("sessions.line-login") %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>
