@@ -68,23 +68,27 @@ class User < ApplicationRecord
 
   def number_of_consecutive_days
     past_count = 0
+    consecutive_count = 0
     my_diaries = diaries.order(created_at: :desc)
     my_diaries.each do |diary|
       logger.info "message::::diary: #{diary.inspect}"
       if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day,
                                    (Time.zone.today - past_count.day).end_of_day)
         past_count += 1
+        consecutive_count += 1
       elsif diary.created_at.between?((Time.zone.today - (past_count - 1).day).beginning_of_day,
                                       (Time.zone.today - (past_count - 1).day).end_of_day)
         logger.info 'message::::Same created_at and different diary_date...not count up'
       elsif diary.created_at.between?((Time.zone.today - (past_count + 1).day).beginning_of_day,
                 (Time.zone.today - (past_count + 1).day).end_of_day)
         logger.info 'message::::created_at Yesterdays diary was there. OK'
-        past_count += 1
+        past_count += 2
+        consecutive_count += 1
       elsif diary.created_at.between?((Time.zone.today - (past_count + 2).day).beginning_of_day,
                 (Time.zone.today - (past_count + 2).day).end_of_day)
         logger.info 'message::::created_at 2days ago diary was there. OK'
-        past_count += 1
+        past_count += 4
+        consecutive_count += 1
       else
         logger.info 'message::::each loop break'
         break
@@ -99,7 +103,8 @@ class User < ApplicationRecord
     }
 
     logger.info "message::::past_count: #{past_count}"
-    mission_milestones_check(milestones, past_count)
+    logger.info "message::::past_count: #{past_count}"
+    mission_milestones_check(milestones, consecutive_count)
   end
 
   def like(diary)
