@@ -14,7 +14,6 @@ class MissionsController < ApplicationController
     when 'challenge'
       @missions = current_user.my_challenges.order(id: :asc)
       @mission_status = current_user.user_challenges.index_by(&:challenge_mission_id)
-      # @missions.each { |mission| prepare_meta_tags(mission) } # 各ミッションごとにメタタグ生成
       render partial: 'shared/challenge_missions',
              locals: { challenge_missions: @missions, challenge_status: @mission_status }
     else
