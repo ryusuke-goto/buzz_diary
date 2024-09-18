@@ -5,43 +5,64 @@
 <%= month_calendar(events: @diaries) do |date, diaries| %>
   <%= date.day %>
   <% diaries.each do |diary| %>
-    <div class="relative">
-      <div id="like-<%=diary.id%>" class="flex right-0.5">
-        <% case diary.user.like_css %>
-        <% when 0 %>
-          <i class="fa-solid fa-heart text-5xl pt-2 text-green-500"></i>
-        <% when 1 %>
-          <i class="fa-solid fa-heart text-5xl pt-2 text-yellow-400"></i>
-        <% when 2 %>
-          <i class="fa-solid fa-heart text-5xl pt-2 text-sky-500"></i>
-        <% when 3 %>
-          <i class="fa-solid fa-heart text-5xl pt-2 text-rose-600"></i>
-        <% when 4 %>
-          <i class="fa-solid fa-heart text-5xl pt-2 text-fuchsia-700"></i>
-        <% when 5 %>
-          <i class="fa-solid fa-heart text-5xl pt-2 text-teal-300"></i>
-        <% end %>
-      </div>
-      <div id="count-<%= diary.id %>">
-        <% if diary.likes_count >= 0 && diary.likes_count < 10 %>
-          <div class="absolute text-black top-5 left-5">
-        <% elsif diary.likes_count >= 10 && diary.likes_count < 100 %>
-          <div class="absolute text-black top-5 left-4">
-        <% elsif diary.likes_count >= 100 && diary.likes_count < 1000 %>
-          <div class="absolute text-black top-5 left-3">
-        <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
-          <div class="absolute text-black top-5 left-2">
-        <% else %>
-          <div class="absolute text-black top-5 left-1">
-        <% end %>
-          <h2><%= diary.likes_count || 0 %></h2>
+    <%= link_to diary_path(diary.id) do %>
+      <div class="relative">
+        <div id="like-<%=diary.id%>" class="flex right-0.5">
+          <% case diary.user.like_css %>
+          <% when 0 %>
+            <% if diary.diary_date == diary.created_at.to_date %>
+              <i class="fa-solid fa-heart text-5xl pt-2 text-green-500"></i>
+            <% else %>
+              <i class="fa-regular fa-heart text-5xl pt-2 text-green-500"></i>
+            <% end %>
+          <% when 1 %>
+            <% if diary.diary_date == diary.created_at.to_date %>
+              <i class="fa-solid fa-heart text-5xl pt-2 text-yellow-400"></i>
+            <% else %>
+              <i class="fa-regular fa-heart text-5xl pt-2 text-yellow-400"></i>
+            <% end %>
+          <% when 2 %>
+            <% if diary.diary_date == diary.created_at.to_date %>
+              <i class="fa-solid fa-heart text-5xl pt-2 text-sky-500"></i>
+            <% else %>
+              <i class="fa-regular fa-heart text-5xl pt-2 text-sky-500"></i>
+            <% end %>
+          <% when 3 %>
+            <% if diary.diary_date == diary.created_at.to_date %>
+              <i class="fa-solid fa-heart text-5xl pt-2 text-rose-600"></i>
+            <% else %>
+              <i class="fa-regular fa-heart text-5xl pt-2 text-rose-600"></i>
+            <% end %>
+          <% when 4 %>
+            <% if diary.diary_date == diary.created_at.to_date %>
+              <i class="fa-solid fa-heart text-5xl pt-2 text-fuchsia-700"></i>
+            <% else %>
+              <i class="fa-regular fa-heart text-5xl pt-2 text-fuchsia-700"></i>
+            <% end %>
+          <% when 5 %>
+            <% if diary.diary_date == diary.created_at.to_date %>
+              <i class="fa-solid fa-heart text-5xl pt-2 text-teal-300"></i>
+            <% else %>
+              <i class="fa-regular fa-heart text-5xl pt-2 text-teal-300"></i>
+            <% end %>
+          <% end %>
+        </div>
+        <div id="count-<%= diary.id %>">
+          <% if diary.likes_count >= 0 && diary.likes_count < 10 %>
+            <div class="absolute text-black top-5 left-5">
+          <% elsif diary.likes_count >= 10 && diary.likes_count < 100 %>
+            <div class="absolute text-black top-5 left-4">
+          <% elsif diary.likes_count >= 100 && diary.likes_count < 1000 %>
+            <div class="absolute text-black top-5 left-3">
+          <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
+            <div class="absolute text-black top-5 left-2">
+          <% else %>
+            <div class="absolute text-black top-5 left-1">
+          <% end %>
+            <h2><%= diary.likes_count || 0 %></h2>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 <% end %>
-<table class="flex items-center justify-center">
-  <tbody>
-    <%= render partial: "memory_diary", collection: @diaries %>
-  </tbody>
-</table>

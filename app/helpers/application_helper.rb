@@ -14,10 +14,10 @@ module ApplicationHelper
   def default_meta_tags
     {
       site: 'バズダイアリー',
-      title: 'チャレンジミッション達成',
+      title: 'バズダイアリー',
       reverse: true,
       separator: '|',   #Webサイト名とページタイトルを区切るために使用されるテキスト
-      description: 'チャレンジミッションを達成したことを共有します',
+      description: '自分の日記をバズらせませんか？',
       keywords: 'バズダイアリー',   #キーワードを「,」区切りで設定する
       canonical: request.original_url,   #優先するurlを指定する
       noindex: ! Rails.env.production?,
@@ -27,8 +27,8 @@ module ApplicationHelper
       ],
       og: {
         site_name: 'バズダイアリー',
-        title: 'チャレンジミッション達成',
-        description: 'チャレンジミッションを達成したことを共有します', 
+        title: 'バズダイアリー',
+        description: '自分の日記をバズらせませんか？', 
         type: 'website',
         url: request.original_url,
         image: image_url('ogp.png'),

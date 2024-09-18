@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
       elsif diary.created_at.between?((Time.zone.today - (past_count + 1).day).beginning_of_day,
                 (Time.zone.today - (past_count + 1).day).end_of_day)
         logger.info 'message::::created_at Yesterdays diary was there. OK'
-        past_count += 2
+        past_count += 3
         consecutive_count += 1
       elsif diary.created_at.between?((Time.zone.today - (past_count + 2).day).beginning_of_day,
                 (Time.zone.today - (past_count + 2).day).end_of_day)
