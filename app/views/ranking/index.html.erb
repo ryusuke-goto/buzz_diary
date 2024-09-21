@@ -1,7 +1,9 @@
-<div class="z-40">
+<div class="relative flex items-center justify-center pb-96">
+  <div class="absolute top-1">
   <div class="text-2xl font-bold flex items-center justify-center">
     <h1><%= t("title.ranking") %></h1>
   </div>
+
   <% if @max_liked_diaries.present? %>
     <div id="diaries">
       <div class="text-2xl flex items-center justify-center">
@@ -28,5 +30,6 @@
       <%= t("diaries.no_result") %>
     </div>
   <% end %>
+  </div>
+  <div id="particles-js"></div>
 </div>
-<div id="particles-js"></div>
