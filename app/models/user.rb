@@ -182,18 +182,34 @@ class User < ApplicationRecord
     true
   end
 
-  def update_css(mission)
-    logger.debug 'message::::update_reward executed'
-    logger.debug "message::::mission is #{mission.inspect}"
+  # def update_css(mission)
+  #   logger.debug 'message::::update_reward executed'
+  #   logger.debug "message::::mission is #{mission.inspect}"
+
+  #   if mission.like_css.present?
+  #     increment!(:like_css, mission.like_css)
+  #     logger.debug 'message::::like_css update'
+  #   elsif mission.diary_css.present?
+  #     increment!(:diary_css, mission.diary_css)
+  #     logger.debug 'message::::diary_css update'
+  #   elsif mission.theme_css.present?
+  #     increment!(:theme_css, mission.theme_css)
+  #     logger.debug 'message::::theme_css update'
+  #   end
+  # end
+
+    def update_css(mission)
+      logger.debug 'message::::update_reward executed'
+      logger.debug "message::::mission is #{mission.inspect}"
 
     if mission.like_css.present?
-      increment!(:like_css, mission.like_css)
+      update!(like_css: mission.like_css)
       logger.debug 'message::::like_css update'
     elsif mission.diary_css.present?
-      increment!(:diary_css, mission.diary_css)
+      update!(diary_css: mission.diary_css)
       logger.debug 'message::::diary_css update'
     elsif mission.theme_css.present?
-      increment!(:theme_css, mission.theme_css)
+      update!(theme_css: mission.theme_css)
       logger.debug 'message::::theme_css update'
     end
   end
