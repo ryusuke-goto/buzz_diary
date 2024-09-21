@@ -95,11 +95,11 @@ class User < ApplicationRecord
       end
     end
     milestones = {
-      30 => '30日間連続',
-      21 => '21日間連続',
-      14 => '14日間連続',
-      7 => '7日間連続',
-      3 => '3日間連続'
+      30 => '30日間連続で日記を投稿',
+      21 => '21日間連続で日記を投稿',
+      14 => '14日間連続で日記を投稿',
+      7 => '7日間連続で日記を投稿',
+      3 => '3日間連続で日記を投稿'
     }
 
     logger.info "message::::past_count: #{past_count}"
@@ -129,9 +129,9 @@ class User < ApplicationRecord
 
   def number_of_comments
     milestones = {
-      25 => '25個のコメントを投稿',
+      40 => '40個のコメントを投稿',
+      30 => '30個のコメントを投稿',
       20 => '20個のコメントを投稿',
-      15 => '15個のコメントを投稿',
       10 => '10個のコメントを投稿',
       5 => '5個のコメントを投稿'
     }
@@ -182,22 +182,6 @@ class User < ApplicationRecord
     true
   end
 
-  # def update_css(mission)
-  #   logger.debug 'message::::update_reward executed'
-  #   logger.debug "message::::mission is #{mission.inspect}"
-
-  #   if mission.like_css.present?
-  #     increment!(:like_css, mission.like_css)
-  #     logger.debug 'message::::like_css update'
-  #   elsif mission.diary_css.present?
-  #     increment!(:diary_css, mission.diary_css)
-  #     logger.debug 'message::::diary_css update'
-  #   elsif mission.theme_css.present?
-  #     increment!(:theme_css, mission.theme_css)
-  #     logger.debug 'message::::theme_css update'
-  #   end
-  # end
-
     def update_css(mission)
       logger.debug 'message::::update_reward executed'
       logger.debug "message::::mission is #{mission.inspect}"
@@ -233,7 +217,7 @@ class User < ApplicationRecord
     request = Net::HTTP::Get.new(uri)
     headers = { "Authorization" => "Bearer #{access_token}" }
     response = http.get(uri.path, headers)
-    logger.info "message::::access_token: #{access_token}"
+    # logger.info "message::::access_token: #{access_token}"
     response.code # status code
     response.body # response body
     logger.info "message::::response.code: #{response.code}"
