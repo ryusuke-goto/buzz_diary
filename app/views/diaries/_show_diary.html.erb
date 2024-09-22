@@ -1,5 +1,5 @@
 <article class="card my-9">
-  <div class="chat chat-start w-auto">
+  <div class="chat chat-start w-72">
     <div class="avatar pt-1 relative">
       <div class="w-10 h-10 rounded-full absolute top-2 left-1">
         <% if diary.user.image.present? %>
@@ -26,16 +26,21 @@
     <div class="chat-bubble bg-white text-black">
       <div class="card-body pt-2">
         <div class="flex">
-          <div class="card-diary-date">
-            <%=diary.diary_date %><%= t("diaries.diary_date") %>
+          <div class="card-diary-date text-xs">
+            <%=diary.diary_date %><br>
+            <%= t("diaries.diary_date") %>
           </div>
         </div>
-        <div class="card-title">
+        <div class="card-title text-base">
           <%= diary.title %>
         </div>
-        <div class="card-text">
+        <div class="card-text text-base">
           <%= diary.body %>
         </div>
+        <div class="text-xs text-gray-400">
+        作成日時：<br>
+        <%= l diary.created_at, format: :short %>
+      </div>
     </div>
   </div>
   <% if diary.diary_image.present? %>
@@ -46,7 +51,8 @@
     </div>
   <% end %>
 </article>
-<div class="other pb-12">
+
+<div class="relative mb-12">
   <% if current_user && current_user.own?(diary) %>
     <div class="action">
       <%= link_to edit_diary_path(diary.id), class: "edit-comment-link" do %>
@@ -56,53 +62,48 @@
         <i class="fa-regular fa-trash-can"></i>
       <% end %>
     </div>
-  <% end %>  
-  <div class="relative">
-    <div class="text-xs">
-      <%= l diary.created_at, format: :short %>
-    </div>
-    <div id="like-<%=diary.id%>">
-      <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
-        <% if diary.likes_count >= 0 && diary.likes_count < 500 %>
-          <div class="btn0">
-        <% elsif diary.likes_count >= 500 && diary.likes_count < 1000 %>
-          <div class="btn1">
-        <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
-          <div class="btn2">
-        <% else %>
-          <div class="btn3">
-        <% end %>
-          <% case diary.user.like_css %>
-          <% when 0 %>
-            <i class="fa-solid fa-heart text-5xl pt-2 text-green-500"></i>
-          <% when 1 %>
-            <i class="fa-solid fa-heart text-5xl pt-2 text-yellow-400"></i>
-          <% when 2 %>
-            <i class="fa-solid fa-heart text-5xl pt-2 text-sky-500"></i>
-          <% when 3 %>
-            <i class="fa-solid fa-heart text-5xl pt-2 text-rose-600"></i>
-          <% when 4 %>
-            <i class="fa-solid fa-heart text-5xl pt-2 text-fuchsia-700"></i>
-          <% when 5 %>
-            <i class="fa-solid fa-heart text-5xl pt-2 text-teal-300"></i>
-          <% end %>
-        </div>
-        <div id="count-<%= diary.id %>">
-          <% if diary.likes_count >= 0 && diary.likes_count < 10 %>
-            <div class="absolute text-black top-8 left-5">
-          <% elsif diary.likes_count >= 10 && diary.likes_count < 100 %>
-            <div class="absolute text-black top-8 left-4">
-          <% elsif diary.likes_count >= 100 && diary.likes_count < 1000 %>
-            <div class="absolute text-black top-8 left-2">
-          <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
-            <div class="absolute text-black top-8 left-1">
-          <% else %>
-            <div class="absolute text-black top-8 left-0">
-          <% end %>
-            <h2><%= diary.likes_count || 0 %></h2>
-          </div>
-        </div>
+  <% end %>
+  <div id="like-<%=diary.id%>">
+    <%= button_to likes_path(diary_id: diary.id), id: "btn_animation", method: { turbo_method: :post } do %>
+      <% if diary.likes_count >= 0 && diary.likes_count < 500 %>
+        <div class="btn0">
+      <% elsif diary.likes_count >= 500 && diary.likes_count < 1000 %>
+        <div class="btn1">
+      <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
+        <div class="btn2">
+      <% else %>
+        <div class="btn3">
       <% end %>
-    </div>
+        <% case diary.user.like_css %>
+        <% when 0 %>
+          <i class="fa-solid fa-heart text-5xl pt-2 text-green-500"></i>
+        <% when 1 %>
+          <i class="fa-solid fa-heart text-5xl pt-2 text-yellow-400"></i>
+        <% when 2 %>
+          <i class="fa-solid fa-heart text-5xl pt-2 text-sky-500"></i>
+        <% when 3 %>
+          <i class="fa-solid fa-heart text-5xl pt-2 text-rose-600"></i>
+        <% when 4 %>
+          <i class="fa-solid fa-heart text-5xl pt-2 text-fuchsia-700"></i>
+        <% when 5 %>
+          <i class="fa-solid fa-heart text-5xl pt-2 text-teal-300"></i>
+        <% end %>
+      </div>
+      <div id="count-<%= diary.id %>">
+        <% if diary.likes_count >= 0 && diary.likes_count < 10 %>
+          <div class="absolute text-black top-8 left-5">
+        <% elsif diary.likes_count >= 10 && diary.likes_count < 100 %>
+          <div class="absolute text-black top-8 left-4">
+        <% elsif diary.likes_count >= 100 && diary.likes_count < 1000 %>
+          <div class="absolute text-black top-8 left-2">
+        <% elsif diary.likes_count >= 1000 && diary.likes_count < 10000 %>
+          <div class="absolute text-black top-8 left-1">
+        <% else %>
+          <div class="absolute text-black top-8 left-0">
+        <% end %>
+          <h2><%= diary.likes_count || 0 %></h2>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
