@@ -24,11 +24,11 @@
   </div>
   <div class="card-body pt-2 pl-2 pr-0">
     <div class="flex flex-row justify-between">  
-      <div class="w-32 pt-2">
-        <div class="user-name text-black font-bold">
-          <%= diary.user.name %>
-        </div>
-        <%= link_to diary_path(diary.id) do %>
+      <%= link_to diary_path(diary.id) do %>
+        <div class="w-32 pt-2">
+          <div class="user-name text-black font-bold">
+            <%= diary.user.name %>
+          </div>
           <div class="card-exist-image mx-2 pt-0">
             <% if diary.diary_image.present? %>
               <%= t("diaries.with_image") %>
@@ -37,8 +37,8 @@
           <div class="card-title text-xs">
             <%= diary.title %>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
       <div class="relative">
         <div class="text-xs">
           <%= l diary.created_at, format: :short %>
