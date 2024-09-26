@@ -24,7 +24,7 @@ class MissionsController < ApplicationController
   private
 
   def prepare_meta_tags(mission)
-## このimage_urlにMiniMagickで設定したOGPの生成した合成画像を代入する
+    ## このimage_urlにMiniMagickで設定したOGPの生成した合成画像を代入する
     image_url = "#{request.base_url}/images/ogp.png?text=#{CGI.escape(mission.title)}"
     set_meta_tags og: {
                     site_name: 'バズダイアリー',

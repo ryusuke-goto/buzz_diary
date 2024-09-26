@@ -1,6 +1,6 @@
 <div id="diary-id-<%= diary.id %>" class="card flex flex-row">
-  <div class="avatar pt-1 relative">
-    <div class="w-12 h-12 rounded-full absolute top-3 left-2">
+  <div class="avatar pt-5 relative">
+    <div class="w-12 h-12 rounded-full absolute top-7 left-2">
       <% if diary.user.image.present? %>
         <%= image_tag diary.user.image %>
       <% else %>
@@ -25,7 +25,7 @@
   <div class="card-body pt-2 pl-2 pr-0">
     <div class="flex flex-row justify-between">  
       <%= link_to diary_path(diary.id) do %>
-        <div class="w-32 pt-2">
+        <div class="w-32 pt-6">
           <div class="user-name text-black font-bold">
             <%= diary.user.name %>
           </div>
@@ -39,6 +39,13 @@
           </div>
         </div>
       <% end %>
+      <div class="text-gray-600 pt-8">
+        <% app_url = "https://praise-diary.onrender.com/diaries" %>
+        <% twitter_share_url = "https://twitter.com/share?url=#{app_url}&text=%0aバズダイアリーで#{diary.likes_count}いいね ]%0a獲得!%0a%0aバズってます！%0a%0a" %>
+        <%= link_to twitter_share_url, target: '_blank', data: { toggle: "tooltip", placement: "bottom" }, title: "Xで自慢しちゃおう!" do %>
+          <i class="fa-brands fa-x-twitter fa-2xl"></i>
+        <% end %>
+      </div>
       <div class="relative">
         <div class="text-xs">
           <%= l diary.created_at, format: :short %>

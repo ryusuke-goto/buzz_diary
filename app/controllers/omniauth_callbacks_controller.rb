@@ -14,7 +14,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if @profile.new_record?
         email = @omniauth['info']['email'] || "#{@omniauth['uid']}-#{@omniauth['provider']}@example.com"
         @profile.assign_attributes(
-          email: email,
+          email:,
           name: @omniauth['info']['name'],
           image: @omniauth['info']['image'],
           password: Devise.friendly_token[0, 20],

@@ -1,7 +1,9 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
-  test "should get ogp" do
+  test 'should get ogp' do
     get images_ogp_url
     assert_response :success
   end

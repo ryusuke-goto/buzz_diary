@@ -80,14 +80,22 @@ class User < ApplicationRecord
                                       (Time.zone.today - (past_count - 1).day).end_of_day)
         logger.info 'message::::Same created_at and different diary_date...not count up'
       elsif diary.created_at.between?((Time.zone.today - (past_count + 1).day).beginning_of_day,
-                (Time.zone.today - (past_count + 1).day).end_of_day)
+                                      (Time.zone.today - (past_count + 1).day).end_of_day)
         logger.info 'message::::created_at Yesterdays diary was there. OK'
-        past_count += 3
+        if past_count == 0
+          past_count += 2
+        else
+          past_count += 3
+        end
         consecutive_count += 1
       elsif diary.created_at.between?((Time.zone.today - (past_count + 2).day).beginning_of_day,
-                (Time.zone.today - (past_count + 2).day).end_of_day)
+                                      (Time.zone.today - (past_count + 2).day).end_of_day)
         logger.info 'message::::created_at 2days ago diary was there. OK'
-        past_count += 4
+        if past_count == 0
+          past_count += 3
+        else
+          past_count += 4
+        end
         consecutive_count += 1
       else
         logger.info 'message::::each loop break'
@@ -182,9 +190,9 @@ class User < ApplicationRecord
     true
   end
 
-    def update_css(mission)
-      logger.debug 'message::::update_reward executed'
-      logger.debug "message::::mission is #{mission.inspect}"
+  def update_css(mission)
+    logger.debug 'message::::update_reward executed'
+    logger.debug "message::::mission is #{mission.inspect}"
 
     if mission.like_css.present?
       update!(like_css: mission.like_css)
@@ -211,11 +219,11 @@ class User < ApplicationRecord
   def get_friendship_status
     return unless access_token # access_tokenがなければリクエストを送らない
 
-    uri = URI.parse("https://api.line.me/friendship/v1/status")
+    uri = URI.parse('https://api.line.me/friendship/v1/status')
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = uri.scheme === "https"
-    request = Net::HTTP::Get.new(uri)
-    headers = { "Authorization" => "Bearer #{access_token}" }
+    http.use_ssl = uri.scheme === 'https'
+    Net::HTTP::Get.new(uri)
+    headers = { 'Authorization' => "Bearer #{access_token}" }
     response = http.get(uri.path, headers)
     # logger.info "message::::access_token: #{access_token}"
     response.code # status code
@@ -224,7 +232,7 @@ class User < ApplicationRecord
     logger.info "message::::response.body: #{response.body}"
 
     friendFlag = JSON.parse(response.body)
-    friendFlag["friendFlag"]
+    friendFlag['friendFlag']
   rescue StandardError => e
     Rails.logger.error "Failed to get friendship status: #{e.message}"
     nil
