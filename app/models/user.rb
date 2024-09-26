@@ -82,12 +82,20 @@ class User < ApplicationRecord
       elsif diary.created_at.between?((Time.zone.today - (past_count + 1).day).beginning_of_day,
                                       (Time.zone.today - (past_count + 1).day).end_of_day)
         logger.info 'message::::created_at Yesterdays diary was there. OK'
-        past_count += 3
+        if past_count == 0
+          past_count += 2
+        else
+          past_count += 3
+        end
         consecutive_count += 1
       elsif diary.created_at.between?((Time.zone.today - (past_count + 2).day).beginning_of_day,
                                       (Time.zone.today - (past_count + 2).day).end_of_day)
         logger.info 'message::::created_at 2days ago diary was there. OK'
-        past_count += 4
+        if past_count == 0
+          past_count += 3
+        else
+          past_count += 4
+        end
         consecutive_count += 1
       else
         logger.info 'message::::each loop break'
