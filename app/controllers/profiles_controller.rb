@@ -29,11 +29,11 @@ class ProfilesController < ApplicationController
       logger.info "message::::diary: #{diary.inspect}"
       if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day,
                                    (Time.zone.today - past_count.day).end_of_day)
+        logger.info "message::Time_zone #{(Time.zone.today - past_count.day).beginning_of_day}"
         past_count += 1
         consecutive_count += 1
         logger.info 'message::count_up'
         logger.info "message::past_count #{past_count}"
-        logger.info "message::Time_zone #{(Time.zone.today - past_count.day).beginning_of_day}"
       elsif diary.created_at.between?((Time.zone.today - (past_count - 1).day).beginning_of_day,
                                       (Time.zone.today - (past_count - 1).day).end_of_day)
         logger.info 'message::::Same created_at and different diary_date...not count up'
@@ -43,18 +43,18 @@ class ProfilesController < ApplicationController
       elsif diary.created_at.between?((Time.zone.today - (past_count + 1).day).beginning_of_day,
                                       (Time.zone.today - (past_count + 1).day).end_of_day)
         logger.info 'message::::created_at Yesterdays diary was there. OK'
-        past_count += 3
+        logger.info "message::Time_zone #{(Time.zone.today - (past_count + 1).day).beginning_of_day}"
+        past_count += 2
         consecutive_count += 1
         logger.info "message::past_count #{past_count}"
-        logger.info "message::Time_zone #{(Time.zone.today - (past_count + 1).day).beginning_of_day}"
 
       elsif diary.created_at.between?((Time.zone.today - (past_count + 2).day).beginning_of_day,
                                       (Time.zone.today - (past_count + 2).day).end_of_day)
         logger.info 'message::::created_at 2days ago diary was there. OK'
-        past_count += 4
+        logger.info "message::Time_zone #{(Time.zone.today - (past_count + 2).day).beginning_of_day}"
+        past_count += 3
         consecutive_count += 1
         logger.info "message::past_count #{past_count}"
-        logger.info "message::Time_zone #{(Time.zone.today - (past_count + 2).day).beginning_of_day}"
       else
         logger.info 'message::::each loop break'
         break
