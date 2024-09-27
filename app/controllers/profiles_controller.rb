@@ -76,6 +76,7 @@ class ProfilesController < ApplicationController
         else
           past_count += 2
           logger.info 'message:: but different diary_date...not count up'
+        end
       else
         logger.info 'message::each loop break'
         break
