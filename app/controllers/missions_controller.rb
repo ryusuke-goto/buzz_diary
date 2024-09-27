@@ -20,25 +20,4 @@ class MissionsController < ApplicationController
       render plain: 'Invalid mission type', status: :bad_request
     end
   end
-
-  private
-
-  def prepare_meta_tags(mission)
-    ## このimage_urlにMiniMagickで設定したOGPの生成した合成画像を代入する
-    image_url = "#{request.base_url}/images/ogp.png?text=#{CGI.escape(mission.title)}"
-    set_meta_tags og: {
-                    site_name: 'バズダイアリー',
-                    title: mission.title,
-                    description: 'ユーザーが達成したチャレンジミッションの共有です',
-                    type: 'website',
-                    url: request.original_url,
-                    image: image_url,
-                    locale: 'ja-JP'
-                  },
-                  twitter: {
-                    card: 'summary_large_image',
-                    site: '@https://x.com/rgoto_51b',
-                    image: image_url
-                  }
-  end
 end
