@@ -26,26 +26,58 @@ class ProfilesController < ApplicationController
     consecutive_count = 0
     my_diaries = current_user.diaries.order(created_at: :desc)
     my_diaries.each do |diary|
-      logger.info "message::::diary: #{diary.inspect}"
+      logger.info "message::diary: #{diary.inspect}"
       if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day,
-                                   (Time.zone.today - past_count.day).end_of_day) && diary.created_at.to_date == diary.diary_date
-        past_count += 1
-        consecutive_count += 1
-      elsif diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day,
-                                      (Time.zone.today - past_count.day).end_of_day) && diary.created_at.to_date != diary.diary_date
-        logger.info 'message::::Same created_at and different diary_date...not count up & past_count up'
+                                   (Time.zone.today - past_count.day).end_of_day)
+# created_at.to_dateとdiary_dateが一致している日記なら連続投稿記録カウントを進める
+        if diary.created_at.to_date == diary.diary_date
+          past_count += 1
+          consecutive_count += 1
+          logger.info "message:: count up #{consecutive_count}"
+          logger.info "message:: count up past #{past_count}"
+        else
+          past_count += 1
+          logger.info 'message:: but different diary_date...not count up'
+        end
+# 一個前のレコードと同じcreated_at.to_dateかどうか検証。
+# 同じcreated_at.to_dateのレコードの中から、diary_dateが一致するものを探すため。
+      elsif diary.created_at.between?((Time.zone.today - (past_count - 1).day).beginning_of_day,
+                                      (Time.zone.today - (past_count - 1).day).end_of_day) && diary.created_at.to_date != diary.diary_date
+        logger.info 'message:: Same created_at as the previous record'
+        if diary.created_at.to_date == diary.diary_date
+          consecutive_count += 1
+          logger.info "message:: count up #{consecutive_count}"
+          logger.info "message:: count up past #{past_count}"
+        else
+          logger.info 'message:: but different diary_date...not count up & past_count'
+        end
+# 1日空いた後に日記があるかを確認。カウントが進むことを許容する。
       elsif diary.created_at.between?((Time.zone.today - (past_count + 1).day).beginning_of_day,
-                                      (Time.zone.today - (past_count + 1).day).end_of_day) && diary.created_at.to_date == diary.diary_date
-        logger.info 'message::::created_at Yesterdays diary was there. OK'
-        past_count += 2
-        consecutive_count += 1
+                                      (Time.zone.today - (past_count + 1).day).end_of_day)
+        logger.info 'message::created_at Yesterdays diary was there. OK'
+        if diary.created_at.to_date == diary.diary_date
+          past_count += 1
+          consecutive_count += 1
+          logger.info "message:: count up #{consecutive_count}"
+          logger.info "message:: count up past #{past_count}"
+        else
+          past_count += 1
+          logger.info 'message:: but different diary_date...not count up'
+        end
+# 2日空いた後に日記があるかを確認。カウントが進むことを許容する。
       elsif diary.created_at.between?((Time.zone.today - (past_count + 2).day).beginning_of_day,
                                       (Time.zone.today - (past_count + 2).day).end_of_day) && diary.created_at.to_date == diary.diary_date
-        logger.info 'message::::created_at 2days ago diary was there. OK'
-        past_count += 3
-        consecutive_count += 1
+        logger.info 'message::created_at 2days ago diary was there. OK'
+        if diary.created_at.to_date == diary.diary_date
+          past_count += 2
+          consecutive_count += 1
+          logger.info "message:: count up #{consecutive_count}"
+          logger.info "message:: count up past #{past_count}"
+        else
+          past_count += 2
+          logger.info 'message:: but different diary_date...not count up'
       else
-        logger.info 'message::::each loop break'
+        logger.info 'message::each loop break'
         break
       end
     end
