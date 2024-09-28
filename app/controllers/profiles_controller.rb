@@ -36,7 +36,6 @@ class ProfilesController < ApplicationController
           logger.info "message:: count up #{consecutive_count}"
           logger.info "message:: count up past #{past_count}"
         else
-          past_count += 1
           logger.info 'message:: but different diary_date...not count up'
         end
 # 最後にカウントアップ処理をしたレコードと同じcreated_at.to_dateかどうか検証。
@@ -61,7 +60,6 @@ class ProfilesController < ApplicationController
           logger.info "message:: count up #{consecutive_count}"
           logger.info "message:: count up past #{past_count}"
         else
-          past_count += 1
           logger.info 'message:: but different diary_date...not count up'
         end
 # 2日空いた後に日記があるかを確認。カウントが進むことを許容する。
@@ -74,7 +72,6 @@ class ProfilesController < ApplicationController
           logger.info "message:: count up #{consecutive_count}"
           logger.info "message:: count up past #{past_count}"
         else
-          past_count += 2
           logger.info 'message:: but different diary_date...not count up'
         end
       else
