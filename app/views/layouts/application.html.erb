@@ -78,12 +78,12 @@
         <% end %>
         <%= yield %>
       </div>
-      <div class="pb-60 bg-white">
+      <div class="pb-24">
         <%= render partial: "shared/footer" %>
       </div>
     </div>
     <% if current_user && params[:controller] == 'diaries' && params[:action] == 'index' %>
-      <div class="fixed bottom-24 left-20">
+      <div class="fixed bottom-40 left-20">
         <%= render partial: "diaries/like_everything", locals: {user: current_user} %>
       </div>
     <% end %>
