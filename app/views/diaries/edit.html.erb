@@ -1,13 +1,12 @@
 <% content_for(:title, t("title.edit_diary")) %>
-  <div class="row">
-    <div class="flex items-center justify-center">
-      <h1><%= t("title.edit_diary") %></h1>
-    </div>
-    <div class="flex items-center justify-center">
-      <%= render partial: "shared/error_messages", locals:{object: @diary} %>
-    </div>
-    <div class="flex items-center justify-center mx-5">
-      <%= render partial: "form", locals:{button: "更新"} %>
-    </div>
+<div class="row">
+  <div class="flex items-center justify-center">
+    <h1><%= t("title.edit_diary") %></h1>
+  </div>
+  <div class="flex items-center justify-center">
+    <%= render partial: "shared/error_messages", locals:{object: @diary} %>
+  </div>
+  <div class="flex items-center justify-center mx-5">
+    <%= render partial: "form", locals:{button: "更新"} %>
   </div>
 </div>
