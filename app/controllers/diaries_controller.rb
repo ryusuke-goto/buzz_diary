@@ -69,7 +69,8 @@ class DiariesController < ApplicationController
   end
 
   def number_of_consecutive_days_check
-    result = current_user.number_of_consecutive_days
+    consecutive = current_user.consecutive_days
+    result = current_user.number_of_consecutive_days(consecutive)
     return unless result[:process]
 
     flash[:challenge_missions_update] =
