@@ -66,45 +66,70 @@ class User < ApplicationRecord
     object.user_id == id
   end
 
-  def number_of_consecutive_days
+  def consecutive_days
     past_count = 0
     consecutive_count = 0
     my_diaries = diaries.order(created_at: :desc)
     my_diaries.each do |diary|
-      logger.info "message::::diary: #{diary.inspect}"
+      logger.info "message::diary: #{diary.inspect}"
       if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day,
                                    (Time.zone.today - past_count.day).end_of_day)
-        past_count += 1
-        consecutive_count += 1
-        logger.info 'message::count_up'
+# created_at.to_dateとdiary_dateが一致している日記なら連続投稿記録カウントを進める
+        if diary.created_at.to_date == diary.diary_date
+          past_count += 1
+          consecutive_count += 1
+          logger.info "message:: count up #{consecutive_count}"
+          logger.info "message:: count up past #{past_count}"
+        else
+          logger.info 'message:: but different diary_date...not count up'
+        end
+# 最後にカウントアップ処理をしたレコードと同じcreated_at.to_dateかどうか検証。
+# 同じcreated_at.to_dateのレコードの中から、diary_dateが一致するものを探すため。
       elsif diary.created_at.between?((Time.zone.today - (past_count - 1).day).beginning_of_day,
-                                      (Time.zone.today - (past_count - 1).day).end_of_day)
-        logger.info 'message::::Same created_at and different diary_date...not count up'
+                                      (Time.zone.today - (past_count - 1).day).end_of_day) && diary.created_at.to_date != diary.diary_date
+        logger.info 'message:: Same created_at as the previous record'
+        if diary.created_at.to_date == diary.diary_date
+          consecutive_count += 1
+          logger.info "message:: count up #{consecutive_count}"
+          logger.info "message:: count up past #{past_count}"
+        else
+          logger.info 'message:: but different diary_date...not count up & past_count'
+        end
+# 1日空いた後に日記があるかを確認。カウントが進むことを許容する。
       elsif diary.created_at.between?((Time.zone.today - (past_count + 1).day).beginning_of_day,
                                       (Time.zone.today - (past_count + 1).day).end_of_day)
-        logger.info 'message::::created_at Yesterdays diary was there. OK'
-        if past_count == 0
+        logger.info 'message::A diary existed with 1 day skipping.. OK'
+        if diary.created_at.to_date == diary.diary_date
           past_count += 2
+          consecutive_count += 1
+          logger.info "message:: count up #{consecutive_count}"
+          logger.info "message:: count up past #{past_count}"
         else
-          past_count += 3
+          logger.info 'message:: but different diary_date...not count up'
         end
-        consecutive_count += 1
-        logger.info 'message::count_up'
+# 2日空いた後に日記があるかを確認。カウントが進むことを許容する。
       elsif diary.created_at.between?((Time.zone.today - (past_count + 2).day).beginning_of_day,
-                                      (Time.zone.today - (past_count + 2).day).end_of_day)
-        logger.info 'message::::created_at 2days ago diary was there. OK'
-        if past_count == 0
+                                      (Time.zone.today - (past_count + 2).day).end_of_day) && diary.created_at.to_date == diary.diary_date
+        logger.info 'message::A diary existed with 2 day skipping. OK'
+        if diary.created_at.to_date == diary.diary_date
           past_count += 3
+          consecutive_count += 1
+          logger.info "message:: count up #{consecutive_count}"
+          logger.info "message:: count up past #{past_count}"
         else
-          past_count += 4
+          logger.info 'message:: but different diary_date...not count up'
         end
-        consecutive_count += 1
-        logger.info 'message::count_up'
       else
-        logger.info 'message::::each loop break'
+        logger.info 'message::each loop break'
         break
       end
     end
+    logger.info "message::::past_count: #{past_count}"
+    logger.info "message::::consecutive_count: #{consecutive_count}"
+    consecutive_count
+  end
+
+  def number_of_consecutive_days(consecutive_count)
     milestones = {
       30 => '30日間連続で日記を投稿',
       21 => '21日間連続で日記を投稿',
@@ -112,9 +137,6 @@ class User < ApplicationRecord
       7 => '7日間連続で日記を投稿',
       3 => '3日間連続で日記を投稿'
     }
-
-    logger.info "message::::past_count: #{past_count}"
-    logger.info "message::::past_count: #{past_count}"
     mission_milestones_check(milestones, consecutive_count)
   end
 
