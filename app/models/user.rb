@@ -74,7 +74,7 @@ class User < ApplicationRecord
       logger.info "message::diary: #{diary.inspect}"
       if diary.created_at.between?((Time.zone.today - past_count.day).beginning_of_day,
                                    (Time.zone.today - past_count.day).end_of_day)
-# created_at.to_dateとdiary_dateが一致している日記なら連続投稿記録カウントを進める
+        # created_at.to_dateとdiary_dateが一致している日記なら連続投稿記録カウントを進める
         if diary.created_at.to_date == diary.diary_date
           past_count += 1
           consecutive_count += 1
@@ -83,8 +83,8 @@ class User < ApplicationRecord
         else
           logger.info 'message:: but different diary_date...not count up'
         end
-# 最後にカウントアップ処理をしたレコードと同じcreated_at.to_dateかどうか検証。
-# 同じcreated_at.to_dateのレコードの中から、diary_dateが一致するものを探すため。
+      # 最後にカウントアップ処理をしたレコードと同じcreated_at.to_dateかどうか検証。
+      # 同じcreated_at.to_dateのレコードの中から、diary_dateが一致するものを探すため。
       elsif diary.created_at.between?((Time.zone.today - (past_count - 1).day).beginning_of_day,
                                       (Time.zone.today - (past_count - 1).day).end_of_day) && diary.created_at.to_date != diary.diary_date
         logger.info 'message:: Same created_at as the previous record'
@@ -95,7 +95,7 @@ class User < ApplicationRecord
         else
           logger.info 'message:: but different diary_date...not count up & past_count'
         end
-# 1日空いた後に日記があるかを確認。カウントが進むことを許容する。
+      # 1日空いた後に日記があるかを確認。カウントが進むことを許容する。
       elsif diary.created_at.between?((Time.zone.today - (past_count + 1).day).beginning_of_day,
                                       (Time.zone.today - (past_count + 1).day).end_of_day)
         logger.info 'message::A diary existed with 1 day skipping.. OK'
@@ -107,7 +107,7 @@ class User < ApplicationRecord
         else
           logger.info 'message:: but different diary_date...not count up'
         end
-# 2日空いた後に日記があるかを確認。カウントが進むことを許容する。
+      # 2日空いた後に日記があるかを確認。カウントが進むことを許容する。
       elsif diary.created_at.between?((Time.zone.today - (past_count + 2).day).beginning_of_day,
                                       (Time.zone.today - (past_count + 2).day).end_of_day) && diary.created_at.to_date == diary.diary_date
         logger.info 'message::A diary existed with 2 day skipping. OK'

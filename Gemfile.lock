@@ -133,6 +133,7 @@ GEM
       responders
       warden (~> 1.2.3)
     devise-i18n-views (0.3.7)
+    diff-lcs (1.5.1)
     dotenv (3.1.2)
     dotenv-rails (3.1.2)
       dotenv (= 3.1.2)
@@ -140,6 +141,11 @@ GEM
     drb (2.2.1)
     erubi (1.13.0)
     excon (0.111.0)
+    factory_bot (6.5.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
     faker (3.4.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.9.2)
@@ -330,6 +336,23 @@ GEM
       railties (>= 5.2)
     rexml (3.3.0)
       strscan
+    rspec-core (3.13.1)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (7.0.1)
+      actionpack (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.1)
     rubocop (1.64.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -416,6 +439,7 @@ DEPENDENCIES
   devise
   devise-i18n-views
   dotenv-rails
+  factory_bot_rails
   faker
   fog-aws
   jbuilder
@@ -431,6 +455,7 @@ DEPENDENCIES
   rails (~> 7.1.3, >= 7.1.3.4)
   rails-i18n
   ransack
+  rspec-rails
   rubocop
   sassc
   selenium-webdriver

@@ -5,8 +5,8 @@ class Diary < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  validates :title, presence: true, length: { maximum: 255 }
-  validates :body, presence: true, length: { maximum: 65_535 }
+  validates :title, presence: true, length: { maximum: 30 }
+  validates :body, presence: true, length: { maximum: 200 }
   validates :diary_date, presence: true, uniqueness: { scope: :user_id }
 
   mount_uploader :diary_image, DiaryImageUploader

@@ -42,7 +42,7 @@
       <% if current_user && current_user.own?(diary) %>
         <div class="text-gray-600 pt-8">
           <% app_url = "https://praise-diary.onrender.com/diaries" %>
-          <% twitter_share_url = "https://twitter.com/share?url=#{app_url}&text=%0aバズダイアリーで投稿した日記でなんと・・・%0a#{diary.likes_count}いいね%0a獲得!%0aバズってます！！！%0a" %>
+          <% twitter_share_url = "https://twitter.com/share?url=#{app_url}&text=%0aバズダイアリーで投稿した日記でなんと・・・%0a#{diary.likes_count}いいね%獲得!!!!!!!%0aバズってます!!!!!%0a" %>
           <%= link_to twitter_share_url, target: '_blank', data: { toggle: "tooltip", placement: "bottom" }, title: "Xで自慢しちゃおう!" do %>
             <i class="fa-brands fa-x-twitter fa-2xl"></i>
           <% end %>
