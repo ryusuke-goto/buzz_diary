@@ -11,38 +11,47 @@
 
     <li class="">
       <div class="dropdown dropdown-end">
-        <% if flash[:daily_missions_update].present? %>
+        <% if flash[:challenge_missions_update].present? || flash[:daily_missions_update].present? %>
           <div class="indicator">
             <span class="indicator-item indicator-bottom indicator-center badge badge-secondary">check!</span>
+        <% end %>
             <button class="" tabindex="0">
               <i class="fa-solid fa-mountain-sun text-4xl"></i>
               <div class="text-sm">
                 ミッション
               </div>
             </button>
+        <% if flash[:challenge_missions_update].present? || flash[:daily_missions_update].present? %>
           </div>
-        <% else %>
-          <button class="" tabindex="0">
-            <i class="fa-solid fa-mountain-sun text-4xl"></i>
-            <div class="text-sm">
-              ミッション
-            </div>
-          </button>
         <% end %>
         <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-36 p-2 shadow bg-white">
           <li>
-            <button class="" onclick="my_modal_3.showModal(); loadMissions('daily', 'mission-list-daily')">
-              <div class="text-black text-sm">
-                ・デイリー
-              </div>
-            </button>
+          <% if flash[:daily_missions_update].present? %>
+            <div class="indicator">
+              <span class="indicator-item indicator-bottom indicator-center badge badge-secondary">check!</span>
+          <% end %>
+              <button class="" onclick="my_modal_3.showModal(); loadMissions('daily', 'mission-list-daily')">
+                <div class="text-black text-sm">
+                  ・デイリー
+                </div>
+              </button>
+          <% if flash[:challenge_missions_update].present? %>
+            </div>
+          <% end %>  
           </li>
           <li>
-            <button class="" onclick="my_modal_4.showModal(); loadMissions('challenge', 'mission-list-challenge')">
-              <div class="text-black text-sm">
-                ・チャレンジ
-              </div>
-            </button>
+          <% if flash[:challenge_missions_update].present? %>
+            <div class="indicator">
+              <span class="indicator-item indicator-bottom indicator-center badge badge-secondary">check!</span>
+            <% end %>            
+              <button class="" onclick="my_modal_4.showModal(); loadMissions('challenge', 'mission-list-challenge')">
+                  <div class="text-black text-sm">
+                    ・チャレンジ
+                  </div>
+              </button>
+          <% if flash[:challenge_missions_update].present? %>
+            </div>
+          <% end %> 
           </li>
         </ul>
       </div>
