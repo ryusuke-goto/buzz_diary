@@ -84,6 +84,8 @@ ja:
     user_index: ユーザー一覧
     user_show: ユーザー詳細
     user_edit: ユーザー編集
+    term: 利用規約
+    policy: プライバシーポリシー
 
   enums:
     user:
