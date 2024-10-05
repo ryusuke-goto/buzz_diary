@@ -37,6 +37,16 @@ RSpec.describe Diary, type: :model do
       diary2 = build(:diary, diary_date: diary1.diary_date, user: user)
       expect(diary2).to be_invalid
     end
+    it 'titleが31文字以上の場合に、バリデーションが機能してinvalidになるか' do
+      user = create(:user)
+      diary = build(:diary, user: user, title: "澄んだ秋空の下、色とりどりの紅葉が風に揺れ、心地よい季節の訪れを感じます。")
+      expect(diary).to be_invalid
+    end
+    it 'bodyが201文字以上の場合に、バリデーションが機能してinvalidになるか' do
+      user = create(:user)
+      diary = build(:diary, user: user, body: "秋の澄んだ空気が心地よく感じられるこの季節、木々の葉は次第に色づき、鮮やかな赤や黄色のカーペットのように地面を彩ります。日々の忙しさの中でも、この瞬間に目を向けることで心が穏やかになります。公園のベンチに座り、温かいコーヒーを片手に読書を楽しむ時間は、まさに贅沢なひとときです。鳥のさえずりや、風に揺れる木々の音に耳を傾けると、自然との一体感を感じ、日常の喧騒を忘れることができる大切な時間となります。")
+      expect(diary).to be_invalid
+    end
   end
 end
 
