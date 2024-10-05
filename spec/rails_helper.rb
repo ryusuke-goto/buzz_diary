@@ -32,6 +32,9 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+# capybara等ファイルの読み込み設定
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
@@ -70,5 +73,12 @@ RSpec.configure do |config|
     config.include Devise::Test::ControllerHelpers, type: :controller
     config.include Devise::Test::ControllerHelpers, type: :view
     config.include Devise::Test::IntegrationHelpers, type: :request
+
+    config.before(:each, type: :system) do
+      driven_by :selenium_chrome_headless # ヘッドレスブラウザを使用
+      Capybara.app_host = 'http://localhost' # テスト環境ではlocalhostを使用
+      Capybara.server_host = 'localhost'
+      Capybara.server_port = 3000
+    end
   end
 end
