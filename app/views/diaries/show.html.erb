@@ -3,9 +3,9 @@
   <%= @diary.user.name %>
 </div>
 <div class="flex mx-4 items-end">
-  <%= render partial: "show_diary", locals: {diary: @diary} %>
+  <%= render partial: "diaries/show_diary", locals: {diary: @diary} %>
 </div>
 <div id="comments">
   <%= render partial: "comments/comment", collection: @comments %>
 </div>
-<%= render partial: "comments/form", locals: {comment: @comment, diary: @diary} %>
+<%= render partial: "comments/form", locals: {comment: @new_comment, diary: @diary} %>
