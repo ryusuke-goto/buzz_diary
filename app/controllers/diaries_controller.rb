@@ -2,6 +2,8 @@
 
 class DiariesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :set_diary, only: %i[show edit update destroy]
+  before_action :verify_access, only: %i[edit update destroy]
   def index
     @q = Diary.ransack(params[:q])
     @diaries = @q.result.includes(:user).with_likes_count.order(created_at: :desc)
@@ -29,14 +31,11 @@ class DiariesController < ApplicationController
     @comments = @diary.comments.includes(:user).order(created_at: :asc)
   end
 
-  def edit
-    @diary = current_user.diaries.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @diary = current_user.diaries.find(params[:id])
     if @diary.update(diary_params)
-      redirect_to diaries_path, success: t('defaults.flash_message.updated', item: t('activerecord.models.diary'))
+      redirect_to diary_path(@diary.id), success: t('defaults.flash_message.updated', item: t('activerecord.models.diary'))
     else
       flash.now[:danger] = t('defaults.flash_message.not_updated', item: t('activerecord.models.diary'))
       render :edit, status: :unprocessable_entity
@@ -44,8 +43,7 @@ class DiariesController < ApplicationController
   end
 
   def destroy
-    diary = current_user.diaries.find(params[:id])
-    diary.destroy!
+    @diary.destroy!
     redirect_to diaries_path, success: t('defaults.flash_message.deleted', item: t('activerecord.models.diary'))
   end
 
@@ -55,6 +53,14 @@ class DiariesController < ApplicationController
   end
 
   private
+
+  def set_diary
+    @diary = Diary.find(params[:id])
+  end
+
+  def verify_access
+    redirect_to root_url, alert: 'Forbidden access.' unless current_user.my_object?(@diary)
+  end
 
   def diary_params
     params.require(:diary).permit(:title, :body, :diary_date, :diary_image, :diary_image_cache)

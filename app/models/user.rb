@@ -46,6 +46,10 @@ class User < ApplicationRecord
     save!
   end
 
+  def my_object?(object)
+    object.user_id == id
+  end
+
   def create_buff
     create_buff!
   end

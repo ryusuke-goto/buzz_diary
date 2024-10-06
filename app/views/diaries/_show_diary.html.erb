@@ -55,10 +55,10 @@
 <div class="relative mb-12">
   <% if current_user && current_user.own?(diary) %>
     <div class="action">
-      <%= link_to edit_diary_path(diary.id), class: "edit-comment-link" do %>
+      <%= link_to edit_diary_path(diary.id), id: "edit", class: "edit-comment-link" do %>
         <i class="fa-regular fa-pen-to-square"></i>
       <% end %>
-      <%= link_to diary_path(diary.id), class: "delete-comment-link", data: { turbo_method: :delete , turbo_confirm: t('defaults.delete_confirm') } do %>
+      <%= link_to diary_path(diary.id), id: "destroy", class: "destroy-comment-link", data: { turbo_method: :delete , turbo_confirm: t('defaults.delete_confirm') } do %>
         <i class="fa-regular fa-trash-can"></i>
       <% end %>
     </div>

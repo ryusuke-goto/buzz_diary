@@ -2,6 +2,8 @@
 
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: %i[create destroy]
+  before_action :set_comment, only: %i[destroy]
+  before_action :verify_access, only: %i[destroy]
 
   def create
     comment = current_user.comments.build(comment_params)
@@ -16,13 +18,20 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = current_user.comments.find(params[:id])
-    comment.destroy!
+    @comment.destroy!
     redirect_to diary_path(comment.diary),
                 success: t('defaults.flash_message.deleted', item: t('activerecord.models.comment'))
   end
 
   private
+
+  def set_comment
+    @diary = Comment.find(params[:id])
+  end
+
+  def verify_access
+    redirect_to root_url, alert: 'Forbidden access.' unless current_user.my_object?(@comment)
+  end
 
   def comment_params
     params.require(:comment).permit(:body).merge(diary_id: params[:diary_id])
