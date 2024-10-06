@@ -27,7 +27,7 @@ class DiariesController < ApplicationController
 
   def show
     @diary = Diary.with_likes_count.find(params[:id])
-    @comment = Comment.new
+    @new_comment = Comment.new
     @comments = @diary.comments.includes(:user).order(created_at: :asc)
   end
 

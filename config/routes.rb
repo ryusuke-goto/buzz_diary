@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get 'up', to: 'rails/health#show', as: :rails_health_check
   get 'memories', to: 'memories#index'
   get 'missions/:type', to: 'missions#show', as: 'missions'
-  resource :profile do
+  resource :profile, only: %i[show] do
     member do
       patch :update_remind
     end

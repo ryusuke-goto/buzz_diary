@@ -6,14 +6,19 @@ class CommentsController < ApplicationController
   before_action :verify_access, only: %i[destroy]
 
   def create
-    comment = current_user.comments.build(comment_params)
-    if comment.save
+    @diary = Diary.with_likes_count.find(params[:diary_id])
+    @comment = current_user.comments.build(comment_params)
+    @new_comment = Comment.new
+    @comments = @diary.comments.includes(:user).order(created_at: :asc)
+    if @comment.save
       daily_create_mission_check
       number_of_comments_check
-      redirect_to diary_path(comment.diary),
+      redirect_to diary_path(@comment.diary),
                   success: t('defaults.flash_message.created', item: t('activerecord.models.comment'))
     else
-      render diary_path(comment.diary), status: :unprocessable_entity
+      # render diary_path(comment.diary), status: :unprocessable_entity
+      flash.now[:alert] = t('defaults.flash_message.not_created', item: t('activerecord.models.comment'))
+      render 'diaries/show', status: :unprocessable_entity 
     end
   end
 
