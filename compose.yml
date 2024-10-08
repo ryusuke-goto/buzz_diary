@@ -32,6 +32,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
+#       selenium_chrome:
+#         condition: service_healthy
+# selenium_chrome:
+#   image: selenium/standalone-chrome:latest
+#   ports:
+#     - 4444:4444
 volumes:
   bundle_data:
   postgresql_data:
