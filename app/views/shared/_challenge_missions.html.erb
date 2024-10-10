@@ -27,7 +27,7 @@
                 <%= t('missions.true') %>
               </div>
               <div class="text-gray-600">
-                <% app_url = "https://buzz-diary.com/diaries" %>
+                <% app_url = "https://buzzdiaries.com/diaries" %>
                 <% twitter_share_url = "https://twitter.com/share?url=#{app_url}&text=チャレンジミッション%0a[ バズダイアリーで#{mission.title} ]%0a達成!%0a%0a日記がバズりやすくなりましたっ%0a%0a" %>
                 <%= link_to twitter_share_url, target: '_blank', data: { toggle: "tooltip", placement: "bottom" }, title: "Xで自慢しちゃおう!" do %>
                   <i class="fa-brands fa-x-twitter fa-2xl"></i>
