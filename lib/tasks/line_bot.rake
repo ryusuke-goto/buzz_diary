@@ -11,7 +11,7 @@ namespace :line_bot do
     end
     message = {
       type: 'text',
-      text: 'こんばんは！今日はどんな日でしたか？些細なことでも構いませんので日記に投稿してみましょう！https://buzz-diary.com'
+      text: 'こんばんは！今日はどんな日でしたか？些細なことでも構いませんので日記に投稿してみましょう！https://buzzdiaries.com'
     }
     LineBotClient.new.client.multicast(to_users, message)
   end
