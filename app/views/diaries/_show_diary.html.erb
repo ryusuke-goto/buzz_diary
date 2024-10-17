@@ -32,10 +32,10 @@
           </div>
         </div>
         <div class="card-title text-base">
-          <%= diary.title %>
+          <%= diary.title.scan(/.{1,15}/).join("<br>").html_safe %>
         </div>
         <div class="card-text text-base">
-          <%= diary.body %>
+          <%= diary.body.scan(/.{1,15}/).join("<br>").html_safe %>
         </div>
         <div class="text-xs text-gray-400">
         作成日時：<br>

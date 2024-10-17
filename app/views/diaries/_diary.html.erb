@@ -35,7 +35,7 @@
             <% end %>
           </div>
           <div class="card-title text-xs">
-            <%= diary.title %>
+            <%= truncate(diary.body, length: 15, omission: '...') %>
           </div>
         </div>
       <% end %>
