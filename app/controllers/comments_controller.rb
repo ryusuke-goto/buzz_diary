@@ -19,9 +19,8 @@ class CommentsController < ApplicationController
       redirect_to diary_path(@comment.diary),
                   success: t('defaults.flash_message.created', item: t('activerecord.models.comment'))
     else
-      # render diary_path(comment.diary), status: :unprocessable_entity
       flash.now[:alert] = t('defaults.flash_message.not_created', item: t('activerecord.models.comment'))
-      render 'diaries/show', status: :unprocessable_entity 
+      render 'diaries/show', status: :unprocessable_entity
     end
   end
 
