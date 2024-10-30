@@ -35,7 +35,8 @@ class DiariesController < ApplicationController
 
   def update
     if @diary.update(diary_params)
-      redirect_to diary_path(@diary.id), success: t('defaults.flash_message.updated', item: t('activerecord.models.diary'))
+      redirect_to diary_path(@diary.id),
+                  success: t('defaults.flash_message.updated', item: t('activerecord.models.diary'))
     else
       flash.now[:danger] = t('defaults.flash_message.not_updated', item: t('activerecord.models.diary'))
       render :edit, status: :unprocessable_entity

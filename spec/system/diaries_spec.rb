@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "Diaries", type: :system do
+RSpec.describe 'Diaries', type: :system do
   include LoginMacros
 
   before do
@@ -82,7 +84,7 @@ RSpec.describe "Diaries", type: :system do
           fill_in 'diary_body', with: 'test_body'
           click_button '保存'
           expect(page).to have_content '日記を投稿できませんでした。'
-          expect(page).to have_content "タイトルが入力されていません。"
+          expect(page).to have_content 'タイトルが入力されていません。'
           expect(current_path).to eq diaries_path
         end
       end
@@ -90,7 +92,7 @@ RSpec.describe "Diaries", type: :system do
       context '登録済のdiary_dateを選択' do
         it 'タスクの新規作成が失敗する' do
           # ログインしたユーザーでdiary1を作成
-          diary1 = create(:diary, user: user)
+          diary1 = create(:diary, user:)
 
           visit new_diary_path
           fill_in 'diary_diary_date', with: diary1.diary_date.strftime('%Y-%m-%d')
@@ -98,15 +100,15 @@ RSpec.describe "Diaries", type: :system do
           fill_in 'diary_body', with: 'test_body'
           click_button '保存'
           expect(page).to have_content '日記を投稿できませんでした。'
-          expect(page).to have_content "日付けは既に使用されています。"
+          expect(page).to have_content '日付けは既に使用されています。'
           expect(current_path).to eq diaries_path
         end
       end
     end
-      
+
     describe '日記編集' do
-      let!(:diary) { create(:diary, user: user) }
-      let(:other_diary) { create(:diary, user: user) }
+      let!(:diary) { create(:diary, user:) }
+      let(:other_diary) { create(:diary, user:) }
       before { visit edit_diary_path(diary) }
 
       context 'フォームの入力値が正常' do
@@ -146,7 +148,7 @@ RSpec.describe "Diaries", type: :system do
       end
 
       context '他ユーザーの日記編集ページにアクセス' do
-        let!(:other_user) { create(:user, email: "other_user@example.com") }
+        let!(:other_user) { create(:user, email: 'other_user@example.com') }
         let!(:other_diary) { create(:diary, user: other_user) }
 
         it '編集ページへのアクセスが失敗する' do
