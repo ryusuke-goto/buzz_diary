@@ -10,6 +10,7 @@ RSpec.describe Comment, type: :model do
       expect(comment).to be_valid
       expect(comment.errors).to be_empty
     end
+
     it 'bodyが101文字以上の場合に、バリデーションが機能してinvalidになるか' do
       user = create(:user)
       diary = create(:diary, user:)

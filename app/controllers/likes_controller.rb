@@ -20,15 +20,10 @@ class LikesController < ApplicationController
     @diaries = Diary.includes(:user).with_likes_count.order(diary_date: :desc)
     if @today_diaries.present?
       @today_diaries.each do |diary|
-        puts "diaryの値は#{diary}"
         current_user.like(diary)
       end
       current_user.number_of_liked_diaries
       @diaries.pluck(:id)
-      # if result
-      #   flash[:challenge_missions_update] =
-      #     # t('defaults.flash_message.challenge_missions_updated', item: result[:message])
-      # end
       redirect_to diaries_path, success: t('likes.everything_success')
     else
       redirect_to diaries_path, success: t('likes.everything_failed')
