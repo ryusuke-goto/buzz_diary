@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def set_values_by_raw_info(raw_info)
-    puts "[event]#{raw_info.to_json}"
+    logger.debug "[event]#{raw_info.to_json}"
     self.raw_info = raw_info.to_json
     save!
   end
@@ -240,9 +240,13 @@ class User < ApplicationRecord
   end
 
   def update_buff(type, amount)
-    buff.increment!(type, amount)
-    buff.increment!(:sum_buff, amount)
-    logger.debug "message::::#{type} updated to #{buff[type]}"
+    buff.increment(type, amount)
+    buff.increment(:sum_buff, amount)
+    if buff.save
+      logger.debug "message::::#{type} updated to #{buff[type]}"
+    else
+      logger.debug "Failed to update buff due to validation errors: #{buff.errors.full_messages.join(', ')}"
+    end
   end
 
   def get_friendship_status

@@ -109,6 +109,7 @@ RSpec.describe 'Diaries', type: :system do
     describe '日記編集' do
       let!(:diary) { create(:diary, user:) }
       let(:other_diary) { create(:diary, user:) }
+
       before { visit edit_diary_path(diary) }
 
       context 'フォームの入力値が正常' do

@@ -11,8 +11,8 @@ class ProfilesController < ApplicationController
   end
 
   def update_remind
-    if current_user.toggle!(:remind)
-      puts 'remind updated'
+    if current_user.toggle(:remind).save
+      logger.info 'remind updated'
     else
       flash.now[:danger] = t('defaults.flash_message.not_updated', item: '設定')
       render :show, status: :unprocessable_entity
