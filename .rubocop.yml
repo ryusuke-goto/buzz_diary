@@ -19,9 +19,3 @@ RSpec/NestedGroups:
 
 RSpec/ContextWording:
   Enabled: false
-
-Rails/BulkChangeTable:
-  Enabled: false
-
-Rails/NotNullColumn:
-  Enabled: false
