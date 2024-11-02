@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_08_125020) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_02_112850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_125020) do
     t.integer "theme_css"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description", null: false
+    t.text "description", default: "ミッションの説明", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -50,7 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_125020) do
     t.integer "buff", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description", null: false
+    t.text "description", default: "ミッションの説明", null: false
   end
 
   create_table "diaries", force: :cascade do |t|
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_125020) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "diary_date", null: false
+    t.date "diary_date", default: -> { "CURRENT_DATE" }, null: false
     t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
@@ -122,6 +122,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_125020) do
     t.integer "theme_css", default: 0
     t.text "access_token"
     t.text "refresh_token"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "age"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
