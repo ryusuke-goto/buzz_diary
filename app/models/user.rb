@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[line] # for line-login
@@ -23,7 +21,7 @@ class User < ApplicationRecord
 
   # for line-login
   def social_profile(provider)
-    social_profiles.select { |sp| sp.provider == provider.to_s }.first
+    social_profiles.find { |sp| sp.provider == provider.to_s }
   end
 
   def set_values(omniauth)
@@ -37,7 +35,6 @@ class User < ApplicationRecord
     credentials.to_json
     info['name']
     info['image']
-    # self.set_values_by_raw_info(omniauth['extra']['raw_info'])
   end
 
   def set_values_by_raw_info(raw_info)
@@ -82,8 +79,7 @@ class User < ApplicationRecord
         if diary.created_at.to_date == diary.diary_date
           past_count += 1
           consecutive_count += 1
-          logger.info "message:: count up #{consecutive_count}"
-          logger.info "message:: count up past #{past_count}"
+          logger.info "message:: past >> #{past_count}, consecutive >> #{consecutive_count}"
         else
           logger.info 'message:: but different diary_date...not count up'
         end
@@ -94,8 +90,7 @@ class User < ApplicationRecord
         logger.info 'message:: Same created_at as the previous record'
         if diary.created_at.to_date == diary.diary_date
           consecutive_count += 1
-          logger.info "message:: count up #{consecutive_count}"
-          logger.info "message:: count up past #{past_count}"
+          logger.info "message:: past >> #{past_count}, consecutive >> #{consecutive_count}"
         else
           logger.info 'message:: but different diary_date...not count up & past_count'
         end
@@ -106,8 +101,7 @@ class User < ApplicationRecord
         if diary.created_at.to_date == diary.diary_date
           past_count += 2
           consecutive_count += 1
-          logger.info "message:: count up #{consecutive_count}"
-          logger.info "message:: count up past #{past_count}"
+          logger.info "message:: past >> #{past_count}, consecutive >> #{consecutive_count}"
         else
           logger.info 'message:: but different diary_date...not count up'
         end
@@ -118,8 +112,7 @@ class User < ApplicationRecord
         if diary.created_at.to_date == diary.diary_date
           past_count += 3
           consecutive_count += 1
-          logger.info "message:: count up #{consecutive_count}"
-          logger.info "message:: count up past #{past_count}"
+          logger.info "message:: past >> #{past_count}, consecutive >> #{consecutive_count}"
         else
           logger.info 'message:: but different diary_date...not count up'
         end
@@ -128,8 +121,7 @@ class User < ApplicationRecord
         break
       end
     end
-    logger.info "message::::past_count: #{past_count}"
-    logger.info "message::::consecutive_count: #{consecutive_count}"
+    logger.info "message:: past >> #{past_count}, past >> #{consecutive_count}"
     consecutive_count
   end
 
@@ -196,8 +188,6 @@ class User < ApplicationRecord
   def add_buff(daily: 0, challenge: 0, mission: nil)
     logger.debug 'message::::add_buff executed'
     logger.debug "self: #{self}"
-    logger.debug "self.buff: #{buff}"
-
     updated = false
 
     if daily.positive?
@@ -258,7 +248,6 @@ class User < ApplicationRecord
     Net::HTTP::Get.new(uri)
     headers = { 'Authorization' => "Bearer #{access_token}" }
     response = http.get(uri.path, headers)
-    # logger.info "message::::access_token: #{access_token}"
     response.code # status code
     response.body # response body
     logger.info "message::::response.code: #{response.code}"

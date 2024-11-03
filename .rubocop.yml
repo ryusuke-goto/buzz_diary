@@ -25,3 +25,6 @@ Rails/NotNullColumn:
 
 Rails/BulkChangeTable:
   Enabled: false
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
