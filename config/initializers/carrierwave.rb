@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
     aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
     region: 'ap-northeast-1'
   }
-  config.cache_dir = "#{Rails.root.join('tmp/uploads')}"
+  config.cache_dir = Rails.root.join('tmp/uploads').to_s
   config.fog_directory = ENV['DIRECTORY_NAME']
   config.storage = :fog
   config.fog_public = false
